@@ -7,5 +7,6 @@ A Open Source project to create a control panel for Kerbal Space Program. The go
 * TODO
 
 ## Block Diagram
+[Diagram](https://app.diagrams.net/#G1_EMb1VFjsUEVt7AdRK-4kCuMEsyWomvp)
 
 ## Schematic
