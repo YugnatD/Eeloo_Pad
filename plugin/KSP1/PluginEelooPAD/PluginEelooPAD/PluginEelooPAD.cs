@@ -12,55 +12,44 @@ using System.Runtime.InteropServices;
 
 namespace PluginEelooPAD
 {
-    // template for data to send
-    [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    public struct DataToSend
-    {
-        public byte id;
-        public float AP;
-        public byte M1;
-        public byte M2;
-        public byte M3;
-    }
-
-    //
-    public class SettingsConfig : MonoBehaviour
+    [KSPAddon(KSPAddon.Startup.MainMenu, false)]
+    public class EelooCom : MonoBehaviour
     {
         private Socket sender;
         private XmlDocument xmlConfig = new XmlDocument();
         private IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
         private IPAddress ipAddr;
         private IPEndPoint localEndPoint;
-        public static Vessel ActiveVessel = new Vessel();
 
-        public DataToSend dataToSend; // Will contain data of the vessel
+        public static DataToSend packet; // Will contain data of the vessel
         //called on startup of the plugin by Unity
         void Awake()
         {
-            ipAddr = ipHost.AddressList[0];
-            // read XML configuration file
-            xmlConfig.Load("PluginEelooPAD.xml");
-            // TODO: read XML configuration file
-            localEndPoint = new IPEndPoint(ipAddr, 11111);
-            // init a socket to send data to
-            sender = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            try
-            {
-                sender.Connect(localEndPoint);
-                byte[] messageSent = Encoding.ASCII.GetBytes("INIT");
-                int byteSent = sender.Send(messageSent);
-            }
-            catch (Exception e)
-            {
-                print("KSPSerialIO: Error connecting to socket: " + e.ToString());
-            }
+            //ipAddr = ipHost.AddressList[0];
+            //// read XML configuration file
+            //xmlConfig.Load("PluginEelooPAD.xml");
+            //// TODO: read XML configuration file
+            //localEndPoint = new IPEndPoint(ipAddr, 11111);
+            //// init a socket to send data to
+            //sender = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            //try
+            //{
+            //    sender.Connect(localEndPoint);
+            //    byte[] messageSent = Encoding.ASCII.GetBytes("INIT");
+            //    int byteSent = sender.Send(messageSent);
+            //}
+            //catch (Exception e)
+            //{
+            //    print("KSPSerialIO: Error connecting to socket: " + e.ToString());
+            //}
             print("KSPSerialIO: Loading settings and socket connected...");
+            Debug.Log("ASJDKJASHAKHJKAJSHDKAJSHDKJASHDKJAHSDKJAHSDKJHAKDHUWHKQUWXKJSHXKJ");
         }
 
         public void SendStruct()
         {
             // send data to socket
-            byte[] messageSent = StructureToByteArray(dataToSend);
+            byte[] messageSent = StructureToByteArray(packet);
             int byteSent = sender.Send(messageSent);
         }
 
@@ -87,22 +76,5 @@ namespace PluginEelooPAD
         }
     }
 
-    public class UpdateDataKSP : MonoBehaviour
-    {
-        public SettingsConfig settingsConfig = new SettingsConfig();
-
-        //called on startup of the plugin by Unity
-        void Awake()
-        {
-            //init a timer to send data to the socket
-
-        }
-
-        //called once per frame
-        void Update()
-        {
-            //settingsConfig.dataToSend.AP = (float)settingsConfig.ActiveVessel.orbit.ApA;
-        }
-    }
-
+    
 }

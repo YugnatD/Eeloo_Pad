@@ -1,11 +1,13 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workbench ActiveDocument="PluginEelooPAD/PluginEelooPAD.cs">
     <Files>
-      <File FileName="PluginEelooPAD/PluginEelooPAD.cs" Line="42" Column="29" />
+      <File FileName="PluginEelooPAD/PluginEelooPAD.cs" Line="41" Column="34" />
+      <File FileName="PluginEelooPAD/InFlight.cs" Line="17" Column="58" />
+      <File FileName="PluginEelooPAD/DataStruct.cs" Line="8" Column="18" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
