@@ -62,8 +62,8 @@ namespace PluginEelooPAD
             Debug.Log("[EelooPad] Got a connection");
             //Send a test message :
             //TODO NEED TO CLOSE THE CONNECTION IF THE CLIENT DISCONNECT AND WAIT FOR A NEW CONNECTION
-            byte[] messageSent = Encoding.ASCII.GetBytes("Test 1234");
-            clientSocket.Send(messageSent);
+            // byte[] messageSent = Encoding.ASCII.GetBytes("Test 1234");
+            //clientSocket.Send(messageSent);
         }
 
         //THANKS KSPSERIALIO
