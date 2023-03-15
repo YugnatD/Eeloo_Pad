@@ -17,24 +17,32 @@ namespace PluginEelooPAD
     {
         private static Socket serverSocket;
         private static Socket clientSocket;
-        //private XmlDocument xmlConfig = new XmlDocument();
+        private XmlDocument xmlConfig = new XmlDocument();
         private static IPHostEntry ipHost;
         private static IPAddress ipAddr;
         private static IPEndPoint localEndPoint;
 
+        public static int refreshRate = 100; // in ms
+
         public static DataToSend packet; // Will contain data of the vessel
-        //called on startup of the plugin by Unity
-        void Awake()
+        
+        void Awake() //called on startup of the plugin by Unity
         {
             Debug.Log("[EelooPad] Awake Call");
-            ipHost = Dns.GetHostEntry(Dns.GetHostName());
-            ipAddr = IPAddress.Parse("127.0.0.1"); // Loopback
-            //ipAddr = ipHost.AddressList[0]; // Local IP
-
             // read XML configuration file
-            //xmlConfig.Load("PluginEelooPAD.xml");
-            // TODO: read XML configuration file
-            localEndPoint = new IPEndPoint(ipAddr, 11111);
+            xmlConfig.Load("GameData/PluginEelooPAD/config.xml");
+            Debug.Log("[EelooPad] XML Loaded");
+            //read port from the XML file
+            int port = int.Parse(xmlConfig.DocumentElement.SelectSingleNode("/config/Port").InnerText);
+            Debug.Log("[EelooPad] Port : " + port.ToString());
+            String ip = xmlConfig.DocumentElement.SelectSingleNode("/config/IP").InnerText;
+            ipAddr = IPAddress.Parse(ip);
+            Debug.Log("[EelooPad] IP : " + ip);
+            refreshRate = int.Parse(xmlConfig.DocumentElement.SelectSingleNode("/config/refresh").InnerText);
+            Debug.Log("[EelooPad] refreshRate : " + refreshRate.ToString());
+            //init a socket to listen to
+            ipHost = Dns.GetHostEntry(Dns.GetHostName());
+            localEndPoint = new IPEndPoint(ipAddr, port);
             // init a socket to send data to
             serverSocket = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             serverSocket.Bind(localEndPoint);
@@ -50,20 +58,34 @@ namespace PluginEelooPAD
         {
             // send data to socket
             byte[] messageSent = StructureToByteArray(packet);
-            //TODO NEED TO CHECK IF THERE IS A CONNECTION HERE...
-            int byteSent = clientSocket.Send(messageSent);
+            if (clientSocket.Connected)
+            {
+                int byteSent = clientSocket.Send(messageSent);
+            }
         }
 
         private static void threadSocketClient()
         {
-            Debug.Log("[EelooPad] On Thread Socket CLient");
             Debug.Log("[EelooPad] Waiting for a client");
             clientSocket = serverSocket.Accept();
             Debug.Log("[EelooPad] Got a connection");
-            //Send a test message :
-            //TODO NEED TO CLOSE THE CONNECTION IF THE CLIENT DISCONNECT AND WAIT FOR A NEW CONNECTION
-            // byte[] messageSent = Encoding.ASCII.GetBytes("Test 1234");
-            //clientSocket.Send(messageSent);
+            while(clientSocket.Connected)
+            {
+                //read data from the socket
+                byte[] messageReceived = new byte[1024];
+                int byteRecv = clientSocket.Receive(messageReceived);
+                if (byteRecv == 0)
+                {
+                    Debug.Log("[EelooPad] Client disconnected");
+                    clientSocket.Close();
+                    clientSocket = serverSocket.Accept();// wait for a new connection
+                    Debug.Log("[EelooPad] Got a new connection");
+                }
+                else
+                {
+                    Debug.Log("[EelooPad] Message received : " + Encoding.ASCII.GetString(messageReceived));
+                }
+            }
         }
 
         //THANKS KSPSERIALIO

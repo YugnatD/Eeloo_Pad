@@ -21,9 +21,11 @@ if __name__ == '__main__':
         # if received data is not empty
         msg = s.recv(1024) # need to make it waiting for message
         if msg:
-            print(type(msg))
             received = eps.EelooPadStructure(msg)
             print(received.AP)
+        else:
+            print("Connection was closed by server")
+            break
 
     # close the connection
     s.close() 

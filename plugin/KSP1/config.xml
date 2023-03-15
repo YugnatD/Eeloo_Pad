@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <refresh>100</refresh>
+    <IP>127.0.0.1</IP>
+	<Port>11111</Port>
+</config>

@@ -23,7 +23,7 @@ namespace PluginEelooPAD
             //init a timer to send data to the socket
             Debug.Log("[EelooPad] Awake Flight OK");
             //Debug.Log("[EelooPad] " + FlightGlobals.ActiveVessel.orbit.ApA.ToString());
-            aTimer = new System.Timers.Timer(500);
+            aTimer = new System.Timers.Timer(EelooCom.refreshRate);
             aTimer.Elapsed += timerUpdate;
             aTimer.AutoReset = true;
             aTimer.Enabled = true;
