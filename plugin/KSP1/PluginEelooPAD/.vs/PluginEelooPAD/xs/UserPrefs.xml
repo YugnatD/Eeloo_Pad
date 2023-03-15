@@ -1,9 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workbench ActiveDocument="PluginEelooPAD/PluginEelooPAD.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="PluginEelooPAD/InFlight.cs">
     <Files>
-      <File FileName="PluginEelooPAD/PluginEelooPAD.cs" Line="41" Column="34" />
-      <File FileName="PluginEelooPAD/InFlight.cs" Line="17" Column="58" />
-      <File FileName="PluginEelooPAD/DataStruct.cs" Line="8" Column="18" />
+      <File FileName="PluginEelooPAD/PluginEelooPAD.cs" Line="26" Column="21" />
+      <File FileName="PluginEelooPAD/InFlight.cs" Line="6" Column="19" />
+      <File FileName="PluginEelooPAD/DataStruct.cs" Line="7" Column="24" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

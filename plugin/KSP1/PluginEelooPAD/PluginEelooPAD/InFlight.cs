@@ -14,7 +14,7 @@ namespace PluginEelooPAD
     [KSPAddon(KSPAddon.Startup.Flight, false)]
     public class UpdateDataKSP : MonoBehaviour
     {
-        public static Vessel ActiveVessel = new Vessel();
+        //public static Vessel ActiveVessel = new Vessel();
         //called on startup of the plugin by Unity
         void Awake()
         {
@@ -24,10 +24,10 @@ namespace PluginEelooPAD
         }
 
         //called once per frame
-        void Update()
-        {
-            EelooCom.packet.AP = (float)ActiveVessel.orbit.ApA;
-        }
+        //void Update()
+        //{
+        //    EelooCom.packet.AP = (float)ActiveVessel.orbit.ApA;
+        //}
     }
 }
 
