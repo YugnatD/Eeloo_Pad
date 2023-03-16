@@ -23,4 +23,30 @@ namespace PluginEelooPAD
         public byte M3;
     }
 
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public struct VesselControls
+    {
+        public Boolean SAS;
+        // public Boolean RCS;
+        // public Boolean Lights;
+        // public Boolean Gear;
+        // public Boolean Brakes;
+        // public Boolean Precision;
+        // public Boolean Abort;
+        // public Boolean Stage;
+        // public int Mode;
+        // public int SASMode;
+        // public int SpeedMode;
+        // public Boolean[] ControlGroup;
+        // public float Pitch;
+        // public float Roll;
+        // public float Yaw;
+        // public float TX;
+        // public float TY;
+        // public float TZ;
+        // public float WheelSteer;
+        // public float Throttle;
+        // public float WheelThrottle;
+    };
+
 }

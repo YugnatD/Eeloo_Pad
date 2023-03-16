@@ -74,6 +74,10 @@ namespace PluginEelooPAD
                 //read data from the socket
                 byte[] messageReceived = new byte[1024];
                 int byteRecv = clientSocket.Receive(messageReceived);
+                //cast the data to a structure
+                VesselControls controls = new VesselControls();
+                controls = (VesselControls)ByteArrayToStructure(messageReceived, controls);
+                FlightGlobals.ActiveVessel.ActionGroups.SetGroup(KSPActionGroup.SAS, controls.SAS);
                 if (byteRecv == 0)
                 {
                     Debug.Log("[EelooPad] Client disconnected");
@@ -83,7 +87,8 @@ namespace PluginEelooPAD
                 }
                 else
                 {
-                    Debug.Log("[EelooPad] Message received : " + Encoding.ASCII.GetString(messageReceived));
+                    Debug.Log("[EelooPad] Message received");
+                    //Debug.Log("[EelooPad] Message received : " + Encoding.ASCII.GetString(messageReceived));
                 }
             }
         }

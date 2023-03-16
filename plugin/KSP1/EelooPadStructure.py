@@ -10,3 +10,10 @@ class EelooPadStructure:
         self.M2: np.uint8 = items[3]
         self.M3: np.uint8 = items[4]
 
+class EelooPadVessel:
+    def __init__(self):
+        # items = struct.unpack('<BfBBB', lstBytes)
+        self.SAS: np.bool = False
+    def pack(self):
+        return struct.pack('<?', self.SAS)
+
