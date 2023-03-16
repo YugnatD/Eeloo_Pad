@@ -51,13 +51,12 @@ namespace PluginEelooPAD
             Thread backgroundThread = new Thread(new ThreadStart(threadSocketClient));
             backgroundThread.Start();
             Debug.Log("[EelooPad] Awake OK");
-            //clientSocket = serverSocket.Accept();
         }
 
-        public static void SendStruct()
+        public static void SendVesselInfo()
         {
             // send data to socket
-            byte[] messageSent = StructureToByteArray(packet);
+            byte[] messageSent = UtilityEeloo.StructureToByteArray(packet);
             if (clientSocket.Connected)
             {
                 int byteSent = clientSocket.Send(messageSent);
@@ -75,9 +74,25 @@ namespace PluginEelooPAD
                 byte[] messageReceived = new byte[1024];
                 int byteRecv = clientSocket.Receive(messageReceived);
                 //cast the data to a structure
-                VesselControls controls = new VesselControls();
-                controls = (VesselControls)ByteArrayToStructure(messageReceived, controls);
+                VesselControls controls = UtilityEeloo.MessageToControls(messageReceived);
                 FlightGlobals.ActiveVessel.ActionGroups.SetGroup(KSPActionGroup.SAS, controls.SAS);
+                FlightGlobals.ActiveVessel.ActionGroups.SetGroup(KSPActionGroup.RCS, controls.RCS);
+                FlightGlobals.ActiveVessel.ActionGroups.SetGroup(KSPActionGroup.Light, controls.Lights);
+                FlightGlobals.ActiveVessel.ActionGroups.SetGroup(KSPActionGroup.Gear, controls.Gear);
+                FlightGlobals.ActiveVessel.ActionGroups.SetGroup(KSPActionGroup.Brakes, controls.Brakes);
+                FlightGlobals.ActiveVessel.ctrlState.mainThrottle = controls.Throttle;
+                FlightGlobals.ActiveVessel.ctrlState.pitch = controls.Pitch;
+                FlightGlobals.ActiveVessel.ctrlState.yaw = controls.Yaw;
+                FlightGlobals.ActiveVessel.ctrlState.roll = controls.Roll;
+                FlightGlobals.ActiveVessel.ctrlState.X = controls.TX;
+                FlightGlobals.ActiveVessel.ctrlState.Y = controls.TY;
+                FlightGlobals.ActiveVessel.ctrlState.Z = controls.TZ;
+                //Stage
+                if (controls.Stage)
+                {
+                    FlightGlobals.ActiveVessel.ActionGroups.SetGroup(KSPActionGroup.Stage, true);
+                    FlightGlobals.ActiveVessel.ActionGroups.SetGroup(KSPActionGroup.Stage, false);
+                }
                 if (byteRecv == 0)
                 {
                     Debug.Log("[EelooPad] Client disconnected");
@@ -91,28 +106,6 @@ namespace PluginEelooPAD
                     //Debug.Log("[EelooPad] Message received : " + Encoding.ASCII.GetString(messageReceived));
                 }
             }
-        }
-
-        //THANKS KSPSERIALIO
-        private static byte[] StructureToByteArray(object obj)
-        {
-            int len = Marshal.SizeOf(obj);
-            byte[] arr = new byte[len];
-            IntPtr ptr = Marshal.AllocHGlobal(len);
-            Marshal.StructureToPtr(obj, ptr, true);
-            Marshal.Copy(ptr, arr, 0, len);
-            Marshal.FreeHGlobal(ptr);
-            return arr;
-        }
-
-        private static object ByteArrayToStructure(byte[] bytearray, object obj)
-        {
-            int len = Marshal.SizeOf(obj);
-            IntPtr i = Marshal.AllocHGlobal(len);
-            Marshal.Copy(bytearray, 0, i, len);
-            obj = Marshal.PtrToStructure(i, obj.GetType());
-            Marshal.FreeHGlobal(i);
-            return obj;
         }
     }
 

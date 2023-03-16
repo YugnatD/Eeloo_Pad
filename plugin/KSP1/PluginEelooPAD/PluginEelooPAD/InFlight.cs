@@ -35,12 +35,6 @@ namespace PluginEelooPAD
             aTimer.Enabled = true;
         }
 
-        // Called Every Frame
-        // void Update()
-        // {
-        //     Debug.Log("[EelooPad] Update Flight Method Called");
-        // }
-
         void OnDestroy()
         {
             Debug.Log("[EelooPad] OnDestroy Flight Method Called");
@@ -52,9 +46,19 @@ namespace PluginEelooPAD
             if (FlightGlobals.ActiveVessel != null)
             {
                 // Debug.Log("[EelooPad] " + FlightGlobals.ActiveVessel.orbit.ApA.ToString());
+                EelooCom.packet.id = 0x01;//(UInt16) FlightGlobals.ActiveVessel.id.;
                 EelooCom.packet.AP = (float)FlightGlobals.ActiveVessel.orbit.ApA;
-                EelooCom.packet.id = 0x01;
-                EelooCom.SendStruct();
+                EelooCom.packet.PE = (float)FlightGlobals.ActiveVessel.orbit.PeA;
+                EelooCom.packet.G = (float)FlightGlobals.ActiveVessel.geeForce;
+                EelooCom.packet.TAp = (int)FlightGlobals.ActiveVessel.orbit.timeToAp;
+                EelooCom.packet.TPe = (int)FlightGlobals.ActiveVessel.orbit.timeToPe;
+                EelooCom.packet.period = (int)FlightGlobals.ActiveVessel.orbit.period;
+                EelooCom.packet.RAlt = (float)FlightGlobals.ActiveVessel.terrainAltitude;
+                EelooCom.packet.Alt = (float)FlightGlobals.ActiveVessel.altitude;
+                EelooCom.packet.Vsurf = (float)FlightGlobals.ActiveVessel.srfSpeed;
+                EelooCom.packet.VOrbit = (float)FlightGlobals.ActiveVessel.obt_speed;
+                // EelooCom.packet.deltaTime = (float)FlightGlobals.ActiveVessel;
+                EelooCom.SendVesselInfo();
             }
             else
             {
