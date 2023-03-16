@@ -38,18 +38,20 @@ if __name__ == '__main__':
 
     #wait for user input to start the program
     msg = input("Press Enter")
+    time.sleep(5)
     print("Setting up the vessel")
     vessel.SAS = True
     vessel.RCS = True
-    vessel.Throttle = 1
+    vessel.Throttle:float = float(1000.0)
     vessel.Stage = False
-    print("Waiting 5 seconds")
+    s.send(vessel.pack())
     time.sleep(5)
     vessel.Stage = True
     s.send(vessel.pack())
+    time.sleep(0.01)
+    vessel.Stage = False
     print("waiting 5 seconds")
     time.sleep(5)
-    vessel.Stage = False
     #set Pitch to 1
     vessel.Pitch = 1
     s.send(vessel.pack())
