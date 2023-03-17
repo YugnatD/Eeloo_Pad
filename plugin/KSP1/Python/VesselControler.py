@@ -60,6 +60,8 @@ class VesselControler:
     self.ip = ip
     self.port = port
     self.s = socket.socket()
+    self.timeLastCommand = time.time()
+    self.MINWAITCMD = 0.03 # 30ms
     # Attribut to control the vessel
     self.__SAS: np.bool = False # ?
     self.__RCS: np.bool = False # ?
@@ -83,7 +85,7 @@ class VesselControler:
   def __threadListener(self):
     # receive data from the server and decoding to get the string.
     while True:
-        # if received data is not emp__TY
+        # if received data is not empty
         msg = self.s.recv(256) # need to make it waiting for message
         if msg:
            # TODO: BE CAREFUL OF CONCURENCY
@@ -125,69 +127,103 @@ class VesselControler:
     lstBytes = struct.pack('=??????iiifffffff', self.__SAS, self.__RCS, self.__Lights, self.__Gear, self.__Brakes, self.__Stage, self.__Mode, self.__SASMode, self.__SpeedMode, self.__Throttle, self.__Pitch, self.__Roll, self.__Yaw, self.__TX, self.__TY, self.__TZ)
     return lstBytes
   
+  def __waitLastCommand(self):
+    time.sleep(max(0, self.MINWAITCMD - (time.time() - self.timeLastCommand)))
+  
   # setter for the vessel control
   def setSAS(self, value: np.bool):
+    self.__waitLastCommand()
     self.__SAS = np.bool(value)
     self.s.send(self.__pack())
+    self.timeLastCommand = time.time()
   
   def setRCS(self, value: np.bool):
+    self.__waitLastCommand()
     self.__RCS = np.bool(value)
     self.s.send(self.__pack())
+    self.timeLastCommand = time.time()
   
   def setLights(self, value: np.bool):
+    self.__waitLastCommand()
     self.__Lights = np.bool(value)
     self.s.send(self.__pack())
+    self.timeLastCommand = time.time()
   
   def setGear(self, value: np.bool):
+    self.__waitLastCommand()
     self.__Gear = np.bool(value)
     self.s.send(self.__pack())
+    self.timeLastCommand = time.time()
   
   def setBrakes(self, value: np.bool):
+    self.__waitLastCommand()
     self.__Brakes = np.bool(value)
     self.s.send(self.__pack())
+    self.timeLastCommand = time.time()
 
   def setStage(self, value: np.bool):
+    self.__waitLastCommand()
     self.__Stage = np.bool(value)
     self.s.send(self.__pack())
     self.__Stage = np.bool(False)
+    self.timeLastCommand = time.time()
   
   def setMode(self, value: np.int32):
+    self.__waitLastCommand()
     self.__Mode = np.int32(value)
     self.s.send(self.__pack())
+    self.timeLastCommand = time.time()
   
   def setSASMode(self, value: np.int32):
+    self.__waitLastCommand()
     self.__SASMode = np.int32(value)
     self.s.send(self.__pack())
+    self.timeLastCommand = time.time()
   
   def setSpeedMode(self, value: np.int32):
+    self.__waitLastCommand()
     self.__SpeedMode = np.int32(value)
     self.s.send(self.__pack())
+    self.timeLastCommand = time.time()
   
   def setThrottle(self, value: np.float):
+    self.__waitLastCommand()
     self.__Throttle = np.float(value)
     self.s.send(self.__pack())
+    self.timeLastCommand = time.time()
   
   def setPitch(self, value: np.float):
+    self.__waitLastCommand()
     self.__Pitch = np.float(value)
     self.s.send(self.__pack())
+    self.timeLastCommand = time.time()
   
   def setRoll(self, value: np.float):
+    self.__waitLastCommand()
     self.__Roll = np.float(value)
     self.s.send(self.__pack())
   
   def setYaw(self, value: np.float):
+    self.__waitLastCommand()
     self.__Yaw = np.float(value)
     self.s.send(self.__pack())
+    self.timeLastCommand = time.time()
   
   def setTX(self, value: np.float):
+    self.__waitLastCommand()
     self.__TX = np.float(value)
     self.s.send(self.__pack())
+    self.timeLastCommand = time.time()
   
   def setTY(self, value: np.float):
+    self.__waitLastCommand()
     self.__TY = np.float(value)
     self.s.send(self.__pack())
+    self.timeLastCommand = time.time()
   
   def setTZ(self, value: np.float):
+    self.__waitLastCommand()
     self.__TZ = np.float(value)
     self.s.send(self.__pack())
+    self.timeLastCommand = time.time()
   
