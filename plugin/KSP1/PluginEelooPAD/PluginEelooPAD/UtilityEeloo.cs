@@ -1,3 +1,8 @@
+/****************************************************************************************************
+*** Author : Tanguy Dietrich / Kirill Goundiaev
+*** Name : DataStruct.cs
+*** Description : Containt some useful struct to send data and receive data
+*****************************************************************************************************/
 using System;
 using System.Net;
 using System.Net.Sockets;
@@ -13,9 +18,15 @@ using System.Runtime.InteropServices;
 // Just some random function
 namespace PluginEelooPAD
 {
-    
+
     public class UtilityEeloo
     {
+        /****************************************************************************************************
+        *** Name : MessageToControls()
+        *** Description : Convert a byte array to a VesselControls struct
+        *** Input : byte[] message -> the message to convert
+        *** Return : VesselControls -> the structure converted
+        *****************************************************************************************************/
         public static VesselControls MessageToControls(byte[] message)
         {
             string s = "";
@@ -30,7 +41,12 @@ namespace PluginEelooPAD
             return controls;
         }
 
-        //THANKS KSPSERIALIO
+        /****************************************************************************************************
+        *** Name : StructureToByteArray()
+        *** Description : Convert an object to a byte array
+        *** Input : object obj -> the object to convert
+        *** Return : byte[] -> the byte array converted
+        *****************************************************************************************************/
         public static byte[] StructureToByteArray(object obj)
         {
             int len = Marshal.SizeOf(obj);
@@ -42,6 +58,12 @@ namespace PluginEelooPAD
             return arr;
         }
 
+        /****************************************************************************************************
+        *** Name : ByteArrayToStructure()
+        *** Description : Convert a byte array to an object
+        *** Input : byte[] bytearray -> the byte array to convert
+        *** Return : object -> the object converted
+        *****************************************************************************************************/
         public static object ByteArrayToStructure(byte[] bytearray, object obj)
         {
             int len = Marshal.SizeOf(obj);

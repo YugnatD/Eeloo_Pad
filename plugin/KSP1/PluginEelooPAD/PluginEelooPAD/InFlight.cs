@@ -1,3 +1,9 @@
+/****************************************************************************************************
+*** Author : Tanguy Dietrich / Kirill Goundiaev
+*** Name : InFlight.cs
+*** Description : This will manage the data to send to the socket when in fligh mode
+***               And update the vessel state when in flight mode
+*****************************************************************************************************/
 using System;
 using System.Net;
 using System.Net.Sockets;
@@ -18,9 +24,13 @@ namespace PluginEelooPAD
     public class UpdateDataKSP : MonoBehaviour
     {
         private static System.Timers.Timer aTimer;
-        //public static Vessel ActiveVessel = new Vessel();
-        //called on startup of the plugin by Unity
-        //Called once when the plugin is loaded, and before start
+
+        /****************************************************************************************************
+        *** Name : Awake()
+        *** Description : Called when starting a flight, Create a timer 
+        *** Input : None
+        *** Return : None
+        *****************************************************************************************************/
         void Awake()
         {
             //init a timer to send data to the socket
@@ -29,7 +39,13 @@ namespace PluginEelooPAD
             aTimer = new System.Timers.Timer(EelooCom.refreshRate);
         }
 
-        void Start() //Called when starting a flight (Afeter Awake)
+        /****************************************************************************************************
+        *** Name : Start()
+        *** Description : Called when starting a flight, init and start the timer (called after Awake)
+        *** Input : None
+        *** Return : None
+        *****************************************************************************************************/
+        void Start() //Called when starting a flight (After Awake)
         {
             Debug.Log("[EelooPad] Start Flight Method Called");
             aTimer.Elapsed += timerUpdate;
@@ -39,6 +55,13 @@ namespace PluginEelooPAD
             FlightGlobals.ActiveVessel.OnPostAutopilotUpdate += UpdateControls;
         }
 
+        /****************************************************************************************************
+        *** Name : OnDestroy()
+        *** Description : Called when leaving a flight, stop the timer and remove the event handler
+                          We dont need to send data to the socket anymore
+        *** Input : None
+        *** Return : None
+        *****************************************************************************************************/
         void OnDestroy()
         {
             Debug.Log("[EelooPad] OnDestroy Flight Method Called");
@@ -46,16 +69,29 @@ namespace PluginEelooPAD
             FlightGlobals.ActiveVessel.OnPostAutopilotUpdate -= UpdateControls;
         }
 
+        /****************************************************************************************************
+        *** Name : Update()
+        *** Description : Called every frame, check if the stage button is pressed and if so, stage the vessel
+        *** Input : None
+        *** Return : None
+        *****************************************************************************************************/
         void Update()
         {
             // Debug.Log("[EelooPad] Update Flight Method Called");
             if(FlightGlobals.ActiveVessel.ActionGroups[KSPActionGroup.Stage])
             {
-                StageManager.ActivateNextStage(); //make the game to crash
+                StageManager.ActivateNextStage();
                 FlightGlobals.ActiveVessel.ActionGroups.SetGroup(KSPActionGroup.Stage, false);
             }
         }
 
+        /****************************************************************************************************
+        *** Name : timerUpdate()
+        *** Description : Callback function called when the timer is elapsed
+        *** Input : System.Object source -> The source of the event
+        ***         ElapsedEventArgs e -> The event arguments
+        *** Return : None
+        *****************************************************************************************************/
         private static void timerUpdate(System.Object source, ElapsedEventArgs e)
         {
             if (FlightGlobals.ActiveVessel != null)
@@ -81,7 +117,12 @@ namespace PluginEelooPAD
             }
         }
 
-        //Callback function
+        /****************************************************************************************************
+        *** Name : UpdateControls()
+        *** Description : Callback function called when the vessel is updated
+        *** Input : FlightCtrlState s -> the actual control state
+        *** Return : None
+        *****************************************************************************************************/
         private void UpdateControls(FlightCtrlState s)
         {
             s.CopyFrom(EelooCom.actualControlState);

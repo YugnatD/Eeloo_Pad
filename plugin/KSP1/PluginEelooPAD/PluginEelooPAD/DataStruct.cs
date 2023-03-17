@@ -1,4 +1,10 @@
-﻿using System;
+﻿/****************************************************************************************************
+*** Author : Tanguy Dietrich / Kirill Goundiaev
+*** Name : DataStruct.cs
+*** Description : Containt some useful struct to send data and receive data
+*****************************************************************************************************/
+
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -9,10 +15,9 @@ using System.Xml;
 using UnityEngine;
 using System.Runtime.InteropServices;
 
-
 namespace PluginEelooPAD
 {
-    // template for data to send
+    // Data structure send to the client socket
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct DataToSend
     {
@@ -44,10 +49,11 @@ namespace PluginEelooPAD
                                      // Last 4 bits set navball mode. (0=ignore,1=ORBIT,2=SURFACE,3=TARGET)
     }
 
+    // Data structure received from the client socket
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct VesselControls
     {
-        [MarshalAs (UnmanagedType.I1)]
+        [MarshalAs (UnmanagedType.I1)] //must be used to avoid padding for bool, not necessary for int, float, etc
         public Boolean SAS;
         [MarshalAs (UnmanagedType.I1)]
         public Boolean RCS;
