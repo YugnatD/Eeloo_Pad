@@ -13,7 +13,7 @@ def threadListener(s):
         msg = s.recv(1024) # need to make it waiting for message
         if msg:
             received = eps.EelooPadStructure(msg)
-            print("AP :"+ str(received.AP) + " PE :" + str(received.PE))
+            # print("AP :"+ str(received.AP) + " PE :" + str(received.PE) + " Vsurf : "+ str(received.Vsurf))
 
         else:
             print("Connection was closed by server")
@@ -43,18 +43,19 @@ if __name__ == '__main__':
     vessel.SAS = True
     vessel.RCS = True
     vessel.Throttle:float = float(1000.0)
-    vessel.Stage = False
-    s.send(vessel.pack())
-    time.sleep(5)
     vessel.Stage = True
     s.send(vessel.pack())
-    time.sleep(0.01)
-    vessel.Stage = False
-    print("waiting 5 seconds")
-    time.sleep(5)
-    #set Pitch to 1
-    vessel.Pitch = 1
-    s.send(vessel.pack())
+    # time.sleep(5)
+    # vessel.Stage = True
+    # s.send(vessel.pack())
+    # time.sleep(0.1)
+    # vessel.Stage = False
+    # s.send(vessel.pack())
+    # print("waiting 5 seconds")
+    # time.sleep(5)
+    # #set Pitch to 1
+    # vessel.Pitch = float(1.0)
+    # s.send(vessel.pack())
 
     t1.join()
     # close the connection

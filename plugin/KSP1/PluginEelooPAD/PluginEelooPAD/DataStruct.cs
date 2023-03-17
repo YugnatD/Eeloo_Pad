@@ -20,9 +20,9 @@ namespace PluginEelooPAD
         public float AP;
         public float PE;
         public float G;
-        public int TAp;
-        public int TPe;
-        public int period;
+        public Int32 TAp;
+        public Int32 TPe;
+        public Int32 period;
         public float RAlt;
         public float Alt;
         public float Vsurf;
@@ -47,11 +47,17 @@ namespace PluginEelooPAD
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     public struct VesselControls
     {
+        [MarshalAs (UnmanagedType.I1)]
         public Boolean SAS;
+        [MarshalAs (UnmanagedType.I1)]
         public Boolean RCS;
+        [MarshalAs (UnmanagedType.I1)]
         public Boolean Lights;
+        [MarshalAs (UnmanagedType.I1)]
         public Boolean Gear;
+        [MarshalAs (UnmanagedType.I1)]
         public Boolean Brakes;
+        [MarshalAs (UnmanagedType.I1)]
         public Boolean Stage;
         public int Mode;
         public int SASMode;

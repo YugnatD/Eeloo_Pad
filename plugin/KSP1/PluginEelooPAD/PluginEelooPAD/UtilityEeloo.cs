@@ -18,7 +18,14 @@ namespace PluginEelooPAD
     {
         public static VesselControls MessageToControls(byte[] message)
         {
+            string s = "";
+            foreach (byte b in message)
+            {
+                s += b.ToString("X2") + " ";
+            }
+            Debug.Log("[EelooPad] " + s);
             VesselControls controls = new VesselControls();
+            Debug.Log("[EelooPad] " + Marshal.SizeOf(controls));
             controls = (VesselControls)ByteArrayToStructure(message, controls);
             return controls;
         }
@@ -38,6 +45,7 @@ namespace PluginEelooPAD
         public static object ByteArrayToStructure(byte[] bytearray, object obj)
         {
             int len = Marshal.SizeOf(obj);
+            Debug.Log("[EelooPad] " + len);
             IntPtr i = Marshal.AllocHGlobal(len);
             Marshal.Copy(bytearray, 0, i, len);
             obj = Marshal.PtrToStructure(i, obj.GetType());
