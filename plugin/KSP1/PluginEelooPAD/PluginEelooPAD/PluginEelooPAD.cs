@@ -8,6 +8,8 @@ using System.Threading;
 using System.Xml;
 using UnityEngine;
 using System.Runtime.InteropServices;
+using KSP.IO;
+using KSP.UI.Screens;
 
 
 namespace PluginEelooPAD
@@ -25,6 +27,8 @@ namespace PluginEelooPAD
         public static int refreshRate = 100; // in ms
 
         public static DataToSend packet; // Will contain data of the vessel
+
+        public static FlightCtrlState actualControlState = new FlightCtrlState();
 
         private static bool init = false;
         
@@ -56,6 +60,17 @@ namespace PluginEelooPAD
                 backgroundThread.Start();
                 Debug.Log("[EelooPad] Awake OK");
                 init = true;
+                actualControlState.mainThrottle = 0;
+                actualControlState.pitch = 0;
+                actualControlState.roll = 0;
+                actualControlState.yaw = 0;
+                actualControlState.X = 0;
+                actualControlState.Y = 0;
+                actualControlState.Z = 0;
+                actualControlState.wheelSteer = 0;
+                actualControlState.wheelSteerTrim = 0;
+                actualControlState.wheelThrottle = 0;
+                actualControlState.wheelThrottleTrim = 0;
             }
         }
 
@@ -99,29 +114,19 @@ namespace PluginEelooPAD
                     FlightGlobals.ActiveVessel.ActionGroups.SetGroup(KSPActionGroup.Light, controls.Lights);
                     FlightGlobals.ActiveVessel.ActionGroups.SetGroup(KSPActionGroup.Gear, controls.Gear);
                     FlightGlobals.ActiveVessel.ActionGroups.SetGroup(KSPActionGroup.Brakes, controls.Brakes);
-                    FlightGlobals.ActiveVessel.ctrlState.mainThrottle = controls.Throttle;
-                    FlightGlobals.ActiveVessel.ctrlState.pitch = controls.Pitch;
-                    FlightGlobals.ActiveVessel.ctrlState.yaw = controls.Yaw;
-                    FlightGlobals.ActiveVessel.ctrlState.roll = controls.Roll;
-                    FlightGlobals.ActiveVessel.ctrlState.X = controls.TX;
-                    FlightGlobals.ActiveVessel.ctrlState.Y = controls.TY;
-                    FlightGlobals.ActiveVessel.ctrlState.Z = controls.TZ;
-                    // print the structure to the log
-                    Debug.Log("[EelooPad] Throttle : " + controls.Throttle);
-                    Debug.Log("[EelooPad] Pitch : " + controls.Pitch);
-                    Debug.Log("[EelooPad] Yaw : " + controls.Yaw);
-                    Debug.Log("[EelooPad] Roll : " + controls.Roll);
-                    Debug.Log("[EelooPad] TX : " + controls.TX);
-                    Debug.Log("[EelooPad] TY : " + controls.TY);
-                    Debug.Log("[EelooPad] TZ : " + controls.TZ);
-                    Debug.Log("[EelooPad] SAS : " + controls.SAS);
-                    Debug.Log("[EelooPad] RCS : " + controls.RCS);
-                    Debug.Log("[EelooPad] Lights : " + controls.Lights);
-                    Debug.Log("[EelooPad] Gear : " + controls.Gear);
-                    Debug.Log("[EelooPad] Brakes : " + controls.Brakes);
-                    Debug.Log("[EelooPad] Stage : " + controls.Stage);
+
+                    FlightGlobals.ActiveVessel.ActionGroups.SetGroup(KSPActionGroup.Stage, controls.Stage);
+                    
+                    actualControlState.mainThrottle = controls.Throttle;
+                    actualControlState.pitch = controls.Pitch;
+                    actualControlState.yaw = controls.Yaw;
+                    actualControlState.roll = controls.Roll;
+                    actualControlState.X = controls.TX;
+                    actualControlState.Y = controls.TY;
+                    actualControlState.Z = controls.TZ;
+
                     //Stage
-                    FlightGlobals.ActiveVessel.ActionGroups.SetGroup(KSPActionGroup.Stage, true);
+                    
                 }
             }
         }

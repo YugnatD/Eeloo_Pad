@@ -9,6 +9,8 @@ using System.Xml;
 using System.Timers;
 using UnityEngine;
 using System.Runtime.InteropServices;
+using KSP.IO;
+using KSP.UI.Screens;
 
 namespace PluginEelooPAD
 {
@@ -33,12 +35,25 @@ namespace PluginEelooPAD
             aTimer.Elapsed += timerUpdate;
             aTimer.AutoReset = true;
             aTimer.Enabled = true;
+            // FlightGlobals.ActiveVessel.OnFlyByWire += UpdateControls;
+            FlightGlobals.ActiveVessel.OnPostAutopilotUpdate += UpdateControls;
         }
 
         void OnDestroy()
         {
             Debug.Log("[EelooPad] OnDestroy Flight Method Called");
             aTimer.Stop();
+            FlightGlobals.ActiveVessel.OnPostAutopilotUpdate -= UpdateControls;
+        }
+
+        void Update()
+        {
+            // Debug.Log("[EelooPad] Update Flight Method Called");
+            if(FlightGlobals.ActiveVessel.ActionGroups[KSPActionGroup.Stage])
+            {
+                StageManager.ActivateNextStage(); //make the game to crash
+                FlightGlobals.ActiveVessel.ActionGroups.SetGroup(KSPActionGroup.Stage, false);
+            }
         }
 
         private static void timerUpdate(System.Object source, ElapsedEventArgs e)
@@ -64,6 +79,12 @@ namespace PluginEelooPAD
             {
                 Debug.Log("FlightGlobals.ActiveVessel null");
             }
+        }
+
+        //Callback function
+        private void UpdateControls(FlightCtrlState s)
+        {
+            s.CopyFrom(EelooCom.actualControlState);
         }
     }
 }

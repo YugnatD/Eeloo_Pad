@@ -43,19 +43,20 @@ if __name__ == '__main__':
     vessel.SAS = True
     vessel.RCS = True
     vessel.Throttle:float = float(1000.0)
+    vessel.Stage = False
+    s.send(vessel.pack())
+    time.sleep(5)
     vessel.Stage = True
     s.send(vessel.pack())
-    # time.sleep(5)
-    # vessel.Stage = True
-    # s.send(vessel.pack())
-    # time.sleep(0.1)
-    # vessel.Stage = False
-    # s.send(vessel.pack())
-    # print("waiting 5 seconds")
-    # time.sleep(5)
-    # #set Pitch to 1
+    time.sleep(0.1)
+    vessel.Stage = False
+    s.send(vessel.pack())
+    print("waiting 5 seconds")
+    time.sleep(5)
+    #set Pitch to 1
     # vessel.Pitch = float(1.0)
-    # s.send(vessel.pack())
+    vessel.Yaw = float(-1.0)
+    s.send(vessel.pack())
 
     t1.join()
     # close the connection
