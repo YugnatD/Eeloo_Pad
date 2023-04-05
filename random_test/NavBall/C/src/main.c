@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
   openPPM(&texture, "NavBall_Texture.ppm");
   // alocate the navball image
   createImageRGB(&navballImage, 256, 256);
+  generateNavBall(&texture, &navballImage, 0.0, 0.0, 0.0);
   // write back the ppm file for test purpose
   // savePPM(&texture, "NavBall_Texture2.ppm");
   // create the navball
