@@ -9,6 +9,7 @@
 
 #include "image.h"
 
+void bilinear(float x, float y, imageRGB *texture, uint8_t *r, uint8_t *g, uint8_t *b);
 float *generatePixelArray(uint32_t size);
 float ***tensorDot(float ***xyz, double **m, int sizex, int sizey, int sizez);
 void meshgrid(float *px, float *py, float ***hx, float ***hy, int sizex, int sizey);

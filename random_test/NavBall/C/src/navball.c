@@ -85,7 +85,35 @@ void generateNavBall(imageRGB *texture, imageRGB *navballImage, float pitch, flo
     float ***xyz2 = tensorDot(xyz, mt, navballImage->width, navballImage->height, 3);
     // print3dArray(xyz2, navballImage->width, navballImage->height, 3);
     float ***xyz3 = tensorDot(xyz2, ms, navballImage->width, navballImage->height, 3);
-    print3dArray(xyz3, navballImage->width, navballImage->height, 3);
+    // print3dArray(xyz3, navballImage->width, navballImage->height, 3);
+    float lat=0.0;
+    float lon=0.0;
+    uint8_t r,g,b;
+    for (int i = 0; i < navballImage->width; i++)
+    {
+        for (int j = 0; j < navballImage->height; j++)
+        {
+            if(hit[i][j] == 1)
+            {
+                lat = (0.5 + asin(xyz3[i][j][1]) / M_PI) * texture->width;
+                lon = (1.0 + atan2(xyz3[i][j][2], xyz3[i][j][0]) / M_PI) * 0.5 * texture->height;
+                bilinear(lat, lon, texture, &r, &g, &b);
+                navballImage->data[i][j][0] = r;
+                navballImage->data[i][j][1] = g;
+                navballImage->data[i][j][2] = b;
+                // navballImage->data[i][j][0] = 255;
+                // navballImage->data[i][j][1] = 255;
+                // navballImage->data[i][j][2] = 255;
+            }
+            else
+            {
+                // set the color to black
+                navballImage->data[i][j][0] = 0;
+                navballImage->data[i][j][1] = 0;
+                navballImage->data[i][j][2] = 0;
+            }
+        }
+    }
 
     // free the memory
     free(px);
@@ -122,6 +150,39 @@ void generateNavBall(imageRGB *texture, imageRGB *navballImage, float pitch, flo
         free(mt[i]);
     }
     free(mt);
+}
+
+void bilinear(float x, float y, imageRGB *texture, uint8_t *r, uint8_t *g, uint8_t *b)
+{
+    
+    int x1 = floor(x);
+    int x2 = ceil(x);
+    int y1 = floor(y);
+    int y2 = ceil(y);
+    // check if the point is on the image
+    if(x1 >= texture->width)
+    {
+        x1 = texture->width - 1;
+    }
+    if(x2 >= texture->width)
+    {
+        x2 = texture->width - 1;
+    }
+    if(y1 >= texture->height)
+    {
+        y1 = texture->height - 1;
+    }
+    if(y2 >= texture->height)
+    {
+        y2 = texture->height - 1;
+    }
+    float x1y1 = (x2 - x) * (y2 - y);
+    float x2y1 = (x - x1) * (y2 - y);
+    float x1y2 = (x2 - x) * (y - y1);
+    float x2y2 = (x - x1) * (y - y1);
+    *r = x1y1 * texture->data[x1][y1][0] + x2y1 * texture->data[x2][y1][0] + x1y2 * texture->data[x1][y2][0] + x2y2 * texture->data[x2][y2][0];
+    *g = x1y1 * texture->data[x1][y1][1] + x2y1 * texture->data[x2][y1][1] + x1y2 * texture->data[x1][y2][1] + x2y2 * texture->data[x2][y2][1];
+    *b = x1y1 * texture->data[x1][y1][2] + x2y1 * texture->data[x2][y1][2] + x1y2 * texture->data[x1][y2][2] + x2y2 * texture->data[x2][y2][2];
 }
 
 float ***tensorDot(float ***xyz, double **m, int sizex, int sizey, int sizez)

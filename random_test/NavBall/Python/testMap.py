@@ -133,6 +133,6 @@ def generateImage(pitch = 0, roll = 0, heading=0, size=256, textureFile = "NavBa
 
 if __name__ == "__main__":
     start = time.time()
-    dst = generateImage(pitch = 45, roll = 90, heading = 45, size = 16, textureFile = 'NavBall_Texture.png')
+    dst = generateImage(pitch = 45, roll = 90, heading = 45, size = 256, textureFile = 'NavBall_Texture.png')
     print("Time to generate image: ", time.time() - start)
     imageio.imwrite('result.png',dst)
