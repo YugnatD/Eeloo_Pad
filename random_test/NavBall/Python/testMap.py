@@ -10,6 +10,47 @@ import subprocess
 import imageio
 import time
 
+# def tensordot2(a, b):
+#     a, b = np.asarray(a), np.asarray(b)
+#     # newaxes_a = [0,1,2]
+#     newshape_a = (a.shape[0]*a.shape[1],a.shape[2])
+#     olda = [a.shape[0],a.shape[1]]
+#     # newaxes_b = [1,0]
+#     newshape_b = (b.shape[0],b.shape[0])
+#     oldb = [b.shape[1]]
+#     at = a.reshape(newshape_a) # 16,3
+#     bt = b.T.reshape(newshape_b) # 3,3
+#     res = np.zeros(newshape_a)
+#     for i in range(newshape_a[0]):
+#         for j in range(newshape_a[1]):
+#             res[i,j] = at[i,0]*bt[0,j] + at[i,1]*bt[1,j] + at[i,2]*bt[2,j]
+#     return res.reshape(olda + oldb)
+
+# def tensordot2(a, b):
+#     a, b = np.asarray(a), np.asarray(b)
+#     newshape_a = (a.shape[0]*a.shape[1],a.shape[2])
+#     olda = [a.shape[0],a.shape[1]]
+#     newshape_b = (b.shape[0],b.shape[0])
+#     oldb = [b.shape[1]]
+#     at = a.reshape(newshape_a) # 16,3
+#     bt = b.reshape(newshape_b) # 3,3
+#     res = np.zeros(newshape_a)
+#     for i in range(newshape_a[0]):
+#         for j in range(newshape_a[1]):
+#             res[i,j] = at[i,0]*bt[j,0] + at[i,1]*bt[j,1] + at[i,2]*bt[j,2]
+#     return res.reshape(olda + oldb)
+
+def tensordot2(a, b):
+    a, b = np.asarray(a), np.asarray(b)
+    res = np.zeros(a.shape)
+    for i in range (a.shape[0]): # 4
+        for j in range(a.shape[1]): # 4
+            for k in range(a.shape[2]): # 3
+                res[i,j,k] = a[i,j,0]*b[k,0] + a[i,j,1]*b[k,1] + a[i,j,2]*b[k,2]
+    return res
+
+
+
 def generateImage(pitch = 0, roll = 0, heading=0, size=256, textureFile = "NavBall_Texture.png"):
     src = imageio.imread(textureFile)
 
@@ -20,14 +61,13 @@ def generateImage(pitch = 0, roll = 0, heading=0, size=256, textureFile = "NavBa
 
     # Image pixel co-ordinates
     px=np.arange(-1.0,1.0,2.0/size)+1.0/size
-    # print(px.shape)
     py=np.arange(-1.0,1.0,2.0/size)+1.0/size
-    print("px[55] = " + str(px[55]))
-    print("py[42] = " + str(py[42]))
+    # print(px)
+    # print(py)
 
     hx,hy=scipy.meshgrid(px,py)
-    print("hx[77][39] = " + str(hx[77][39]))
-    print("hy[55][42] = " + str(hy[39][77]))
+    # print(hx)
+    # print(hy)
 
     # Compute z of sphere hit position, if pixel's ray hits
     r2=hx*hx+hy*hy
@@ -37,23 +77,31 @@ def generateImage(pitch = 0, roll = 0, heading=0, size=256, textureFile = "NavBa
         -np.sqrt(1.0-np.where(hit,r2,0.0)),
         np.NaN
         )
-    print("hz[55][42] = " + str(hz[55][42]))
+    # print(hz)
+    # print(hit)
+
     # Some spin and tilt to make things interesting
     spin=roll #2.0*np.pi*(frame+0.5)/frames
     cs=math.cos(spin)
     ss=math.sin(spin)
     ms=np.array([[cs,0.0,ss],[0.0,1.0,0.0],[-ss,0.0,cs]])
+    # print(ms)
 
     tilt= pitch #0.125*np.pi*math.sin(2.0*spin)
     ct=math.cos(tilt)
     st=math.sin(tilt)
     mt=np.array([[1.0,0.0,0.0],[0.0,ct,st],[0.0,-st,ct]])
+    # print(mt)
 
     # Rotate the hit points
     xyz=np.dstack([hx,hy,hz]) 
-    print(xyz.shape)
-    xyz=np.tensordot(xyz,mt,axes=([2],[1]))
-    xyz=np.tensordot(xyz,ms,axes=([2],[1]))
+    # print(xyz)
+    # xyz=np.tensordot(xyz,mt,axes=([2],[1]))
+    xyz = tensordot2(xyz,mt)
+    # print(xyz)
+    # xyz=np.tensordot(xyz,ms,axes=([2],[1]))
+    xyz = tensordot2(xyz,ms)
+    print(xyz)
     x=xyz[:,:,0]
     y=xyz[:,:,1]
     z=xyz[:,:,2]
@@ -85,6 +133,6 @@ def generateImage(pitch = 0, roll = 0, heading=0, size=256, textureFile = "NavBa
 
 if __name__ == "__main__":
     start = time.time()
-    dst = generateImage(pitch = 45, roll = 90, heading = 45, size = 256, textureFile = 'NavBall_Texture.png')
+    dst = generateImage(pitch = 45, roll = 90, heading = 45, size = 16, textureFile = 'NavBall_Texture.png')
     print("Time to generate image: ", time.time() - start)
     imageio.imwrite('result.png',dst)
