@@ -89,21 +89,30 @@ void generateNavBall(imageRGB *texture, imageRGB *navballImage, float pitch, flo
     float lat=0.0;
     float lon=0.0;
     uint8_t r,g,b;
+    printf("texture->height: %d, texture->width: %d \r\n", texture->height, texture->width);
+    int x = 315;
+    int y = 125;
+    printf("texture[%d,%d] = %d %d %d \r\n", x, y, texture->data[x][y][0], texture->data[x][y][1], texture->data[x][y][2]);
+    
     for (int i = 0; i < navballImage->width; i++)
     {
         for (int j = 0; j < navballImage->height; j++)
         {
             if(hit[i][j] == 1)
             {
-                lat = (0.5 + asin(xyz3[i][j][1]) / M_PI) * texture->width;
-                lon = (1.0 + atan2(xyz3[i][j][2], xyz3[i][j][0]) / M_PI) * 0.5 * texture->height;
-                bilinear(lat, lon, texture, &r, &g, &b);
+                lat = (0.5 + (asin(xyz3[i][j][1])) / M_PI) * texture->height;
+                lon = (1.0 + atan2(xyz3[i][j][2], xyz3[i][j][0]) / M_PI) * 0.5 * texture->width;
+                // printf("latitude[%d,%d] = %f, longitude[%d,%d] = %f \r\n", i, j, lat, i, j, lon);
+                // r = (int) texture->data[(int)lat][(int)lon][0];
+                // g = (int) texture->data[(int)lat][(int)lon][1];
+                // b = (int) texture->data[(int)lat][(int)lon][2];
+                r = (int) texture->data[(int)lon][(int)lat][0];
+                g = (int) texture->data[(int)lon][(int)lat][1];
+                b = (int) texture->data[(int)lon][(int)lat][2];
+                // printf("%d, %d, %d \r\n", r, g, b);
                 navballImage->data[i][j][0] = r;
                 navballImage->data[i][j][1] = g;
                 navballImage->data[i][j][2] = b;
-                // navballImage->data[i][j][0] = 255;
-                // navballImage->data[i][j][1] = 255;
-                // navballImage->data[i][j][2] = 255;
             }
             else
             {
@@ -163,18 +172,22 @@ void bilinear(float x, float y, imageRGB *texture, uint8_t *r, uint8_t *g, uint8
     if(x1 >= texture->width)
     {
         x1 = texture->width - 1;
+        printf("x1 is out of range %d\r\n", x1);
     }
     if(x2 >= texture->width)
     {
         x2 = texture->width - 1;
+        printf("x2 is out of range %d\r\n", x2);
     }
     if(y1 >= texture->height)
     {
         y1 = texture->height - 1;
+        printf("y1 is out of range %d\r\n", y1);
     }
     if(y2 >= texture->height)
     {
         y2 = texture->height - 1;
+        printf("y2 is out of range %d\r\n", y2);
     }
     float x1y1 = (x2 - x) * (y2 - y);
     float x2y1 = (x - x1) * (y2 - y);
@@ -183,6 +196,12 @@ void bilinear(float x, float y, imageRGB *texture, uint8_t *r, uint8_t *g, uint8
     *r = x1y1 * texture->data[x1][y1][0] + x2y1 * texture->data[x2][y1][0] + x1y2 * texture->data[x1][y2][0] + x2y2 * texture->data[x2][y2][0];
     *g = x1y1 * texture->data[x1][y1][1] + x2y1 * texture->data[x2][y1][1] + x1y2 * texture->data[x1][y2][1] + x2y2 * texture->data[x2][y2][1];
     *b = x1y1 * texture->data[x1][y1][2] + x2y1 * texture->data[x2][y1][2] + x1y2 * texture->data[x1][y2][2] + x2y2 * texture->data[x2][y2][2];
+}
+
+// equivalent to scipy.ndimage.interpolation.map_coordinates
+void interpolationMapCoordinate(float lat, float lon, imageRGB *texture, uint8_t *r, uint8_t *g, uint8_t *b)
+{
+
 }
 
 float ***tensorDot(float ***xyz, double **m, int sizex, int sizey, int sizez)
