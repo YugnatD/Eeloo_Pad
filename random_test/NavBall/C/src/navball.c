@@ -90,26 +90,77 @@ void generateNavBall(imageRGB *texture, imageRGB *navballImage, float pitch, flo
     float lon=0.0;
     uint8_t r,g,b;
     printf("texture->height: %d, texture->width: %d \r\n", texture->height, texture->width);
-    int x = 315;
-    int y = 125;
-    printf("texture[%d,%d] = %d %d %d \r\n", x, y, texture->data[x][y][0], texture->data[x][y][1], texture->data[x][y][2]);
-    
+    // int x = 1024-315;
+    // int y = 512-125;
+    int x = 1024-125;
+    int y = 512-315;
+    // printf("texture[%d,%d] = %d %d %d \r\n", x, y, texture->data[x][y][0], texture->data[x][y][1], texture->data[x][y][2]);
+
+    float **latitude = (float **)malloc(navballImage->width * sizeof(float *));
+    for (int i = 0; i < navballImage->width; i++)
+    {
+        latitude[i] = (float *)malloc(navballImage->height * sizeof(float));
+    }
+
+    float **longitude = (float **)malloc(navballImage->width * sizeof(float *));
+    for (int i = 0; i < navballImage->width; i++)
+    {
+        longitude[i] = (float *)malloc(navballImage->height * sizeof(float));
+    }
+
     for (int i = 0; i < navballImage->width; i++)
     {
         for (int j = 0; j < navballImage->height; j++)
         {
             if(hit[i][j] == 1)
             {
-                lat = (0.5 + (asin(xyz3[i][j][1])) / M_PI) * texture->height;
-                lon = (1.0 + atan2(xyz3[i][j][2], xyz3[i][j][0]) / M_PI) * 0.5 * texture->width;
-                // printf("latitude[%d,%d] = %f, longitude[%d,%d] = %f \r\n", i, j, lat, i, j, lon);
-                // r = (int) texture->data[(int)lat][(int)lon][0];
-                // g = (int) texture->data[(int)lat][(int)lon][1];
-                // b = (int) texture->data[(int)lat][(int)lon][2];
-                r = (int) texture->data[(int)lon][(int)lat][0];
-                g = (int) texture->data[(int)lon][(int)lat][1];
-                b = (int) texture->data[(int)lon][(int)lat][2];
-                // printf("%d, %d, %d \r\n", r, g, b);
+                latitude[i][j] = (0.5 + (asin(xyz3[i][j][1])) / M_PI) * texture->height;
+                longitude[i][j] = (1.0 + atan2(xyz3[i][j][2], xyz3[i][j][0]) / M_PI) * 0.5 * texture->width;
+            }
+            else
+            {
+                latitude[i][j] = 0.0;
+                longitude[i][j] = 0.0;
+            }
+        }
+    }
+
+    // print lat and lon at specific pixel for debugging
+    printf("latitude[%d,%d] = %f, longitude[%d,%d] = %f \r\n", 125, 125, latitude[125][125], 125, 125, longitude[125][125]);
+    
+    // print pixel x,y of texture
+    x = 378;
+    y = 18;
+    printf("texture[%d,%d] = %d %d %d \r\n", x, y, texture->data[x][y][0], texture->data[x][y][1], texture->data[x][y][2]);
+
+    // print 
+    for (int i = 0; i < navballImage->width; i++)
+    {
+        for (int j = 0; j < navballImage->height; j++)
+        {
+            if(hit[i][j] == 1)
+            {
+                x = (int)latitude[i][j] % texture->height;
+                y = (int)longitude[i][j] % texture->width;
+                // x = (texture->width - x);
+                // y = (texture->height - y);
+                // printf("i = %d, j = %d, x = %d, y = %d \r\n", i, j, x, y);
+                // if (x < 0 || x >= texture->width || y < 0 || y >= texture->height)
+                // {
+                //     // set the color to black
+                //     navballImage->data[i][j][0] = 0;
+                //     navballImage->data[i][j][1] = 0;
+                //     navballImage->data[i][j][2] = 0;
+                //     continue;
+                // }
+                // r = (int) texture->data[y][x][0];
+                // g = (int) texture->data[y][x][1];
+                // b = (int) texture->data[y][x][2];
+                r = (int) texture->data[x][y][0];
+                g = (int) texture->data[x][y][1];
+                b = (int) texture->data[x][y][2];
+                // print all data x,y,r,g,b,latitude,longitude
+                // printf("%d, %d, %d, %d, %d, %f, %f \r\n", x, y, r, g, b, latitude[i][j], longitude[i][j]);
                 navballImage->data[i][j][0] = r;
                 navballImage->data[i][j][1] = g;
                 navballImage->data[i][j][2] = b;

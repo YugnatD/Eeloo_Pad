@@ -107,46 +107,44 @@ def generateImage(pitch = 0, roll = 0, heading=0, size=256, textureFile = "NavBa
     z=xyz[:,:,2]
 
     # Compute map position of hit
-    print(src.shape[0])
-    print(src.shape[1])
+    print(src.shape[0]) # height = 512
+    print(src.shape[1]) # width = 1024
     latitude =np.where(hit,(0.5+np.arcsin(y)/np.pi)*src.shape[0],0.0)
+    print(type(latitude[0][0]))
     print("latitude")
     print(latitude)
     longitude=np.where(hit,(1.0+np.arctan2(z,x)/np.pi)*0.5*src.shape[1],0.0)
     print("longitude")
     print(longitude)
+    print(latitude.shape)
     latlong=np.array([latitude,longitude])
+
+    # extract value from latitude and longitude for debugging
+    print("latitude[0][0] " + str(latitude[0][117]))
+    print("longitude[0][0] " + str(longitude[0][117]))
 
     # Resample, and zap non-hit pixels
     dst=np.zeros((size,size,3))
-    # for coord in latlong:
-    # for channel in [0,1,2]:
-    #     # print(coord)
-    #     # print("channel" + str(channel))
-    #     # print("src[:,:,channel]" + str(src[:,:,channel][0]))
-    #     interpolated = scipy.ndimage.interpolation.map_coordinates(src[:,:,channel],latlong,order=1)
-    #     # print("latlong" + str(latlong[0]))
-    #     # print("interpolated" + str(interpolated[0]))
-    #     val = np.where(hit,interpolated,0.0)
-    #     dst[:,:,channel]= val
-    #     # print(latlong, val)
-    #     # print the lat long and the corresponding pixel r,g,b interpolated values
-    # print(src.shape)
     x = 315
     y = 125
+    # print("texture["+str(x)+","+str(y)+"] " + str(src[x,y,0]) + " " + str(src[x,y,1]) + " " + str(src[x,y,2]))
+    # print pixel x,y of texture
     print("texture["+str(x)+","+str(y)+"] " + str(src[x,y,0]) + " " + str(src[x,y,1]) + " " + str(src[x,y,2]))
-    for x in range(size):
-        for y in range(size):
-            if hit[x,y]:
+    for i in range(size):
+        for j in range(size):
+            if hit[i,j]:
+                x = int(latitude[i,j]) % src.shape[0]
+                y = int(longitude[i,j]) % src.shape[1]
                 # print("x " + str(x) + " y " + str(y))
                 # print("latitude["+str(x)+","+str(y)+"] " + str(latitude[x,y]) + " longitude["+str(x)+","+str(y)+"] " + str(longitude[x,y]))          
-                r = src[int(latitude[x,y]),int(longitude[x,y]),0]
-                g = src[int(latitude[x,y]),int(longitude[x,y]),1]
-                b = src[int(latitude[x,y]),int(longitude[x,y]),2]
-                # print(r,g,b)
-                dst[x,y,0] = r
-                dst[x,y,1] = g
-                dst[x,y,2] = b
+                r = src[x,y,0]
+                g = src[x,y,1]
+                b = src[x,y,2]
+                # print all data x,y,r,g,b,latitude,longitude
+                # print(str(x) + " " + str(y) + " " + str(r) + " " + str(g) + " " + str(b) + " " + str(latitude[i,j]) + " " + str(longitude[i,j]))
+                dst[i,j,0] = r
+                dst[i,j,1] = g
+                dst[i,j,2] = b
 
     # make a rotation of the image to match the heading
     # could propably be done in a better way when generating the latlong array

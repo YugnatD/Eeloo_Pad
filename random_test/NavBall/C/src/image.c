@@ -12,11 +12,11 @@ void createImageRGB(imageRGB *image, uint32_t width, uint32_t height)
 {
     image->width = width;
     image->height = height;
-    image->data = malloc(width * sizeof(int **));
-    for (uint32_t i = 0; i < width; i++)
+    image->data = malloc(height * sizeof(int **));
+    for (uint32_t i = 0; i < height; i++)
     {
-        image->data[i] = malloc(height * sizeof(int *));
-        for (uint32_t j = 0; j < height; j++)
+        image->data[i] = malloc(width * sizeof(int *));
+        for (uint32_t j = 0; j < width; j++)
         {
             image->data[i][j] = malloc(3 * sizeof(int));
         }
@@ -68,9 +68,9 @@ void openPPM(imageRGB *image, char *filename)
         printf("Error reading file %s ERROR=5\n", filename);
         exit(1);
     }
-    for (int i = 0; i < image->width; i++)
+    for (int i = 0; i < image->height; i++)
     {
-        for (int j = 0; j < image->height; j++)
+        for (int j = 0; j < image->width; j++)
         {
             for (int k = 0; k < 3; k++)
             {
@@ -93,9 +93,9 @@ void savePPM(imageRGB *image, char *filename)
     fprintf(file, "P6\n");
     fprintf(file, "%d %d\n", image->width, image->height);
     fprintf(file, "255\n");
-    for (int i = 0; i < image->width; i++)
+    for (int i = 0; i < image->height; i++)
     {
-        for (int j = 0; j < image->height; j++)
+        for (int j = 0; j < image->width; j++)
         {
             for (int k = 0; k < 3; k++)
             {
@@ -109,9 +109,9 @@ void savePPM(imageRGB *image, char *filename)
 
 void freeImageRGB(imageRGB *image)
 {
-    for (int i = 0; i < image->width; i++)
+    for (int i = 0; i < image->height; i++)
     {
-        for (int j = 0; j < image->height; j++)
+        for (int j = 0; j < image->width; j++)
         {
             free(image->data[i][j]);
         }
