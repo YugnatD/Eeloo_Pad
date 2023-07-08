@@ -1,3 +1,4 @@
+#define _DEFAULT_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -5,6 +6,8 @@
 #include <SDL2/SDL.h>
 #include "navball.h"
 #include "textureMap.h"
+
+// #define FPS 24.0 // 24
 
 extern textureMap_t defaultTextureMap;
 
@@ -38,11 +41,14 @@ int main()
   while (!quit)
   {
     // measure time between generation
-    clock_t start = clock();
+    // clock_t start = clock();
     generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
-    clock_t end = clock();
-    float seconds = (float)(end - start) / CLOCKS_PER_SEC;
-    printf("Time to generate: %f\n", seconds);
+    // clock_t end = clock();
+    // float seconds = (float)(end - start) / CLOCKS_PER_SEC;
+    // // sleep the righ amount of time to get 24 FPS
+    // int sleepTime = (1.0 * 1000000 / FPS) - seconds * 1000000;
+    // usleep(sleepTime);
+    // printf("Time to generate: %f\n", seconds);
     pitch += 0.01;
     roll += 0.01;
     yaw += 0.01;
