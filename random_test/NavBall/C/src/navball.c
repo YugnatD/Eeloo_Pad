@@ -10,17 +10,18 @@ Description :
 // float px[SIZE_NAVBALL];
 // float py[SIZE_NAVBALL];
 
-//                         cs    0   ss      0    1    0      -ss   0   cs
+//roll                     cs    0   ss      0    1    0      -ss   0   cs
 static double ms[3][3] = {{0.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
-//                          1     0   0       0    ct   st     0    -st  ct
+//pitch                     1     0   0       0    ct   st     0    -st  ct
 static double mt[3][3] = {{1.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}};
+//yaw                       cy    sy  0       -sy  cy   0      0    0   1
+static double my[3][3] = {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 1.0}};
 
 // float latitude[SIZE_NAVBALL][SIZE_NAVBALL];
 // float longitude[SIZE_NAVBALL][SIZE_NAVBALL];
 float hx[SIZE_NAVBALL][SIZE_NAVBALL];
 float hy[SIZE_NAVBALL][SIZE_NAVBALL];
 float hz[SIZE_NAVBALL][SIZE_NAVBALL];
-uint8_t hit[SIZE_NAVBALL][SIZE_NAVBALL];
 // float xyz[SIZE_NAVBALL][SIZE_NAVBALL][3];
 // float xyz2[SIZE_NAVBALL][SIZE_NAVBALL][3];
 // float hx2[SIZE_NAVBALL][SIZE_NAVBALL];
@@ -33,7 +34,7 @@ uint8_t hit[SIZE_NAVBALL][SIZE_NAVBALL];
 
 void generateNavBall(imageRGB *texture, imageRGB *navballImage, float pitch, float roll, float yaw)
 {
-    double cs, ss, ct, st;
+    double cs, ss, ct, st, cy, sy;
     float lat, lon;
     uint8_t r,g,b;
     int x, y;
@@ -54,7 +55,9 @@ void generateNavBall(imageRGB *texture, imageRGB *navballImage, float pitch, flo
     meshgrid(hx, hy);
 
     // create the meshgrid hz and hit
-    compute_hz(hx, hy, hz, hit);
+    // compute_hz(hx, hy, hz, hit);
+    compute_hz2(hx, hy, hz);
+
 
     cs = cos(roll);
     ss = sin(roll);
@@ -70,6 +73,13 @@ void generateNavBall(imageRGB *texture, imageRGB *navballImage, float pitch, flo
     mt[2][1] = -st;
     mt[2][2] = ct;
 
+    cy = cos(yaw);
+    sy = sin(yaw);
+    my[0][0] = cy;
+    my[0][1] = sy;
+    my[1][0] = -sy;
+    my[1][1] = cy;
+
     // allocate xyz array of navballImage.size
     // dstack(xyz, hx, hy, hz, navballImage->width, navballImage->height, 3);
     // tensorDot(xyz, mt, navballImage->width, navballImage->height, 3, xyz2);
@@ -78,6 +88,8 @@ void generateNavBall(imageRGB *texture, imageRGB *navballImage, float pitch, flo
     // tensorDot(xyz2, ms, navballImage->width, navballImage->height, 3, xyz3);
     // tensorDot2(hx2, hy2, hz2, ms, hx3, hy3, hz3); // i could reuse hx, hy, hz to save memory
     tensorDot2InPlace(hx, hy, hz, ms);
+    // adding yaw
+    tensorDot2InPlace(hx, hy, hz, my);
     
 
     // for (int i = 0; i < SIZE_NAVBALL; i++)
@@ -96,15 +108,14 @@ void generateNavBall(imageRGB *texture, imageRGB *navballImage, float pitch, flo
     //         }
     //     }
     // }
-
+    float r2;
     for (int i = 0; i < SIZE_NAVBALL; i++)
     {
         for (int j = 0; j < SIZE_NAVBALL; j++)
         {
-            if(hit[i][j] == 1)
+            r2 = hx[i][j] * hx[i][j] + hy[i][j] * hy[i][j];
+            if(r2 <= 1.0)
             {
-                // x = (int)latitude[i][j];
-                // y = (int)longitude[i][j];
                 x = (int)((0.5 + (asin(hy[i][j])) / M_PI) * texture->height);
                 y = (int)((1.0 + atan2(hz[i][j], hx[i][j]) / M_PI) * 0.5 * texture->width);
                 r = (int) texture->data[x][y][0];
@@ -225,6 +236,28 @@ void compute_hz(float hx[SIZE_NAVBALL][SIZE_NAVBALL], float hy[SIZE_NAVBALL][SIZ
             r2 = hx[i][j] * hx[i][j] + hy[i][j] * hy[i][j];
             hit[i][j] = r2 <= 1.0;
             if (hit[i][j])
+            {
+                // if hit the hz[i,j] = -np.sqrt(1.0-np.where(hit,r2,0.0)
+                hz[i][j] = -sqrt(1.0 - r2); 
+            }
+            else
+            {
+                hz[i][j] = NAN;
+            }
+        }
+    }
+}
+
+void compute_hz2(float hx[SIZE_NAVBALL][SIZE_NAVBALL], float hy[SIZE_NAVBALL][SIZE_NAVBALL], float hz[SIZE_NAVBALL][SIZE_NAVBALL])
+{
+    float r2;
+    // compute hz and hit
+    for (int i = 0; i < SIZE_NAVBALL; i++)
+    {
+        for (int j = 0; j < SIZE_NAVBALL; j++)
+        {
+            r2 = hx[i][j] * hx[i][j] + hy[i][j] * hy[i][j];
+            if (r2 <= 1.0)
             {
                 // if hit the hz[i,j] = -np.sqrt(1.0-np.where(hit,r2,0.0)
                 hz[i][j] = -sqrt(1.0 - r2); 
