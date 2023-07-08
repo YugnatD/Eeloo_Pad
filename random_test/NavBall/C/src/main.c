@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+#include <SDL2/SDL.h>
 #include "navball.h"
 #include "textureMap.h"
 
@@ -10,6 +11,9 @@ extern textureMap_t defaultTextureMap;
 // int main(int argc, char *argv[])
 int main()
 {
+  SDL_Window* window = NULL;
+  SDL_Renderer* renderer = NULL;
+  SDL_Event event;
   printf("HELLO WORLD \n");
   // open the texture file
   navballImage_t navballImage;
@@ -23,5 +27,40 @@ int main()
   generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
   // save the navball
   savePPM(&navballImage, "NavBall.ppm");
+
+  SDL_Init(SDL_INIT_VIDEO);
+  SDL_CreateWindowAndRenderer(SIZE_NAVBALL,SIZE_NAVBALL,SDL_WINDOW_SHOWN,&window,&renderer);
+  SDL_RenderClear(renderer);
+  int quit = 0;
+  uint32_t pixelR = 0;
+  uint32_t pixelG = 0;
+  uint32_t pixelB = 0;
+  while (!quit)
+  {
+    generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
+    pitch += 0.01;
+    // roll += 0.01;
+    // yaw += 0.01;
+    SDL_RenderClear(renderer);    
+    for(uint32_t li=0;li<SIZE_NAVBALL;li++)
+    {
+      for(uint32_t co=0;co<SIZE_NAVBALL;co++)
+      {
+        
+        pixelR = navballImage.data[li][co][0];
+        pixelG = navballImage.data[li][co][1];
+        pixelB = navballImage.data[li][co][2];
+        if(SDL_SetRenderDrawColor(renderer,pixelR,pixelG,pixelB,SDL_ALPHA_OPAQUE)!=0){printf("ERROR Renderer\n");}
+          SDL_RenderDrawPoint(renderer,co,li);
+        }
+        if (SDL_PollEvent(&event)) {
+          if (event.type == SDL_QUIT) {
+            quit = 1;
+            break;
+          }
+      }
+    }
+    SDL_RenderPresent(renderer);
+  }
   return 0;
 }

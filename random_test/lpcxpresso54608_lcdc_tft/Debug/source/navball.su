@@ -1,0 +1,17 @@
+navball.c:36:6:generateNavBall	128	static
+navball.c:138:6:bilinear	88	static
+navball.c:163:6:tensorDot	48	static
+navball.c:180:6:tensorDot2	40	static
+navball.c:195:6:tensorDot2InPlace	56	static
+navball.c:214:6:compute_hz	40	static
+navball.c:237:6:compute_hz2	40	static
+navball.c:259:6:meshgrid	48	static
+navball.c:280:6:generatePixelArray	32	static
+navball.c:290:6:generatePixelXY	32	static
+navball.c:302:6:dstack	32	static
+navball.c:315:6:print3dArray	40	static
+navball.c:334:6:print2dArray	32	static
+navball.c:348:6:print1dArray	24	static
+navball.c:357:6:print2dArrayUint8	32	static
+navball.c:371:6:print2dArrayDouble	32	static
+navball.c:385:6:savePPM	32	static

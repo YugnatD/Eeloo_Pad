@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-Wall -Wextra -pedantic -g -std=gnu99 -O3
 SANITIZERS=-fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer -fsanitize=leak
-LIBS= -lm -pthread
+LIBS= -lm -pthread -lSDL2 
 
 DEPMAIN=src/main.o src/navball.o src/textureMap.o
 

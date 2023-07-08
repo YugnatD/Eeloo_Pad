@@ -48,6 +48,9 @@ void generateNavBall(textureMap_t *texture, navballImage_t *navballImage, float 
 
     // create the meshgrid hx, hy
     meshgrid(hx, hy);
+    // printf("hx[0][0] = %f\n", hx[0][0]);
+    // printf("hy[0][0] = %f\n", hy[0][0]);
+    // printf("hz[0][0] = %f\n", hz[0][0]);
 
     // create the meshgrid hz and hit
     // compute_hz(hx, hy, hz, hit);
@@ -85,6 +88,10 @@ void generateNavBall(textureMap_t *texture, navballImage_t *navballImage, float 
     tensorDot2InPlace(hx, hy, hz, ms);
     // adding yaw
     tensorDot2InPlace(hx, hy, hz, my);
+
+    // printf("hx[0][0] = %f\n", hx[0][0]);
+    // printf("hy[0][0] = %f\n", hy[0][0]);
+    // printf("hz[0][0] = %f\n", hz[0][0]);
     
 
     // for (int i = 0; i < SIZE_NAVBALL; i++)
@@ -111,6 +118,7 @@ void generateNavBall(textureMap_t *texture, navballImage_t *navballImage, float 
             r2 = hx[i][j] * hx[i][j] + hy[i][j] * hy[i][j];
             if(r2 <= 1.0)
             {
+
                 x = (int)((0.5 + (asin(hy[i][j])) / M_PI) * TEXTURE_MAP_HEIGHT);
                 y = (int)((1.0 + atan2(hz[i][j], hx[i][j]) / M_PI) * 0.5 * TEXTURE_MAP_WIDTH);
                 r = (int) texture->data[x * TEXTURE_MAP_WIDTH * 3 + y * 3 + 0];
