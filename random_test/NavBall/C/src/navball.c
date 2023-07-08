@@ -10,84 +10,80 @@ Description :
 // float px[SIZE_NAVBALL];
 // float py[SIZE_NAVBALL];
 
-//roll                     cs    0   ss      0    1    0      -ss   0   cs
-static double ms[3][3] = {{0.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
-//pitch                     1     0   0       0    ct   st     0    -st  ct
-static double mt[3][3] = {{1.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}};
-//yaw                       cy    sy  0       -sy  cy   0      0    0   1
-static double my[3][3] = {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 1.0}};
+// //roll                     cs    0   ss      0    1    0      -ss   0   cs
+// static double ms[3][3] = {{0.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
+// //pitch                     1     0   0       0    ct   st     0    -st  ct
+// static double mt[3][3] = {{1.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}};
+// //yaw                       cy    sy  0       -sy  cy   0      0    0   1
+// static double my[3][3] = {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 1.0}};
 
-// float latitude[SIZE_NAVBALL][SIZE_NAVBALL];
-// float longitude[SIZE_NAVBALL][SIZE_NAVBALL];
+static double mtot[3][3] = {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}};
+
 float hx[SIZE_NAVBALL][SIZE_NAVBALL];
 float hy[SIZE_NAVBALL][SIZE_NAVBALL];
 float hz[SIZE_NAVBALL][SIZE_NAVBALL];
-// float xyz[SIZE_NAVBALL][SIZE_NAVBALL][3];
-// float xyz2[SIZE_NAVBALL][SIZE_NAVBALL][3];
-// float hx2[SIZE_NAVBALL][SIZE_NAVBALL];
-// float hy2[SIZE_NAVBALL][SIZE_NAVBALL];
-// float hz2[SIZE_NAVBALL][SIZE_NAVBALL];
-// // float xyz3[SIZE_NAVBALL][SIZE_NAVBALL][3];
-// float hx3[SIZE_NAVBALL][SIZE_NAVBALL];
-// float hy3[SIZE_NAVBALL][SIZE_NAVBALL];
-// float hz3[SIZE_NAVBALL][SIZE_NAVBALL];
 
 void generateNavBall(textureMap_t *texture, navballImage_t *navballImage, float pitch, float roll, float yaw)
 {
     double cs, ss, ct, st, cy, sy;
-    // float lat, lon;
     uint8_t r,g,b;
     int x, y;
-    // create the navball
-    // I consider the pitch, roll and yaw are in radian
-    // Create two array px,py going from -1 to 1 with a step of 2/size
-    // THIS STEP IS DONE IN THE MESHGRID FUNCTION
-    // generatePixelArray(px, navballImage->width);
-    // generatePixelArray(py, navballImage->height);
-    // generatePixelXY(px, py);
-
     // create the meshgrid hx, hy
     meshgrid(hx, hy);
-    // printf("hx[0][0] = %f\n", hx[0][0]);
-    // printf("hy[0][0] = %f\n", hy[0][0]);
-    // printf("hz[0][0] = %f\n", hz[0][0]);
-
-    // create the meshgrid hz and hit
-    // compute_hz(hx, hy, hz, hit);
     compute_hz2(hx, hy, hz);
-
-
     cs = cos(roll);
     ss = sin(roll);
-    ms[0][0] = cs;
-    ms[0][2] = ss;
-    ms[2][0] = -ss;
-    ms[2][2] = cs;
+    // ms[0][0] = cs;
+    // ms[0][2] = ss;
+    // ms[2][0] = -ss;
+    // ms[2][2] = cs;
+
 
     ct = cos(pitch);
     st = sin(pitch);
-    mt[1][1] = ct;
-    mt[1][2] = st;
-    mt[2][1] = -st;
-    mt[2][2] = ct;
+    // mt[1][1] = ct;
+    // mt[1][2] = st;
+    // mt[2][1] = -st;
+    // mt[2][2] = ct;
 
     cy = cos(yaw);
     sy = sin(yaw);
-    my[0][0] = cy;
-    my[0][1] = sy;
-    my[1][0] = -sy;
-    my[1][1] = cy;
+    // my[0][0] = cy;
+    // my[0][1] = sy;
+    // my[1][0] = -sy;
+    // my[1][1] = cy;
+
+    // // mtot = mt * ms * my
+    // mtot[0][0] = 1.0 * cs * cy + 0.0 * 0.0 * cy + 0.0 * -ss * cy + 1.0 * 0.0 * -sy + 0.0 * 1.0 * -sy + 0.0 * 0.0 * -sy + 1.0 * ss * 0.0 + 0.0 * 0.0 * 0.0 + 0.0 * cs * 0.0;
+    // mtot[0][1] = 1.0 * cs * sy + 0.0 * 0.0 * sy + 0.0 * -ss * sy + 1.0 * 0.0 * cy + 0.0 * 1.0 * cy + 0.0 * 0.0 * cy + 1.0 * ss * 0.0 + 0.0 * 0.0 * 0.0 + 0.0 * cs * 0.0;
+    // mtot[0][2] = 1.0 * cs * 0.0 + 0.0 * 0.0 * 0.0 + 0.0 * -ss * 0.0 + 1.0 * 0.0 * 0.0 + 0.0 * 1.0 * 0.0 + 0.0 * 0.0 * 0.0 + 1.0 * ss * 1.0 + 0.0 * 0.0 * 1.0 + 0.0 * cs * 1.0;
+    // mtot[1][0] = 0.0 * cs * cy + ct * 0.0 * cy + st * -ss * cy + 0.0 * 0.0 * -sy + ct * 1.0 * -sy + st * 0.0 * -sy + 0.0 * ss * 0.0 + ct * 0.0 * 0.0 + st * cs * 0.0;
+    // mtot[1][1] = 0.0 * cs * sy + ct * 0.0 * sy + st * -ss * sy + 0.0 * 0.0 * cy + ct * 1.0 * cy + st * 0.0 * cy + 0.0 * ss * 0.0 + ct * 0.0 * 0.0 + st * cs * 0.0;
+    // mtot[1][2] = 0.0 * cs * 0.0 + ct * 0.0 * 0.0 + st * -ss * 0.0 + 0.0 * 0.0 * 0.0 + ct * 1.0 * 0.0 + st * 0.0 * 0.0 + 0.0 * ss * 1.0 + ct * 0.0 * 1.0 + st * cs * 1.0;
+    // mtot[2][0] = 0.0 * cs * cy + -st * 0.0 * cy + ct * -ss * cy + 0.0 * 0.0 * -sy + -st * 1.0 * -sy + ct * 0.0 * -sy + 0.0 * ss * 0.0 + -st * 0.0 * 0.0 + ct * cs * 0.0;
+    // mtot[2][1] = 0.0 * cs * sy + -st * 0.0 * sy + ct * -ss * sy + 0.0 * 0.0 * cy + -st * 1.0 * cy + ct * 0.0 * cy + 0.0 * ss * 0.0 + -st * 0.0 * 0.0 + ct * cs * 0.0;
+    // mtot[2][2] = 0.0 * cs * 0.0 + -st * 0.0 * 0.0 + ct * -ss * 0.0 + 0.0 * 0.0 * 0.0 + -st * 1.0 * 0.0 + ct * 0.0 * 0.0 + 0.0 * ss * 1.0 + -st * 0.0 * 1.0 + ct * cs * 1.0;
+    mtot[0][0] = 1.0 * cs * cy;
+    mtot[0][1] = 1.0 * cs * sy;
+    mtot[0][2] = 1.0 * ss * 1.0;
+    mtot[1][0] = st * -ss * cy + ct * 1.0 * -sy;
+    mtot[1][1] = st * -ss * sy + ct * 1.0 * cy;
+    mtot[1][2] = st * cs * 1.0;
+    mtot[2][0] = ct * -ss * cy + -st * 1.0 * -sy;
+    mtot[2][1] = ct * -ss * sy + -st * 1.0 * cy;
+    mtot[2][2] = ct * cs * 1.0;
 
     // allocate xyz array of navballImage.size
     // dstack(xyz, hx, hy, hz, navballImage->width, navballImage->height, 3);
     // tensorDot(xyz, mt, navballImage->width, navballImage->height, 3, xyz2);
     // tensorDot2(hx, hy, hz, mt, hx2, hy2, hz2);
-    tensorDot2InPlace(hx, hy, hz, mt);
-    // tensorDot(xyz2, ms, navballImage->width, navballImage->height, 3, xyz3);
-    // tensorDot2(hx2, hy2, hz2, ms, hx3, hy3, hz3); // i could reuse hx, hy, hz to save memory
-    tensorDot2InPlace(hx, hy, hz, ms);
-    // adding yaw
-    tensorDot2InPlace(hx, hy, hz, my);
+    // tensorDot2InPlace(hx, hy, hz, mt);
+    // // tensorDot(xyz2, ms, navballImage->width, navballImage->height, 3, xyz3);
+    // // tensorDot2(hx2, hy2, hz2, ms, hx3, hy3, hz3); // i could reuse hx, hy, hz to save memory
+    // tensorDot2InPlace(hx, hy, hz, ms);
+    // // adding yaw
+    // tensorDot2InPlace(hx, hy, hz, my);
+    tensorDot2InPlace(hx, hy, hz, mtot);
 
     // printf("hx[0][0] = %f\n", hx[0][0]);
     // printf("hy[0][0] = %f\n", hy[0][0]);
@@ -116,7 +112,7 @@ void generateNavBall(textureMap_t *texture, navballImage_t *navballImage, float 
         for (int j = 0; j < SIZE_NAVBALL; j++)
         {
             r2 = hx[i][j] * hx[i][j] + hy[i][j] * hy[i][j];
-            if(r2 <= 1.0)
+            if(r2 <= 1.0) // hit on the sphere
             {
 
                 x = (int)((0.5 + (asin(hy[i][j])) / M_PI) * TEXTURE_MAP_HEIGHT);

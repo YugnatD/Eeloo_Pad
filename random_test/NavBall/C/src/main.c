@@ -37,10 +37,15 @@ int main()
   uint32_t pixelB = 0;
   while (!quit)
   {
+    // measure time between generation
+    clock_t start = clock();
     generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
+    clock_t end = clock();
+    float seconds = (float)(end - start) / CLOCKS_PER_SEC;
+    printf("Time to generate: %f\n", seconds);
     pitch += 0.01;
-    // roll += 0.01;
-    // yaw += 0.01;
+    roll += 0.01;
+    yaw += 0.01;
     SDL_RenderClear(renderer);    
     for(uint32_t li=0;li<SIZE_NAVBALL;li++)
     {
