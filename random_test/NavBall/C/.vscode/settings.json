@@ -6,6 +6,8 @@
         "initializer_list": "c",
         "ranges": "c",
         "utility": "c",
-        "image.h": "c"
+        "image.h": "c",
+        "texturemap.h": "c",
+        "math.h": "c"
     }
 }

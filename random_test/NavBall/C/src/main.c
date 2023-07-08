@@ -3,30 +3,25 @@
 #include <time.h>
 #include <math.h>
 #include "navball.h"
-#include "image.h"
+#include "textureMap.h"
 
+extern textureMap_t defaultTextureMap;
 
 // int main(int argc, char *argv[])
 int main()
 {
   printf("HELLO WORLD \n");
   // open the texture file
-  imageRGB texture;
-  imageRGB navballImage;
-  openPPM(&texture, "NavBall_Texture.ppm");
-  // alocate the navball image
-  createImageRGB(&navballImage, SIZE_NAVBALL, SIZE_NAVBALL);
+  navballImage_t navballImage;
+  // textureMap_t texture;
+  // openTextureMap(&texture, "NavBall_Texture.ppm");
   // convert 45 deg to rad
   float pitch = 45.0 * M_PI / 180.0;
   float roll = 30.0 * M_PI / 180.0;
   float yaw = 10.0 * M_PI / 180.0;
-  generateNavBall(&texture, &navballImage, pitch, roll, yaw);
-  // write back the ppm file for test purpose
-  // savePPM(&texture, "NavBall_Texture2.ppm");
-  // create the navball
+  // generateNavBall(&texture, &navballImage, pitch, roll, yaw);
+  generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
   // save the navball
   savePPM(&navballImage, "NavBall.ppm");
-  // free the texture
-  freeImageRGB(&texture);
   return 0;
 }

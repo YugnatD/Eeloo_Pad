@@ -32,17 +32,12 @@ float hz[SIZE_NAVBALL][SIZE_NAVBALL];
 // float hy3[SIZE_NAVBALL][SIZE_NAVBALL];
 // float hz3[SIZE_NAVBALL][SIZE_NAVBALL];
 
-void generateNavBall(imageRGB *texture, imageRGB *navballImage, float pitch, float roll, float yaw)
+void generateNavBall(textureMap_t *texture, navballImage_t *navballImage, float pitch, float roll, float yaw)
 {
     double cs, ss, ct, st, cy, sy;
-    float lat, lon;
+    // float lat, lon;
     uint8_t r,g,b;
     int x, y;
-    if (texture->width <= 0 || texture->height <= 0)
-    {
-        printf("Error texture image size is not valid \n");
-        exit(1);
-    }
     // create the navball
     // I consider the pitch, roll and yaw are in radian
     // Create two array px,py going from -1 to 1 with a step of 2/size
@@ -116,11 +111,11 @@ void generateNavBall(imageRGB *texture, imageRGB *navballImage, float pitch, flo
             r2 = hx[i][j] * hx[i][j] + hy[i][j] * hy[i][j];
             if(r2 <= 1.0)
             {
-                x = (int)((0.5 + (asin(hy[i][j])) / M_PI) * texture->height);
-                y = (int)((1.0 + atan2(hz[i][j], hx[i][j]) / M_PI) * 0.5 * texture->width);
-                r = (int) texture->data[x][y][0];
-                g = (int) texture->data[x][y][1];
-                b = (int) texture->data[x][y][2];
+                x = (int)((0.5 + (asin(hy[i][j])) / M_PI) * TEXTURE_MAP_HEIGHT);
+                y = (int)((1.0 + atan2(hz[i][j], hx[i][j]) / M_PI) * 0.5 * TEXTURE_MAP_WIDTH);
+                r = (int) texture->data[x * TEXTURE_MAP_WIDTH * 3 + y * 3 + 0];
+                g = (int) texture->data[x * TEXTURE_MAP_WIDTH * 3 + y * 3 + 1];
+                b = (int) texture->data[x * TEXTURE_MAP_WIDTH * 3 + y * 3 + 2];
                 navballImage->data[i][j][0] = r;
                 navballImage->data[i][j][1] = g;
                 navballImage->data[i][j][2] = b;
@@ -136,41 +131,28 @@ void generateNavBall(imageRGB *texture, imageRGB *navballImage, float pitch, flo
     }
 }
 
-void bilinear(float x, float y, imageRGB *texture, uint8_t *r, uint8_t *g, uint8_t *b)
+void bilinear(float x, float y, textureMap_t *texture, uint8_t *r, uint8_t *g, uint8_t *b)
 {
-    
+    int i,j,k,l;
     int x1 = floor(x);
     int x2 = ceil(x);
     int y1 = floor(y);
     int y2 = ceil(y);
-    // check if the point is on the image
-    if(x1 >= texture->width)
-    {
-        x1 = texture->width - 1;
-        printf("x1 is out of range %d\r\n", x1);
-    }
-    if(x2 >= texture->width)
-    {
-        x2 = texture->width - 1;
-        printf("x2 is out of range %d\r\n", x2);
-    }
-    if(y1 >= texture->height)
-    {
-        y1 = texture->height - 1;
-        printf("y1 is out of range %d\r\n", y1);
-    }
-    if(y2 >= texture->height)
-    {
-        y2 = texture->height - 1;
-        printf("y2 is out of range %d\r\n", y2);
-    }
     float x1y1 = (x2 - x) * (y2 - y);
     float x2y1 = (x - x1) * (y2 - y);
     float x1y2 = (x2 - x) * (y - y1);
     float x2y2 = (x - x1) * (y - y1);
-    *r = x1y1 * texture->data[x1][y1][0] + x2y1 * texture->data[x2][y1][0] + x1y2 * texture->data[x1][y2][0] + x2y2 * texture->data[x2][y2][0];
-    *g = x1y1 * texture->data[x1][y1][1] + x2y1 * texture->data[x2][y1][1] + x1y2 * texture->data[x1][y2][1] + x2y2 * texture->data[x2][y2][1];
-    *b = x1y1 * texture->data[x1][y1][2] + x2y1 * texture->data[x2][y1][2] + x1y2 * texture->data[x1][y2][2] + x2y2 * texture->data[x2][y2][2];
+    i = x1 * TEXTURE_MAP_WIDTH * 3 + y1 * 3 + 0;
+    j = x2 * TEXTURE_MAP_WIDTH * 3 + y1 * 3 + 0;
+    k = x1 * TEXTURE_MAP_WIDTH * 3 + y2 * 3 + 0;
+    l = x2 * TEXTURE_MAP_WIDTH * 3 + y2 * 3 + 0;
+    // *r = x1y1 * texture->data[x1][y1][0] + x2y1 * texture->data[x2][y1][0] + x1y2 * texture->data[x1][y2][0] + x2y2 * texture->data[x2][y2][0];
+    // *g = x1y1 * texture->data[x1][y1][1] + x2y1 * texture->data[x2][y1][1] + x1y2 * texture->data[x1][y2][1] + x2y2 * texture->data[x2][y2][1];
+    // *b = x1y1 * texture->data[x1][y1][2] + x2y1 * texture->data[x2][y1][2] + x1y2 * texture->data[x1][y2][2] + x2y2 * texture->data[x2][y2][2];
+
+    *r = x1y1 * texture->data[i] + x2y1 * texture->data[j] + x1y2 * texture->data[k] + x2y2 * texture->data[l];
+    *g = x1y1 * texture->data[i] + x2y1 * texture->data[j] + x1y2 * texture->data[k] + x2y2 * texture->data[l];
+    *b = x1y1 * texture->data[i] + x2y1 * texture->data[j] + x1y2 * texture->data[k] + x2y2 * texture->data[l];
 }
 
 // float ***tensorDot(float ***xyz, double **m, int sizex, int sizey, int sizez)
@@ -394,4 +376,28 @@ void print2dArrayDouble(double **array, int sizex, int sizey)
         printf("]\r\n");
     }
     printf("\r\n");
+}
+
+void savePPM(navballImage_t *image, char *filename)
+{
+    FILE *file = fopen(filename, "w");
+    if (file == NULL)
+    {
+        printf("Error opening file %s \n", filename);
+        exit(1);
+    }
+    fprintf(file, "P6\n");
+    fprintf(file, "%d %d\n", SIZE_NAVBALL, SIZE_NAVBALL);
+    fprintf(file, "255\n");
+    for (int i = 0; i < SIZE_NAVBALL; i++)
+    {
+        for (int j = 0; j < SIZE_NAVBALL; j++)
+        {
+            for (int k = 0; k < 3; k++)
+            {
+                fputc(image->data[i][j][k], file);
+            }
+        }
+    }
+    fclose(file);
 }
