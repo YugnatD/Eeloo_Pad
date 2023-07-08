@@ -7,27 +7,34 @@ Description :
 #include <stdio.h>
 #include <stdlib.h>
 
-float px[SIZE_NAVBALL];
-float py[SIZE_NAVBALL];
+// float px[SIZE_NAVBALL];
+// float py[SIZE_NAVBALL];
 
 //                         cs    0   ss      0    1    0      -ss   0   cs
 static double ms[3][3] = {{0.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
 //                          1     0   0       0    ct   st     0    -st  ct
 static double mt[3][3] = {{1.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}};
 
-float latitude[SIZE_NAVBALL][SIZE_NAVBALL];
-float longitude[SIZE_NAVBALL][SIZE_NAVBALL];
+// float latitude[SIZE_NAVBALL][SIZE_NAVBALL];
+// float longitude[SIZE_NAVBALL][SIZE_NAVBALL];
 float hx[SIZE_NAVBALL][SIZE_NAVBALL];
 float hy[SIZE_NAVBALL][SIZE_NAVBALL];
 float hz[SIZE_NAVBALL][SIZE_NAVBALL];
 uint8_t hit[SIZE_NAVBALL][SIZE_NAVBALL];
-float xyz[SIZE_NAVBALL][SIZE_NAVBALL][3];
-float xyz2[SIZE_NAVBALL][SIZE_NAVBALL][3];
-float xyz3[SIZE_NAVBALL][SIZE_NAVBALL][3];
+// float xyz[SIZE_NAVBALL][SIZE_NAVBALL][3];
+// float xyz2[SIZE_NAVBALL][SIZE_NAVBALL][3];
+// float hx2[SIZE_NAVBALL][SIZE_NAVBALL];
+// float hy2[SIZE_NAVBALL][SIZE_NAVBALL];
+// float hz2[SIZE_NAVBALL][SIZE_NAVBALL];
+// // float xyz3[SIZE_NAVBALL][SIZE_NAVBALL][3];
+// float hx3[SIZE_NAVBALL][SIZE_NAVBALL];
+// float hy3[SIZE_NAVBALL][SIZE_NAVBALL];
+// float hz3[SIZE_NAVBALL][SIZE_NAVBALL];
 
 void generateNavBall(imageRGB *texture, imageRGB *navballImage, float pitch, float roll, float yaw)
 {
     double cs, ss, ct, st;
+    float lat, lon;
     uint8_t r,g,b;
     int x, y;
     if (texture->width <= 0 || texture->height <= 0)
@@ -35,22 +42,19 @@ void generateNavBall(imageRGB *texture, imageRGB *navballImage, float pitch, flo
         printf("Error texture image size is not valid \n");
         exit(1);
     }
-    if (navballImage->width <= 0 || navballImage->height <= 0)
-    {
-        printf("Error navball image size is not valid \n");
-        exit(1);
-    }
     // create the navball
     // I consider the pitch, roll and yaw are in radian
     // Create two array px,py going from -1 to 1 with a step of 2/size
-    // TODO Optimize to get one loop, the image is a square...
-    generatePixelArray(px, navballImage->width);
-    generatePixelArray(py, navballImage->height);
+    // THIS STEP IS DONE IN THE MESHGRID FUNCTION
+    // generatePixelArray(px, navballImage->width);
+    // generatePixelArray(py, navballImage->height);
+    // generatePixelXY(px, py);
+
     // create the meshgrid hx, hy
-    meshgrid(px, py, hx, hy, navballImage->width, navballImage->height);
+    meshgrid(hx, hy);
 
     // create the meshgrid hz and hit
-    compute_hz(hx, hy, hz, hit, navballImage->width, navballImage->height);
+    compute_hz(hx, hy, hz, hit);
 
     cs = cos(roll);
     ss = sin(roll);
@@ -67,36 +71,42 @@ void generateNavBall(imageRGB *texture, imageRGB *navballImage, float pitch, flo
     mt[2][2] = ct;
 
     // allocate xyz array of navballImage.size
-    dstack(xyz, hx, hy, hz, navballImage->width, navballImage->height, 3);
-    tensorDot(xyz, mt, navballImage->width, navballImage->height, 3, xyz2);
-    tensorDot(xyz2, ms, navballImage->width, navballImage->height, 3, xyz3);
+    // dstack(xyz, hx, hy, hz, navballImage->width, navballImage->height, 3);
+    // tensorDot(xyz, mt, navballImage->width, navballImage->height, 3, xyz2);
+    // tensorDot2(hx, hy, hz, mt, hx2, hy2, hz2);
+    tensorDot2InPlace(hx, hy, hz, mt);
+    // tensorDot(xyz2, ms, navballImage->width, navballImage->height, 3, xyz3);
+    // tensorDot2(hx2, hy2, hz2, ms, hx3, hy3, hz3); // i could reuse hx, hy, hz to save memory
+    tensorDot2InPlace(hx, hy, hz, ms);
     
 
-    for (int i = 0; i < navballImage->width; i++)
-    {
-        for (int j = 0; j < navballImage->height; j++)
-        {
-            if(hit[i][j] == 1)
-            {
-                latitude[i][j] = (0.5 + (asin(xyz3[i][j][1])) / M_PI) * texture->height;
-                longitude[i][j] = (1.0 + atan2(xyz3[i][j][2], xyz3[i][j][0]) / M_PI) * 0.5 * texture->width;
-            }
-            else
-            {
-                latitude[i][j] = 0.0;
-                longitude[i][j] = 0.0;
-            }
-        }
-    }
+    // for (int i = 0; i < SIZE_NAVBALL; i++)
+    // {
+    //     for (int j = 0; j < SIZE_NAVBALL; j++)
+    //     {
+    //         if(hit[i][j] == 1)
+    //         {
+    //             latitude[i][j] = (0.5 + (asin(hy3[i][j])) / M_PI) * texture->height;
+    //             longitude[i][j] = (1.0 + atan2(hz3[i][j], hx3[i][j]) / M_PI) * 0.5 * texture->width;
+    //         }
+    //         else
+    //         {
+    //             latitude[i][j] = 0.0;
+    //             longitude[i][j] = 0.0;
+    //         }
+    //     }
+    // }
 
-    for (int i = 0; i < navballImage->width; i++)
+    for (int i = 0; i < SIZE_NAVBALL; i++)
     {
-        for (int j = 0; j < navballImage->height; j++)
+        for (int j = 0; j < SIZE_NAVBALL; j++)
         {
             if(hit[i][j] == 1)
             {
-                x = (int)latitude[i][j];
-                y = (int)longitude[i][j];
+                // x = (int)latitude[i][j];
+                // y = (int)longitude[i][j];
+                x = (int)((0.5 + (asin(hy[i][j])) / M_PI) * texture->height);
+                y = (int)((1.0 + atan2(hz[i][j], hx[i][j]) / M_PI) * 0.5 * texture->width);
                 r = (int) texture->data[x][y][0];
                 g = (int) texture->data[x][y][1];
                 b = (int) texture->data[x][y][2];
@@ -169,20 +179,55 @@ void tensorDot(float xyz[SIZE_NAVBALL][SIZE_NAVBALL][3], double m[3][3], int siz
     }
 }
 
-void compute_hz(float hx[SIZE_NAVBALL][SIZE_NAVBALL], float hy[SIZE_NAVBALL][SIZE_NAVBALL], float hz[SIZE_NAVBALL][SIZE_NAVBALL], uint8_t hit[SIZE_NAVBALL][SIZE_NAVBALL], int sizex, int sizey)
+// this function is used to avoid call to dstack, because we pass directly hx, hy, hz
+void tensorDot2(float hx[SIZE_NAVBALL][SIZE_NAVBALL], float hy[SIZE_NAVBALL][SIZE_NAVBALL], float hz[SIZE_NAVBALL][SIZE_NAVBALL], double m[3][3], float r_hx[SIZE_NAVBALL][SIZE_NAVBALL], float r_hy[SIZE_NAVBALL][SIZE_NAVBALL], float r_hz[SIZE_NAVBALL][SIZE_NAVBALL])
+{
+    // in normal time i should transpose m, but id do it in the loop by inverting the indices
+    // perform the dot product
+    for (int i = 0; i < SIZE_NAVBALL; i++)
+    {
+        for (int j = 0; j < SIZE_NAVBALL; j++)
+        {
+            r_hx[i][j] = hx[i][j] * m[0][0] + hy[i][j] * m[0][1] + hz[i][j] * m[0][2];
+            r_hy[i][j] = hx[i][j] * m[1][0] + hy[i][j] * m[1][1] + hz[i][j] * m[1][2];
+            r_hz[i][j] = hx[i][j] * m[2][0] + hy[i][j] * m[2][1] + hz[i][j] * m[2][2];
+        }
+    }
+}
+
+void tensorDot2InPlace(float hx[SIZE_NAVBALL][SIZE_NAVBALL], float hy[SIZE_NAVBALL][SIZE_NAVBALL], float hz[SIZE_NAVBALL][SIZE_NAVBALL], double m[3][3])
+{
+    float tmp_hx = 0;
+    float tmp_hy = 0;
+    float tmp_hz = 0;
+    for (int i = 0; i < SIZE_NAVBALL; i++)
+    {
+        for (int j = 0; j < SIZE_NAVBALL; j++)
+        {
+            tmp_hx = hx[i][j];
+            tmp_hy = hy[i][j];
+            tmp_hz = hz[i][j];
+            hx[i][j] = tmp_hx * m[0][0] + tmp_hy * m[0][1] + tmp_hz * m[0][2];
+            hy[i][j] = tmp_hx * m[1][0] + tmp_hy * m[1][1] + tmp_hz * m[1][2];
+            hz[i][j] = tmp_hx * m[2][0] + tmp_hy * m[2][1] + tmp_hz * m[2][2];
+        }
+    }
+}
+
+void compute_hz(float hx[SIZE_NAVBALL][SIZE_NAVBALL], float hy[SIZE_NAVBALL][SIZE_NAVBALL], float hz[SIZE_NAVBALL][SIZE_NAVBALL], uint8_t hit[SIZE_NAVBALL][SIZE_NAVBALL])
 {
     float r2;
     // compute hz and hit
-    for (int i = 0; i < sizex; i++)
+    for (int i = 0; i < SIZE_NAVBALL; i++)
     {
-        for (int j = 0; j < sizey; j++)
+        for (int j = 0; j < SIZE_NAVBALL; j++)
         {
             r2 = hx[i][j] * hx[i][j] + hy[i][j] * hy[i][j];
             hit[i][j] = r2 <= 1.0;
             if (hit[i][j])
             {
                 // if hit the hz[i,j] = -np.sqrt(1.0-np.where(hit,r2,0.0)
-                hz[i][j] = -sqrt(1.0 - r2); // NOT SURE
+                hz[i][j] = -sqrt(1.0 - r2); 
             }
             else
             {
@@ -192,20 +237,23 @@ void compute_hz(float hx[SIZE_NAVBALL][SIZE_NAVBALL], float hy[SIZE_NAVBALL][SIZ
     }
 }
 
-void meshgrid(float *px, float *py, float hx[SIZE_NAVBALL][SIZE_NAVBALL], float hy[SIZE_NAVBALL][SIZE_NAVBALL], int sizex, int sizey)
+void meshgrid(float hx[SIZE_NAVBALL][SIZE_NAVBALL], float hy[SIZE_NAVBALL][SIZE_NAVBALL])
 {
-    for (int i = 0; i < sizex; i++)
+    float step = 2.0 / (float)SIZE_NAVBALL;
+    for (int i = 0; i < SIZE_NAVBALL; i++)
     {
-        for (int j = 0; j < sizey; j++)
+        for (int j = 0; j < SIZE_NAVBALL; j++)
         {
-            hx[i][j] = px[j];
+            // hx[i][j] = px[j];
+            hx[i][j] = -1.0 + (float)j * step + 1.0 / (float)SIZE_NAVBALL;
         }
     }
-    for (int i = 0; i < sizey; i++)
+    for (int i = 0; i < SIZE_NAVBALL; i++)
     {
-        for (int j = 0; j < sizex; j++)
+        for (int j = 0; j < SIZE_NAVBALL; j++)
         {
-            hy[i][j] = py[i];
+            // hy[i][j] = py[i];
+            hy[i][j] = -1.0 + (float)i * step + 1.0 / (float)SIZE_NAVBALL;
         }
     }
 }
@@ -217,6 +265,17 @@ void generatePixelArray(float px[SIZE_NAVBALL], uint32_t size)
     for (uint32_t i = 0; i < size; i++)
     {
         px[i] = -1.0 + (float)i * step + 1.0 / (float)size;
+    }
+}
+
+void generatePixelXY(float px[SIZE_NAVBALL], float py[SIZE_NAVBALL])
+{
+    // equivalent to calling generatePixelArray twice
+    float step = 2.0 / (float)SIZE_NAVBALL;
+    for (uint32_t i = 0; i < SIZE_NAVBALL; i++)
+    {
+        px[i] = -1.0 + (float)i * step + 1.0 / (float)SIZE_NAVBALL;
+        py[i] = -1.0 + (float)i * step + 1.0 / (float)SIZE_NAVBALL;
     }
 }
 

@@ -17,7 +17,7 @@ int main()
   // alocate the navball image
   createImageRGB(&navballImage, SIZE_NAVBALL, SIZE_NAVBALL);
   // convert 45 deg to rad
-  float pitch = 30.0 * M_PI / 180.0;
+  float pitch = 45.0 * M_PI / 180.0;
   float roll = 90.0 * M_PI / 180.0;
   generateNavBall(&texture, &navballImage, pitch, roll, 0.0);
   // write back the ppm file for test purpose
