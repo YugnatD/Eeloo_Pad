@@ -11,7 +11,7 @@
 
 #include "textureMap.h"
 
-#define SIZE_NAVBALL 64
+#define SIZE_NAVBALL 256
 
 typedef struct _navballImage {
     // int width; // USE DEFINE

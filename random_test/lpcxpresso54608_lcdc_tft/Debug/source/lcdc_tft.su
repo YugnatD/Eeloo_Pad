@@ -1,6 +1,6 @@
 core_cm4.h:1679:22:__NVIC_EnableIRQ	16	static
 fsl_lcdc.h:276:20:LCDC_Start	16	static
 fsl_lcdc.h:302:20:LCDC_PowerUp	16	static
-lcdc_tft.c:126:13:BOARD_InitPWM	40	static
-lcdc_tft.c:147:6:LCD_IRQHandler	16	static
-lcdc_tft.c:166:5:main	64	static
+lcdc_tft.c:118:13:BOARD_InitPWM	40	static
+lcdc_tft.c:139:6:LCD_IRQHandler	16	static
+lcdc_tft.c:158:5:main	80	static

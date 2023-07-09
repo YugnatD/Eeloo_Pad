@@ -10,8 +10,11 @@
 
 
 // we work on uC, so we use static array with fixed size
-#define TEXTURE_MAP_WIDTH 1024
-#define TEXTURE_MAP_HEIGHT 512
+//#define TEXTURE_MAP_WIDTH 1024
+//#define TEXTURE_MAP_HEIGHT 512
+
+#define TEXTURE_MAP_WIDTH 400
+#define TEXTURE_MAP_HEIGHT 200
 
 typedef struct _textureMap {
     uint16_t width; // USE DEFINE, it's here because of gimp export

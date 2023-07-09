@@ -483,6 +483,669 @@ void BOARD_InitPins(void)
                                         IOCON_PIO_OPENDRAIN_DI);
     /* PORT3 PIN9 (coords: C7) is configured as LCD_VD(23) */
     IOCON_PinMuxSet(IOCON, 3U, 9U, port3_pin9_config);
+
+
+    // ADDED FOR SDRAM ACCESS :
+    const uint32_t port0_pin15_config = (/* Pin is configured as EMC_WEN */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT0 PIN15 (coords: L4) is configured as EMC_WEN */
+        IOCON_PinMuxSet(IOCON, 0U, 15U, port0_pin15_config);
+
+        const uint32_t port0_pin18_config = (/* Pin is configured as EMC_A(0) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT0 PIN18 (coords: C14) is configured as EMC_A(0) */
+        IOCON_PinMuxSet(IOCON, 0U, 18U, port0_pin18_config);
+
+        const uint32_t port0_pin19_config = (/* Pin is configured as EMC_A(1) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT0 PIN19 (coords: C6) is configured as EMC_A(1) */
+        IOCON_PinMuxSet(IOCON, 0U, 19U, port0_pin19_config);
+
+        const uint32_t port0_pin2_config = (/* Pin is configured as EMC_D(0) */
+                                            IOCON_PIO_FUNC6 |
+                                            /* No addition pin function */
+                                            IOCON_PIO_MODE_INACT |
+                                            /* Input function is not inverted */
+                                            IOCON_PIO_INV_DI |
+                                            /* Enables digital function */
+                                            IOCON_PIO_DIGITAL_EN |
+                                            /* Input filter disabled */
+                                            IOCON_PIO_INPFILT_OFF |
+                                            /* Fast mode, slew rate control is disabled */
+                                            IOCON_PIO_SLEW_FAST |
+                                            /* Open drain is disabled */
+                                            IOCON_PIO_OPENDRAIN_DI);
+        /* PORT0 PIN2 (coords: E9) is configured as EMC_D(0) */
+        IOCON_PinMuxSet(IOCON, 0U, 2U, port0_pin2_config);
+
+        const uint32_t port0_pin20_config = (/* Pin is configured as EMC_A(2) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT0 PIN20 (coords: D13) is configured as EMC_A(2) */
+        IOCON_PinMuxSet(IOCON, 0U, 20U, port0_pin20_config);
+
+        const uint32_t port0_pin21_config = (/* Pin is configured as EMC_A(3) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT0 PIN21 (coords: C13) is configured as EMC_A(3) */
+        IOCON_PinMuxSet(IOCON, 0U, 21U, port0_pin21_config);
+
+        const uint32_t port0_pin3_config = (/* Pin is configured as EMC_D(1) */
+                                            IOCON_PIO_FUNC6 |
+                                            /* No addition pin function */
+                                            IOCON_PIO_MODE_INACT |
+                                            /* Input function is not inverted */
+                                            IOCON_PIO_INV_DI |
+                                            /* Enables digital function */
+                                            IOCON_PIO_DIGITAL_EN |
+                                            /* Input filter disabled */
+                                            IOCON_PIO_INPFILT_OFF |
+                                            /* Fast mode, slew rate control is disabled */
+                                            IOCON_PIO_SLEW_FAST |
+                                            /* Open drain is disabled */
+                                            IOCON_PIO_OPENDRAIN_DI);
+        /* PORT0 PIN3 (coords: A10) is configured as EMC_D(1) */
+        IOCON_PinMuxSet(IOCON, 0U, 3U, port0_pin3_config);
+
+        const uint32_t port0_pin4_config = (/* Pin is configured as EMC_D(2) */
+                                            IOCON_PIO_FUNC6 |
+                                            /* No addition pin function */
+                                            IOCON_PIO_MODE_INACT |
+                                            /* Input function is not inverted */
+                                            IOCON_PIO_INV_DI |
+                                            /* Enables digital function */
+                                            IOCON_PIO_DIGITAL_EN |
+                                            /* Input filter disabled */
+                                            IOCON_PIO_INPFILT_OFF |
+                                            /* Fast mode, slew rate control is disabled */
+                                            IOCON_PIO_SLEW_FAST |
+                                            /* Open drain is disabled */
+                                            IOCON_PIO_OPENDRAIN_DI);
+        /* PORT0 PIN4 (coords: C8) is configured as EMC_D(2) */
+        IOCON_PinMuxSet(IOCON, 0U, 4U, port0_pin4_config);
+
+        const uint32_t port0_pin5_config = (/* Pin is configured as EMC_D(3) */
+                                            IOCON_PIO_FUNC6 |
+                                            /* No addition pin function */
+                                            IOCON_PIO_MODE_INACT |
+                                            /* Input function is not inverted */
+                                            IOCON_PIO_INV_DI |
+                                            /* Enables digital function */
+                                            IOCON_PIO_DIGITAL_EN |
+                                            /* Input filter disabled */
+                                            IOCON_PIO_INPFILT_OFF |
+                                            /* Fast mode, slew rate control is disabled */
+                                            IOCON_PIO_SLEW_FAST |
+                                            /* Open drain is disabled */
+                                            IOCON_PIO_OPENDRAIN_DI);
+        /* PORT0 PIN5 (coords: E7) is configured as EMC_D(3) */
+        IOCON_PinMuxSet(IOCON, 0U, 5U, port0_pin5_config);
+
+        const uint32_t port0_pin6_config = (/* Pin is configured as EMC_D(4) */
+                                            IOCON_PIO_FUNC6 |
+                                            /* No addition pin function */
+                                            IOCON_PIO_MODE_INACT |
+                                            /* Input function is not inverted */
+                                            IOCON_PIO_INV_DI |
+                                            /* Enables digital function */
+                                            IOCON_PIO_DIGITAL_EN |
+                                            /* Input filter disabled */
+                                            IOCON_PIO_INPFILT_OFF |
+                                            /* Fast mode, slew rate control is disabled */
+                                            IOCON_PIO_SLEW_FAST |
+                                            /* Open drain is disabled */
+                                            IOCON_PIO_OPENDRAIN_DI);
+        /* PORT0 PIN6 (coords: A5) is configured as EMC_D(4) */
+        IOCON_PinMuxSet(IOCON, 0U, 6U, port0_pin6_config);
+
+        const uint32_t port0_pin7_config = (/* Pin is configured as EMC_D(5) */
+                                            IOCON_PIO_FUNC6 |
+                                            /* No addition pin function */
+                                            IOCON_PIO_MODE_INACT |
+                                            /* Input function is not inverted */
+                                            IOCON_PIO_INV_DI |
+                                            /* Enables digital function */
+                                            IOCON_PIO_DIGITAL_EN |
+                                            /* Input filter disabled */
+                                            IOCON_PIO_INPFILT_OFF |
+                                            /* Fast mode, slew rate control is disabled */
+                                            IOCON_PIO_SLEW_FAST |
+                                            /* Open drain is disabled */
+                                            IOCON_PIO_OPENDRAIN_DI);
+        /* PORT0 PIN7 (coords: H12) is configured as EMC_D(5) */
+        IOCON_PinMuxSet(IOCON, 0U, 7U, port0_pin7_config);
+
+        const uint32_t port0_pin8_config = (/* Pin is configured as EMC_D(6) */
+                                            IOCON_PIO_FUNC6 |
+                                            /* No addition pin function */
+                                            IOCON_PIO_MODE_INACT |
+                                            /* Input function is not inverted */
+                                            IOCON_PIO_INV_DI |
+                                            /* Enables digital function */
+                                            IOCON_PIO_DIGITAL_EN |
+                                            /* Input filter disabled */
+                                            IOCON_PIO_INPFILT_OFF |
+                                            /* Fast mode, slew rate control is disabled */
+                                            IOCON_PIO_SLEW_FAST |
+                                            /* Open drain is disabled */
+                                            IOCON_PIO_OPENDRAIN_DI);
+        /* PORT0 PIN8 (coords: H10) is configured as EMC_D(6) */
+        IOCON_PinMuxSet(IOCON, 0U, 8U, port0_pin8_config);
+
+        const uint32_t port0_pin9_config = (/* Pin is configured as EMC_D(7) */
+                                            IOCON_PIO_FUNC6 |
+                                            /* No addition pin function */
+                                            IOCON_PIO_MODE_INACT |
+                                            /* Input function is not inverted */
+                                            IOCON_PIO_INV_DI |
+                                            /* Enables digital function */
+                                            IOCON_PIO_DIGITAL_EN |
+                                            /* Input filter disabled */
+                                            IOCON_PIO_INPFILT_OFF |
+                                            /* Fast mode, slew rate control is disabled */
+                                            IOCON_PIO_SLEW_FAST |
+                                            /* Open drain is disabled */
+                                            IOCON_PIO_OPENDRAIN_DI);
+        /* PORT0 PIN9 (coords: G12) is configured as EMC_D(7) */
+        IOCON_PinMuxSet(IOCON, 0U, 9U, port0_pin9_config);
+
+        const uint32_t port1_pin10_config = (/* Pin is configured as EMC_RASN */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN10 (coords: N9) is configured as EMC_RASN */
+        IOCON_PinMuxSet(IOCON, 1U, 10U, port1_pin10_config);
+
+        const uint32_t port1_pin11_config = (/* Pin is configured as EMC_CLK(0) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN11 (coords: B4) is configured as EMC_CLK(0) */
+        IOCON_PinMuxSet(IOCON, 1U, 11U, port1_pin11_config);
+
+        const uint32_t port1_pin12_config = (/* Pin is configured as EMC_DYCSN(0) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN12 (coords: K9) is configured as EMC_DYCSN(0) */
+        IOCON_PinMuxSet(IOCON, 1U, 12U, port1_pin12_config);
+
+        const uint32_t port1_pin13_config = (/* Pin is configured as EMC_DQM(0) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN13 (coords: G10) is configured as EMC_DQM(0) */
+        IOCON_PinMuxSet(IOCON, 1U, 13U, port1_pin13_config);
+
+        const uint32_t port1_pin14_config = (/* Pin is configured as EMC_DQM(1) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN14 (coords: C12) is configured as EMC_DQM(1) */
+        IOCON_PinMuxSet(IOCON, 1U, 14U, port1_pin14_config);
+
+        const uint32_t port1_pin15_config = (/* Pin is configured as EMC_CKE(0) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN15 (coords: A11) is configured as EMC_CKE(0) */
+        IOCON_PinMuxSet(IOCON, 1U, 15U, port1_pin15_config);
+
+        const uint32_t port1_pin16_config = (/* Pin is configured as EMC_A(10) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN16 (coords: B7) is configured as EMC_A(10) */
+        IOCON_PinMuxSet(IOCON, 1U, 16U, port1_pin16_config);
+
+        const uint32_t port1_pin19_config = (/* Pin is configured as EMC_D(8) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN19 (coords: L1) is configured as EMC_D(8) */
+        IOCON_PinMuxSet(IOCON, 1U, 19U, port1_pin19_config);
+
+        const uint32_t port1_pin20_config = (/* Pin is configured as EMC_D(9) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN20 (coords: M1) is configured as EMC_D(9) */
+        IOCON_PinMuxSet(IOCON, 1U, 20U, port1_pin20_config);
+
+        const uint32_t port1_pin21_config = (/* Pin is configured as EMC_D(10) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN21 (coords: N8) is configured as EMC_D(10) */
+        IOCON_PinMuxSet(IOCON, 1U, 21U, port1_pin21_config);
+
+        const uint32_t port1_pin23_config = (/* Pin is configured as EMC_A(11) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN23 (coords: M10) is configured as EMC_A(11) */
+        IOCON_PinMuxSet(IOCON, 1U, 23U, port1_pin23_config);
+
+        const uint32_t port1_pin24_config = (/* Pin is configured as EMC_A(12) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN24 (coords: N14) is configured as EMC_A(12) */
+        IOCON_PinMuxSet(IOCON, 1U, 24U, port1_pin24_config);
+
+        const uint32_t port1_pin25_config = (/* Pin is configured as EMC_A(13) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN25 (coords: M12) is configured as EMC_A(13) */
+        IOCON_PinMuxSet(IOCON, 1U, 25U, port1_pin25_config);
+
+        const uint32_t port1_pin26_config = (/* Pin is configured as EMC_A(8) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN26 (coords: J10) is configured as EMC_A(8) */
+        IOCON_PinMuxSet(IOCON, 1U, 26U, port1_pin26_config);
+
+        const uint32_t port1_pin27_config = (/* Pin is configured as EMC_A(9) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN27 (coords: F10) is configured as EMC_A(9) */
+        IOCON_PinMuxSet(IOCON, 1U, 27U, port1_pin27_config);
+
+        const uint32_t port1_pin28_config = (/* Pin is configured as EMC_D(12) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN28 (coords: E12) is configured as EMC_D(12) */
+        IOCON_PinMuxSet(IOCON, 1U, 28U, port1_pin28_config);
+
+        const uint32_t port1_pin29_config = (/* Pin is configured as EMC_D(13) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN29 (coords: C11) is configured as EMC_D(13) */
+        IOCON_PinMuxSet(IOCON, 1U, 29U, port1_pin29_config);
+
+        const uint32_t port1_pin30_config = (/* Pin is configured as EMC_D(14) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN30 (coords: A8) is configured as EMC_D(14) */
+        IOCON_PinMuxSet(IOCON, 1U, 30U, port1_pin30_config);
+
+        const uint32_t port1_pin31_config = (/* Pin is configured as EMC_D(15) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN31 (coords: C5) is configured as EMC_D(15) */
+        IOCON_PinMuxSet(IOCON, 1U, 31U, port1_pin31_config);
+
+        const uint32_t port1_pin4_config = (/* Pin is configured as EMC_D(11) */
+                                            IOCON_PIO_FUNC6 |
+                                            /* No addition pin function */
+                                            IOCON_PIO_MODE_INACT |
+                                            /* Input function is not inverted */
+                                            IOCON_PIO_INV_DI |
+                                            /* Enables digital function */
+                                            IOCON_PIO_DIGITAL_EN |
+                                            /* Input filter disabled */
+                                            IOCON_PIO_INPFILT_OFF |
+                                            /* Fast mode, slew rate control is disabled */
+                                            IOCON_PIO_SLEW_FAST |
+                                            /* Open drain is disabled */
+                                            IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN4 (coords: D4) is configured as EMC_D(11) */
+        IOCON_PinMuxSet(IOCON, 1U, 4U, port1_pin4_config);
+
+        const uint32_t port1_pin5_config = (/* Pin is configured as EMC_A(4) */
+                                            IOCON_PIO_FUNC6 |
+                                            /* No addition pin function */
+                                            IOCON_PIO_MODE_INACT |
+                                            /* Input function is not inverted */
+                                            IOCON_PIO_INV_DI |
+                                            /* Enables digital function */
+                                            IOCON_PIO_DIGITAL_EN |
+                                            /* Input filter disabled */
+                                            IOCON_PIO_INPFILT_OFF |
+                                            /* Fast mode, slew rate control is disabled */
+                                            IOCON_PIO_SLEW_FAST |
+                                            /* Open drain is disabled */
+                                            IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN5 (coords: E4) is configured as EMC_A(4) */
+        IOCON_PinMuxSet(IOCON, 1U, 5U, port1_pin5_config);
+
+        const uint32_t port1_pin6_config = (/* Pin is configured as EMC_A(5) */
+                                            IOCON_PIO_FUNC6 |
+                                            /* No addition pin function */
+                                            IOCON_PIO_MODE_INACT |
+                                            /* Input function is not inverted */
+                                            IOCON_PIO_INV_DI |
+                                            /* Enables digital function */
+                                            IOCON_PIO_DIGITAL_EN |
+                                            /* Input filter disabled */
+                                            IOCON_PIO_INPFILT_OFF |
+                                            /* Fast mode, slew rate control is disabled */
+                                            IOCON_PIO_SLEW_FAST |
+                                            /* Open drain is disabled */
+                                            IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN6 (coords: G4) is configured as EMC_A(5) */
+        IOCON_PinMuxSet(IOCON, 1U, 6U, port1_pin6_config);
+
+        const uint32_t port1_pin7_config = (/* Pin is configured as EMC_A(6) */
+                                            IOCON_PIO_FUNC6 |
+                                            /* No addition pin function */
+                                            IOCON_PIO_MODE_INACT |
+                                            /* Input function is not inverted */
+                                            IOCON_PIO_INV_DI |
+                                            /* Enables digital function */
+                                            IOCON_PIO_DIGITAL_EN |
+                                            /* Input filter disabled */
+                                            IOCON_PIO_INPFILT_OFF |
+                                            /* Fast mode, slew rate control is disabled */
+                                            IOCON_PIO_SLEW_FAST |
+                                            /* Open drain is disabled */
+                                            IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN7 (coords: N1) is configured as EMC_A(6) */
+        IOCON_PinMuxSet(IOCON, 1U, 7U, port1_pin7_config);
+
+        const uint32_t port1_pin8_config = (/* Pin is configured as EMC_A(7) */
+                                            IOCON_PIO_FUNC6 |
+                                            /* No addition pin function */
+                                            IOCON_PIO_MODE_INACT |
+                                            /* Input function is not inverted */
+                                            IOCON_PIO_INV_DI |
+                                            /* Enables digital function */
+                                            IOCON_PIO_DIGITAL_EN |
+                                            /* Input filter disabled */
+                                            IOCON_PIO_INPFILT_OFF |
+                                            /* Fast mode, slew rate control is disabled */
+                                            IOCON_PIO_SLEW_FAST |
+                                            /* Open drain is disabled */
+                                            IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN8 (coords: P8) is configured as EMC_A(7) */
+        IOCON_PinMuxSet(IOCON, 1U, 8U, port1_pin8_config);
+
+        const uint32_t port1_pin9_config = (/* Pin is configured as EMC_CASN */
+                                            IOCON_PIO_FUNC6 |
+                                            /* No addition pin function */
+                                            IOCON_PIO_MODE_INACT |
+                                            /* Input function is not inverted */
+                                            IOCON_PIO_INV_DI |
+                                            /* Enables digital function */
+                                            IOCON_PIO_DIGITAL_EN |
+                                            /* Input filter disabled */
+                                            IOCON_PIO_INPFILT_OFF |
+                                            /* Fast mode, slew rate control is disabled */
+                                            IOCON_PIO_SLEW_FAST |
+                                            /* Open drain is disabled */
+                                            IOCON_PIO_OPENDRAIN_DI);
+        /* PORT1 PIN9 (coords: K6) is configured as EMC_CASN */
+        IOCON_PinMuxSet(IOCON, 1U, 9U, port1_pin9_config);
+
+        const uint32_t port3_pin25_config = (/* Pin is configured as EMC_A(14) */
+                                             IOCON_PIO_FUNC6 |
+                                             /* No addition pin function */
+                                             IOCON_PIO_MODE_INACT |
+                                             /* Input function is not inverted */
+                                             IOCON_PIO_INV_DI |
+                                             /* Enables digital function */
+                                             IOCON_PIO_DIGITAL_EN |
+                                             /* Input filter disabled */
+                                             IOCON_PIO_INPFILT_OFF |
+                                             /* Fast mode, slew rate control is disabled */
+                                             IOCON_PIO_SLEW_FAST |
+                                             /* Open drain is disabled */
+                                             IOCON_PIO_OPENDRAIN_DI);
+        /* PORT3 PIN25 (coords: P9) is configured as EMC_A(14) */
+        IOCON_PinMuxSet(IOCON, 3U, 25U, port3_pin25_config);
 }
 /***********************************************************************************************************************
  * EOF

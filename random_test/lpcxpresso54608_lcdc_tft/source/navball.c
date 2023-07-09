@@ -12,111 +12,55 @@ Description :
 // float px[SIZE_NAVBALL];
 // float py[SIZE_NAVBALL];
 
-//roll                     cs    0   ss      0    1    0      -ss   0   cs
-static double ms[3][3] = {{0.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
-//pitch                     1     0   0       0    ct   st     0    -st  ct
-static double mt[3][3] = {{1.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}};
-//yaw                       cy    sy  0       -sy  cy   0      0    0   1
-static double my[3][3] = {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 1.0}};
+// //roll                     cs    0   ss      0    1    0      -ss   0   cs
+// static double ms[3][3] = {{0.0, 0.0, 0.0}, {0.0, 1.0, 0.0}, {0.0, 0.0, 1.0}};
+// //pitch                     1     0   0       0    ct   st     0    -st  ct
+// static double mt[3][3] = {{1.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}};
+// //yaw                       cy    sy  0       -sy  cy   0      0    0   1
+// static double my[3][3] = {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 1.0}};
 
-float hx[SIZE_NAVBALL][SIZE_NAVBALL];
-float hy[SIZE_NAVBALL][SIZE_NAVBALL];
-float hz[SIZE_NAVBALL][SIZE_NAVBALL];
-
-//__NOINIT(BOARD_SDRAM) __attribute__ ((aligned)) float hx[SIZE_NAVBALL][SIZE_NAVBALL];
-//__NOINIT(BOARD_SDRAM) __attribute__ ((aligned)) float hy[SIZE_NAVBALL][SIZE_NAVBALL];
-//__NOINIT(BOARD_SDRAM) __attribute__ ((aligned)) float hz[SIZE_NAVBALL][SIZE_NAVBALL];
-
-//__SECTION(data, BOARD_SDRAM) __attribute__ ((aligned)) float hx[SIZE_NAVBALL][SIZE_NAVBALL];
-//__SECTION(data, BOARD_SDRAM) __attribute__ ((aligned)) float hy[SIZE_NAVBALL][SIZE_NAVBALL];
-//__SECTION(data, BOARD_SDRAM) __attribute__ ((aligned)) float hz[SIZE_NAVBALL][SIZE_NAVBALL];
-
-
+static double mtot[3][3] = {{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}};
 
 void generateNavBall(textureMap_t *texture, navballImage_t *navballImage, float pitch, float roll, float yaw)
 {
     double cs, ss, ct, st, cy, sy;
-    // float lat, lon;
     uint8_t r,g,b;
     int x, y;
-    // create the navball
-    // I consider the pitch, roll and yaw are in radian
-    // Create two array px,py going from -1 to 1 with a step of 2/size
-    // THIS STEP IS DONE IN THE MESHGRID FUNCTION
-    // generatePixelArray(px, navballImage->width);
-    // generatePixelArray(py, navballImage->height);
-    // generatePixelXY(px, py);
-
-    // create the meshgrid hx, hy
-    meshgrid(hx, hy);
-
-    // create the meshgrid hz and hit
-    // compute_hz(hx, hy, hz, hit);
-    compute_hz2(hx, hy, hz);
-
-
     cs = cos(roll);
     ss = sin(roll);
-    ms[0][0] = cs;
-    ms[0][2] = ss;
-    ms[2][0] = -ss;
-    ms[2][2] = cs;
-
     ct = cos(pitch);
     st = sin(pitch);
-    mt[1][1] = ct;
-    mt[1][2] = st;
-    mt[2][1] = -st;
-    mt[2][2] = ct;
-
     cy = cos(yaw);
     sy = sin(yaw);
-    my[0][0] = cy;
-    my[0][1] = sy;
-    my[1][0] = -sy;
-    my[1][1] = cy;
-
-    // allocate xyz array of navballImage.size
-    // dstack(xyz, hx, hy, hz, navballImage->width, navballImage->height, 3);
-    // tensorDot(xyz, mt, navballImage->width, navballImage->height, 3, xyz2);
-    // tensorDot2(hx, hy, hz, mt, hx2, hy2, hz2);
-    tensorDot2InPlace(hx, hy, hz, mt);
-    // tensorDot(xyz2, ms, navballImage->width, navballImage->height, 3, xyz3);
-    // tensorDot2(hx2, hy2, hz2, ms, hx3, hy3, hz3); // i could reuse hx, hy, hz to save memory
-    tensorDot2InPlace(hx, hy, hz, ms);
-    // adding yaw
-    tensorDot2InPlace(hx, hy, hz, my);
-    hx[0][0] = 42;
-    
-
-    // for (int i = 0; i < SIZE_NAVBALL; i++)
-    // {
-    //     for (int j = 0; j < SIZE_NAVBALL; j++)
-    //     {
-    //         if(hit[i][j] == 1)
-    //         {
-    //             latitude[i][j] = (0.5 + (asin(hy3[i][j])) / M_PI) * texture->height;
-    //             longitude[i][j] = (1.0 + atan2(hz3[i][j], hx3[i][j]) / M_PI) * 0.5 * texture->width;
-    //         }
-    //         else
-    //         {
-    //             latitude[i][j] = 0.0;
-    //             longitude[i][j] = 0.0;
-    //         }
-    //     }
-    // }
-//    int debug = ((1.0 + atan2(0, 0) / M_PI) * 0.5 * TEXTURE_MAP_WIDTH);
-//    int debug = atan2(0, 0)
-    float r2;
+    mtot[0][0] = 1.0 * cs * cy;
+    mtot[0][1] = 1.0 * cs * sy;
+    mtot[0][2] = 1.0 * ss * 1.0;
+    mtot[1][0] = st * -ss * cy + ct * 1.0 * -sy;
+    mtot[1][1] = st * -ss * sy + ct * 1.0 * cy;
+    mtot[1][2] = st * cs * 1.0;
+    mtot[2][0] = ct * -ss * cy + -st * 1.0 * -sy;
+    mtot[2][1] = ct * -ss * sy + -st * 1.0 * cy;
+    mtot[2][2] = ct * cs * 1.0;
+    float r2, px_hx, px_hy, px_hz, temp_hx, temp_hy, temp_hz;
+    float step = 2.0 / (float)SIZE_NAVBALL;
     for (int i = 0; i < SIZE_NAVBALL; i++)
     {
         for (int j = 0; j < SIZE_NAVBALL; j++)
         {
-            r2 = hx[i][j] * hx[i][j] + hy[i][j] * hy[i][j];
-            if(r2 <= 1.0)
+            px_hx = -1.0 + (float)j * step + 1.0 / (float)SIZE_NAVBALL;
+            px_hy = -1.0 + (float)i * step + 1.0 / (float)SIZE_NAVBALL;
+            r2 = px_hx * px_hx + px_hy * px_hy;
+            if(r2 <= 1.0) // hit on the sphere
             {
-                x = (int)((0.5 + (asin(hy[i][j])) / M_PI) * TEXTURE_MAP_HEIGHT);
-                y = (int)((1.0 + atan2(hz[i][j], hx[i][j]) / M_PI) * 0.5 * TEXTURE_MAP_WIDTH);
+                px_hz = -sqrt(1.0 - r2);
+                temp_hx = px_hx;
+                temp_hy = px_hy;
+                temp_hz = px_hz;
+                px_hx = mtot[0][0] * temp_hx + mtot[0][1] * temp_hy + mtot[0][2] * temp_hz;
+                px_hy = mtot[1][0] * temp_hx + mtot[1][1] * temp_hy + mtot[1][2] * temp_hz;
+                px_hz = mtot[2][0] * temp_hx + mtot[2][1] * temp_hy + mtot[2][2] * temp_hz;
+                x = (int)((0.5 + (asin(px_hy)) / M_PI) * TEXTURE_MAP_HEIGHT);
+                y = (int)((1.0 + atan2(px_hz, px_hx) / M_PI) * 0.5 * TEXTURE_MAP_WIDTH);
                 r = (int) texture->data[x * TEXTURE_MAP_WIDTH * 3 + y * 3 + 0];
                 g = (int) texture->data[x * TEXTURE_MAP_WIDTH * 3 + y * 3 + 1];
                 b = (int) texture->data[x * TEXTURE_MAP_WIDTH * 3 + y * 3 + 2];
@@ -127,6 +71,7 @@ void generateNavBall(textureMap_t *texture, navballImage_t *navballImage, float 
             else
             {
                 // set the color to black
+                // px_hz = NAN;
                 navballImage->data[i][j][0] = 0;
                 navballImage->data[i][j][1] = 0;
                 navballImage->data[i][j][2] = 0;

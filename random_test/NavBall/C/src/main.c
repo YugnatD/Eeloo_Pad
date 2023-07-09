@@ -7,7 +7,7 @@
 #include "navball.h"
 #include "textureMap.h"
 
-// #define FPS 24.0 // 24
+#define FPS 24.0 // 24
 
 extern textureMap_t defaultTextureMap;
 
@@ -20,14 +20,19 @@ int main()
   printf("HELLO WORLD \n");
   // open the texture file
   navballImage_t navballImage;
-  // textureMap_t texture;
+  textureMap_t texture;
   // openTextureMap(&texture, "NavBall_Texture.ppm");
+  // openTextureMap(&texture, "NavBall_Texture_M.ppm"); // 612x306
+  openTextureMap(&texture, "NavBall_Texture_S.ppm"); // 400x200
+
   // convert 45 deg to rad
   float pitch = 45.0 * M_PI / 180.0;
   float roll = 30.0 * M_PI / 180.0;
   float yaw = 10.0 * M_PI / 180.0;
   // generateNavBall(&texture, &navballImage, pitch, roll, yaw);
-  generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
+  // generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
+  generateNavBall(&texture, &navballImage, pitch, roll, yaw);
+
   // save the navball
   savePPM(&navballImage, "NavBall.ppm");
 
@@ -41,14 +46,16 @@ int main()
   while (!quit)
   {
     // measure time between generation
-    // clock_t start = clock();
-    generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
-    // clock_t end = clock();
-    // float seconds = (float)(end - start) / CLOCKS_PER_SEC;
-    // // sleep the righ amount of time to get 24 FPS
-    // int sleepTime = (1.0 * 1000000 / FPS) - seconds * 1000000;
-    // usleep(sleepTime);
-    // printf("Time to generate: %f\n", seconds);
+    clock_t start = clock();
+    // generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
+    generateNavBall(&texture, &navballImage, pitch, roll, yaw);
+
+    clock_t end = clock();
+    float seconds = (float)(end - start) / CLOCKS_PER_SEC;
+    // sleep the righ amount of time to get 24 FPS
+    int sleepTime = (1.0 * 1000000 / FPS) - seconds * 1000000;
+    usleep(sleepTime);
+    printf("Time to generate: %f\n", seconds);
     pitch += 0.01;
     roll += 0.01;
     yaw += 0.01;

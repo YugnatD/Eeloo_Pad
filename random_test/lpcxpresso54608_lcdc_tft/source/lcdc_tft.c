@@ -25,8 +25,8 @@
 
 extern textureMap_t defaultTextureMap;
 
-navballImage_t navball;
-// __NOINIT(BOARD_SDRAM) __attribute__ ((aligned)) navballImage_t navball;
+//static navballImage_t navball;
+ __NOINIT(BOARD_SDRAM) __attribute__ ((aligned)) navballImage_t navball;
 //__SECTION(data, BOARD_SDRAM) __attribute__ ((aligned)) navballImage_t navball;
 
 
@@ -49,10 +49,7 @@ navballImage_t navball;
 #define LCD_INPUT_CLK_FREQ CLOCK_GetLcdClkFreq()
 #define APP_LCD_IRQHandler LCD_IRQHandler
 #define APP_LCD_IRQn LCD_IRQn
-#define APP_BIT_PER_PIXEL 2
-#define APP_PIXEL_PER_BYTE 4
-#define APP_PIXEL_MAX_VALUE 3
-#define APP_PIXEL_MIN_VALUE 3
+#define APP_PIXEL_PER_BYTE 8
 
 /*******************************************************************************
  * Prototypes
@@ -69,19 +66,17 @@ __attribute__((aligned(8)))
 #else
 #error Toolchain not support.
 #endif
-static uint8_t s_frameBuf0[IMG_HEIGHT][IMG_WIDTH / APP_PIXEL_PER_BYTE];
+// __NOINIT(BOARD_SDRAM) __attribute__ ((aligned)) uint8_t s_frameBufs[IMG_HEIGHT][IMG_WIDTH][3];
+__attribute__(( section(".noinit.$RAM4"), aligned(8) ))
+static uint16_t s_frameBufs[IMG_HEIGHT][IMG_WIDTH];
+// static uint8_t s_frameBufs[IMG_HEIGHT][IMG_WIDTH][3];
 
-#if (defined(__CC_ARM) || defined(__ARMCC_VERSION) || defined(__GNUC__))
-__attribute__((aligned(8)))
-#elif defined(__ICCARM__)
-#pragma data_alignment = 8
-#else
-#error Toolchain not support.
-#endif
-//static uint8_t s_frameBuf1[IMG_HEIGHT][IMG_WIDTH / APP_PIXEL_PER_BYTE];
+//static uint8_t s_frameBufs[IMG_HEIGHT][IMG_WIDTH / APP_PIXEL_PER_BYTE];
+//static uint8_t s_frameBufs[IMG_HEIGHT][IMG_WIDTH];
 
-//static const uint32_t s_frameBufAddr[] = {(uint32_t)s_frameBuf0, (uint32_t)s_frameBuf1};
-static const uint32_t s_frameBufAddr[] = {(uint32_t)s_frameBuf0};
+
+static volatile bool s_frameEndFlag;
+
 
 /*
  * In this example, LCD controller works in 2 bpp mode, supports 4 colors,
@@ -112,13 +107,10 @@ static const uint32_t s_frameBufAddr[] = {(uint32_t)s_frameBuf0};
  * This example uses RGB format, the supported colors set in palette
  * are: black, red, green, and blue.
  */
-static const uint32_t palette[] = {0x001F0000U, 0x7C0003E0U};
+//static const uint32_t palette[] = {0x00007FFF};
+static const uint32_t palette[] = {0x001F0000U, 0x7C0003D0U };
 
-/* The index of the inactive buffer. */
-static volatile uint8_t s_inactiveBufsIdx;
 
-/* The new frame address already loaded to the LCD controller. */
-static volatile bool s_frameAddrUpdated = false;
 
 /*******************************************************************************
  * Code
@@ -150,9 +142,9 @@ void APP_LCD_IRQHandler(void)
 
     LCDC_ClearInterruptsStatus(APP_LCD, intStatus);
 
-    if (intStatus & kLCDC_BaseAddrUpdateInterrupt)
+    if (intStatus & kLCDC_VerticalCompareInterrupt)
     {
-        s_frameAddrUpdated = true;
+        s_frameEndFlag = true;
     }
     __DSB();
 /* Add for ARM errata 838869, affects Cortex-M4, Cortex-M4F Store immediate overlapping
@@ -181,9 +173,6 @@ int main(void)
     /* Set the back light PWM. */
     BOARD_InitPWM();
 
-    s_frameAddrUpdated = false;
-    s_inactiveBufsIdx  = 1;
-
 //    APP_FillBuffer((void *)(s_frameBufAddr[0]));
 
     LCDC_GetDefaultConfig(&lcdConfig);
@@ -198,8 +187,8 @@ int main(void)
     lcdConfig.vfp            = LCD_VFP;
     lcdConfig.vbp            = LCD_VBP;
     lcdConfig.polarityFlags  = LCD_POL_FLAGS;
-    lcdConfig.upperPanelAddr = (uint32_t)s_frameBufAddr[0];
-    lcdConfig.bpp            = kLCDC_2BPP;
+    lcdConfig.upperPanelAddr = (uint32_t)s_frameBufs;
+    lcdConfig.bpp            = kLCDC_16BPP565; // kLCDC_1BPP / kLCDC_2BPP kLCDC_24BPP kLCDC_16BPP565
     lcdConfig.display        = kLCDC_DisplayTFT;
     lcdConfig.swapRedBlue    = false;
 
@@ -207,7 +196,7 @@ int main(void)
 
     LCDC_SetPalette(APP_LCD, palette, ARRAY_SIZE(palette));
 
-    LCDC_EnableInterrupts(APP_LCD, kLCDC_BaseAddrUpdateInterrupt);
+    LCDC_EnableInterrupts(APP_LCD, kLCDC_VerticalCompareInterrupt);
     NVIC_EnableIRQ(APP_LCD_IRQn);
 
     LCDC_Start(APP_LCD);
@@ -216,47 +205,54 @@ int main(void)
     float pitch = 45.0 * M_PI / 180.0;
 	float roll = 30.0 * M_PI / 180.0;
 	float yaw = 10.0 * M_PI / 180.0;
+    float pitch_rad = 0.0;
+    float roll_rad = 0.0;
+    float yaw_rad = 0.0;
 
-	LCDC_SetPanelAddr(APP_LCD, kLCDC_UpperPanel, (uint32_t)(s_frameBufAddr[0]));
+//	LCDC_SetPanelAddr(APP_LCD, kLCDC_UpperPanel, (uint32_t)(s_frameBufAddr[0]));
+	uint8_t r, g, b;
 
     while (1)
     {
-
-    	generateNavBall(&defaultTextureMap, &navball, pitch, roll, yaw);
-        /* Fill the inactive buffer. */
-        // * 4:0      R[4:0]   Red palette data B[4:0] Blue palette data
-        // * 9:5      G[4:0]   Green palette data G[4:0] Green palette data
-        // * 14:10    B[4:0]   Blue palette data R[4:0] Red palette data
-        // * 15       I        Intensity / unused I Intensity / unused
-        // * 20:16    R[4:0]   Red palette data B[4:0] Blue palette data
-        // * 25:21    G[4:0]   Green palette data G[4:0] Green palette data
-        // * 30:26    B[4:0]   Blue palette data R[4:0] Red palette data
-    	// copy data from navball to s_frameBufAddr[0]
-        // for (int i = 0; i < SIZE_NAVBALL; i++) {
-        // 	for (int j = 0; j < SIZE_NAVBALL; j++) {
-        //         for (int k = 0; k < 3; k++) {
-        //         	s_frameBufAddr[0][i * SIZE_NAVBALL * 4 + j * 4 + k] = navball[i][j][k];
-        //         }
-        // 	}
-        // }
+        pitch += 1.0;
+        roll += 1.0;
+        yaw += 1.0;
+        pitch_rad = pitch * M_PI / 180.0;
+        roll_rad = roll * M_PI / 180.0;
+        yaw_rad = yaw * M_PI / 180.0;
+        if (pitch > 360.0) {
+        	pitch = 0.0;
+        }
+        if (roll > 360.0) {
+        	roll = 0.0;
+        }
+        if (yaw > 360.0) {
+        	yaw = 0.0;
+        }
+    	generateNavBall(&defaultTextureMap, &navball, pitch_rad, roll_rad, yaw_rad);
         // pass through the frame buffer {IMG_HEIGHT][IMG_WIDTH / APP_PIXEL_PER_BYTE];
         for (int i = 0; i < IMG_HEIGHT; i++) {
-        	for (int j = 0; j < IMG_WIDTH / APP_PIXEL_PER_BYTE; j++) {
-//        		s_frameBuf0[i][j] = 0x01; // red and black line
-        		// s_frameBuf0[i][j] = 0x02; // green and black line
-//        		s_frameBuf0[i][j] = 0x03; // blue and black line
-       		// s_frameBuf0[i][j] = 0x04; // red and black line
-            s_frameBuf0[i][j] = 0x05; // red and black line
+        	for (int j = 0; j < IMG_WIDTH; j++) {
+//        		s_frameBufs[i][j] = 0x001F;
+                if(i < SIZE_NAVBALL && j < SIZE_NAVBALL) {
+                	r = navball.data[i][j][0] >> 3;
+                	g = navball.data[i][j][1] >> 2;
+                	b = navball.data[i][j][2] >> 3;
+                } else {
+                	r = 0;
+                	g = 0;
+                	b = 0;
+                }
+                s_frameBufs[i][j] = (r << 11) | (g << 5) | b;
         	}
         }
 
-        while (!s_frameAddrUpdated)
+        while (!s_frameEndFlag)
         {
         }
 
 
 
-        s_frameAddrUpdated = false;
-//        s_inactiveBufsIdx ^= 1U;
+        s_frameEndFlag = false;
     }
 }
