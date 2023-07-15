@@ -10,6 +10,9 @@
 #include "textureMap.h"
 
 #define SIZE_NAVBALL 256
+#define STEP (2.0 / (float)SIZE_NAVBALL)
+
+#define ENABLE_PRECOMPUTED_VALUES
 
 typedef struct _navballImage {
     // int width; // USE DEFINE
@@ -18,7 +21,16 @@ typedef struct _navballImage {
 } navballImage_t;
 
 // #include "image.h"
+void generateNavBall(textureMap_t *texture, navballImage_t *navballImage, float pitch, float roll, float yaw);
+void initPreComputedValue();
+void savePPM(navballImage_t *image, char *filename);
+double FastArcTan(double x);
+double FastArcTan2(double y, double x);
+double FastASin(double x);
+double FastCos (double x);
+double FastSin (double x);
 
+// FUNCTION NOT USED ANYMORE
 void bilinear(float x, float y, textureMap_t *texture, uint8_t *r, uint8_t *g, uint8_t *b);
 void generatePixelArray(float px[SIZE_NAVBALL], uint32_t size);
 void generatePixelXY(float px[SIZE_NAVBALL], float py[SIZE_NAVBALL]);
@@ -27,7 +39,6 @@ void tensorDot2(float hx[SIZE_NAVBALL][SIZE_NAVBALL], float hy[SIZE_NAVBALL][SIZ
 void tensorDot2InPlace(float hx[SIZE_NAVBALL][SIZE_NAVBALL], float hy[SIZE_NAVBALL][SIZE_NAVBALL], float hz[SIZE_NAVBALL][SIZE_NAVBALL], double m[3][3]);
 void meshgrid(float hx[SIZE_NAVBALL][SIZE_NAVBALL], float hy[SIZE_NAVBALL][SIZE_NAVBALL]);
 void dstack(float xyz[SIZE_NAVBALL][SIZE_NAVBALL][3], float hx[SIZE_NAVBALL][SIZE_NAVBALL], float hy[SIZE_NAVBALL][SIZE_NAVBALL], float hz[SIZE_NAVBALL][SIZE_NAVBALL], int sizex, int sizey, int sizez);
-void generateNavBall(textureMap_t *texture, navballImage_t *navballImage, float pitch, float roll, float yaw);
 void compute_hz(float hx[SIZE_NAVBALL][SIZE_NAVBALL], float hy[SIZE_NAVBALL][SIZE_NAVBALL], float hz[SIZE_NAVBALL][SIZE_NAVBALL], uint8_t hit[SIZE_NAVBALL][SIZE_NAVBALL]);
 void compute_hz2(float hx[SIZE_NAVBALL][SIZE_NAVBALL], float hy[SIZE_NAVBALL][SIZE_NAVBALL], float hz[SIZE_NAVBALL][SIZE_NAVBALL]);
 // void convolve2dInPlace(float ***img, double **k, int sizex, int sizey, int sizez);
@@ -36,5 +47,4 @@ void print2dArray(float **array, int sizex, int sizey);
 void print1dArray(float *array, int size);
 void print2dArrayUint8(uint8_t **array, int sizex, int sizey);
 void print2dArrayDouble(double **array, int sizex, int sizey);
-void savePPM(navballImage_t *image, char *filename);
 #endif
