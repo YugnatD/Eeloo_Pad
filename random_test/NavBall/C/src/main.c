@@ -11,9 +11,14 @@
 
 extern textureMap_t defaultTextureMap;
 
-// int main(int argc, char *argv[])
-int main()
+int main(int argc, char *argv[])
+// int main()
 {
+  if (argc != 4)
+  {
+    printf("Usage: ./navball <pitch> <roll> <yaw>\n");
+    return 1;
+  }
   // SDL_Window* window = NULL;
   // SDL_Renderer* renderer = NULL;
   // SDL_Event event;
@@ -26,24 +31,27 @@ int main()
   // openTextureMap(&texture, "NavBall_Texture_S.ppm"); // 400x200
 
   // convert 45 deg to rad
-  float pitch = 45.0 * M_PI / 180.0;
-  float roll = 30.0 * M_PI / 180.0;
-  float yaw = 10.0 * M_PI / 180.0;
+  // float pitch = 45.0 * M_PI / 180.0;
+  // float roll = 30.0 * M_PI / 180.0;
+  // float yaw = 10.0 * M_PI / 180.0;
+  float pitch = atof(argv[1]) * M_PI / 180.0;
+  float roll = atof(argv[2]) * M_PI / 180.0;
+  float yaw = atof(argv[3]) * M_PI / 180.0;
 
   initPreComputedValue();
 
   // generateNavBall(&texture, &navballImage, pitch, roll, yaw);
-  // generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
+  generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
   // generateNavBall(&texture, &navballImage, pitch, roll, yaw);
 
   // for profiling purpose
-  // for (int i = 0; i < 5000; i++)
-  // {
-  //   generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
-  // }
+  for (int i = 0; i < 5000; i++)
+  {
+    generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
+  }
 
   // save the navball
-  // savePPM(&navballImage, "NavBall.ppm");
+  savePPM(&navballImage, "NavBall.ppm");
 
   // SDL_Init(SDL_INIT_VIDEO);
   // SDL_CreateWindowAndRenderer(SIZE_NAVBALL,SIZE_NAVBALL,SDL_WINDOW_SHOWN,&window,&renderer);

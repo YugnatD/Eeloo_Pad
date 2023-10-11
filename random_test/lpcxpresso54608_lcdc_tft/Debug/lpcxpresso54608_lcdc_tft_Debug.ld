@@ -6,7 +6,7 @@
  * Generated linker script file for LPC54608J512
  * Created from linkscript.ldt by FMCreateLinkLibraries
  * Using Freemarker v2.3.30
- * MCUXpresso IDE v11.3.1 [Build 5262] [2021-04-02] on 9 juil. 2023 11:55:03
+ * MCUXpresso IDE v11.3.1 [Build 5262] [2021-04-02] on 20 sept. 2023 15:08:59
  */
 
 INCLUDE "lpcxpresso54608_lcdc_tft_Debug_library.ld"

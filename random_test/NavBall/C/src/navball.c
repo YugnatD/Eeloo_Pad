@@ -25,17 +25,24 @@ void generateNavBall(textureMap_t *texture, navballImage_t *navballImage, float 
     // uint8_t r,g,b;
     int x, y;
     // cs = cos(roll);
-    // ss = sin(roll);
     // ct = cos(pitch);
-    // st = sin(pitch);
     // cy = cos(yaw);
+    // ss = sin(roll);
+    // st = sin(pitch);
     // sy = sin(yaw);
-    cs = FastCos(roll);
+
+    // 
+    // ss = sqrt(1.0 - cs * cs);
+    // st = sqrt(1.0 - ct * ct);
+    // sy = sqrt(1.0 - cy * cy);
+
+    // Approximation of cos and sin
     ss = FastSin(roll);
-    ct = FastCos(pitch);
+    cs = FastCos(roll);
     st = FastSin(pitch);
-    cy = FastCos(yaw);
+    ct = FastCos(pitch);
     sy = FastSin(yaw);
+    cy = FastCos(yaw);
     for (int i = 0; i < SIZE_NAVBALL; i++)
     {
         for (int j = 0; j < SIZE_NAVBALL; j++)
