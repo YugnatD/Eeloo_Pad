@@ -11,8 +11,15 @@ Description :
 static float g_px_hx[SIZE_NAVBALL][SIZE_NAVBALL];
 static float g_px_hy[SIZE_NAVBALL][SIZE_NAVBALL];
 static float g_px_hz[SIZE_NAVBALL][SIZE_NAVBALL];
-
 static float g_r2[SIZE_NAVBALL][SIZE_NAVBALL];
+
+static int32_t g_px_hx_fp[SIZE_NAVBALL][SIZE_NAVBALL];
+static int32_t g_px_hy_fp[SIZE_NAVBALL][SIZE_NAVBALL];
+static int32_t g_px_hz_fp[SIZE_NAVBALL][SIZE_NAVBALL];
+
+static int32_t g_r2_fp[SIZE_NAVBALL][SIZE_NAVBALL];
+
+
 #endif
 
 void generateNavBall(textureMap_t *texture, navballImage_t *navballImage, float pitch, float roll, float yaw)
@@ -94,6 +101,191 @@ void generateNavBall(textureMap_t *texture, navballImage_t *navballImage, float 
     }
 }
 
+// fixed point version : without precomputed values
+void generateNavBallFixed(textureMap_t *texture, navballImage_t *navballImage, int32_t pitch, int32_t roll, int32_t yaw)
+{
+    // TODO : REWRITE THIS FUNCTION, TAKING INTO ACCOUNT THE FACT THAT WE ARE WORKING WITH FIXED POINT
+    #ifndef ENABLE_PRECOMPUTED_VALUES
+    float r2, px_hx, px_hy, px_hz;
+    #endif
+    float temp_hx, temp_hy, temp_hz;
+    double cs, ss, ct, st, cy, sy = 0.0;
+    // uint8_t r,g,b;
+    int x, y;
+    // cs = cos(roll);
+    // ct = cos(pitch);
+    // cy = cos(yaw);
+    // ss = sin(roll);
+    // st = sin(pitch);
+    // sy = sin(yaw);
+
+    // 
+    // ss = sqrt(1.0 - cs * cs);
+    // st = sqrt(1.0 - ct * ct);
+    // sy = sqrt(1.0 - cy * cy);
+
+    // Approximation of cos and sin
+    ss = FastSin(roll);
+    cs = FastCos(roll);
+    st = FastSin(pitch);
+    ct = FastCos(pitch);
+    sy = FastSin(yaw);
+    cy = FastCos(yaw);
+    for (int i = 0; i < SIZE_NAVBALL; i++)
+    {
+        for (int j = 0; j < SIZE_NAVBALL; j++)
+        {
+            #ifndef ENABLE_PRECOMPUTED_VALUES
+            px_hx = -1.0 + (float)j * STEP + 1.0 / (float)SIZE_NAVBALL;
+            px_hy = -1.0 + (float)i * STEP + 1.0 / (float)SIZE_NAVBALL;
+            r2 = px_hx * px_hx + px_hy * px_hy;
+            if(r2 <= 1.0)
+            #endif
+            #ifdef ENABLE_PRECOMPUTED_VALUES
+            if(g_r2[i][j] <= 1.0) // PRECOMPUTED VERSION
+            #endif
+            {
+                #ifndef ENABLE_PRECOMPUTED_VALUES
+                px_hz = -sqrt(1.0 - r2); // COULD BE PRECOMPUTED
+                temp_hx = px_hx;
+                temp_hy = px_hy;
+                temp_hz = px_hz;
+                px_hx = cs * cy * temp_hx + cs * sy * temp_hy + ss * temp_hz;
+                px_hy = (st * -ss * cy + ct * -sy) * temp_hx + (st * -ss * sy + ct * cy) * temp_hy + st * cs * temp_hz;
+                px_hz = (ct * -ss * cy + -st * -sy) * temp_hx + (ct * -ss * sy + -st * cy) * temp_hy + ct * cs * temp_hz;
+                x = (int)((0.5 + (asin(px_hy)) / M_PI) * TEXTURE_MAP_HEIGHT);
+                y = (int)((1.0 + atan2(px_hz, px_hx) / M_PI) * 0.5 * TEXTURE_MAP_WIDTH);
+                // y = (int)((1.0 + FastArcTan2(px_hz, px_hx) / M_PI) * 0.5 * TEXTURE_MAP_WIDTH);
+                #endif
+                #ifdef ENABLE_PRECOMPUTED_VALUES
+                temp_hx = cs * cy * g_px_hx[i][j] + cs * sy * g_px_hy[i][j] + ss * g_px_hz[i][j];
+                temp_hy = (st * -ss * cy + ct * -sy) * g_px_hx[i][j] + (st * -ss * sy + ct * cy) * g_px_hy[i][j] + st * cs * g_px_hz[i][j];
+                temp_hz = (ct * -ss * cy + -st * -sy) * g_px_hx[i][j] + (ct * -ss * sy + -st * cy) * g_px_hy[i][j] + ct * cs * g_px_hz[i][j];
+                // x = (int)((0.5 + (asin(temp_hy)) / M_PI) * TEXTURE_MAP_HEIGHT);
+                x = (int)((0.5 + (FastASin(temp_hy)) / M_PI) * TEXTURE_MAP_HEIGHT);
+                // y = (int)((1.0 + atan2(temp_hz, temp_hx) / M_PI) * 0.5 * TEXTURE_MAP_WIDTH);
+                y = (int)((1.0 + FastArcTan2(temp_hz, temp_hx) / M_PI) * 0.5 * TEXTURE_MAP_WIDTH);
+                #endif
+                navballImage->data[i][j][0] = (int) texture->data[x * TEXTURE_MAP_WIDTH * 3 + y * 3 + 0];
+                navballImage->data[i][j][1] = (int) texture->data[x * TEXTURE_MAP_WIDTH * 3 + y * 3 + 1];
+                navballImage->data[i][j][2] = (int) texture->data[x * TEXTURE_MAP_WIDTH * 3 + y * 3 + 2];
+            }
+            else
+            {
+                // set the color to black
+                // px_hz = NAN;
+                navballImage->data[i][j][0] = 0;
+                navballImage->data[i][j][1] = 0;
+                navballImage->data[i][j][2] = 0;
+            }
+        }
+    }
+}
+
+int32_t fastASinFixedPoint(int32_t x)
+{
+    int32_t x8, x4, x2;
+    x2 = x * x;
+    x4 = x2 * x2;
+    x8 = x4 * x4;
+    /* evaluate polynomial using a mix of Estrin's and Horner's scheme */
+    // TODO : REWRITE THIS FUNCTION, TAKING INTO ACCOUNT THE FACT THAT WE ARE WORKING WITH FIXED POINT
+    return (((FP_ASIN_1 * x2 - FP_ASIN_2) * x4 +
+           (FP_ASIN_3 * x2 + FP_ASIN_4)) * x8 +
+          (FP_ASIN_5 * x2 + FP_ASIN_6) * x4 +
+          (FP_ASIN_7 * x2 + FP_ASIN_8)) * x2 * x + x; 
+}
+
+int32_t FastCosFixedPoint(int32_t x)
+{
+    int32_t x8, x4, x2;
+    x2 = x * x;
+    x4 = x2 * x2;
+    x8 = x4 * x4;
+    /* evaluate polynomial using Estrin's scheme */
+    // TODO : REWRITE THIS FUNCTION, TAKING INTO ACCOUNT THE FACT THAT WE ARE WORKING WITH FIXED POINT
+    return (FP_COS_1 * x2 + FP_COS_2) * x8 +
+         (FP_COS_3 * x2 + FP_COS_4) * x4 +
+         (FP_COS_5 * x2 + FP_COS_6);
+}
+
+int32_t FastSinFixedPoint(int32_t x)
+{
+    int32_t x4, x2, t;
+    x2 = x * x;
+    x4 = x2 * x2;
+    /* evaluate polynomial using a mix of Estrin's and Horner's scheme */
+    // TODO : REWRITE THIS FUNCTION, TAKING INTO ACCOUNT THE FACT THAT WE ARE WORKING WITH FIXED POINT
+    return ((FP_SIN_1 * x2 + FP_SIN_2) * x4 + 
+          (FP_SIN_3 * x2 + FP_SIN_4)) * x2 * x + x;
+}
+
+int32_t FastArcTanFixedPoint(int32_t x)
+{
+    // TODO : REWRITE THIS FUNCTION, TAKING INTO ACCOUNT THE FACT THAT WE ARE WORKING WITH FIXED POINT
+    return FP_M_PI_4 * x - x * (abs(x) - MULTIPLIER) * (FP_ATAN_1 + FP_ATAN_2 * abs(x));
+}
+
+int32_t FastArcTan2FixedPoint(int32_t y, int32_t x)
+{
+    // TODO : REWRITE THIS FUNCTION, TAKING INTO ACCOUNT THE FACT THAT WE ARE WORKING WITH FIXED POINT
+    if (x >= 0) { // -pi/2 .. pi/2
+		if (y >= 0) { // 0 .. pi/2
+			if (y < x) { // 0 .. pi/4
+				return FastArcTanFixedPoint(y / x);
+			} else { // pi/4 .. pi/2
+				return FP_M_PI_2 - FastArcTanFixedPoint(x / y);
+			}
+		} else {
+			if (-y < x) { // -pi/4 .. 0
+				return FastArcTanFixedPoint(y / x);
+			} else { // -pi/2 .. -pi/4
+				return -FP_M_PI_2 - FastArcTanFixedPoint(x / y);
+			}
+		}
+	} else { // -pi..-pi/2, pi/2..pi
+		if (y >= 0) { // pi/2 .. pi
+			if (y < -x) { // pi*3/4 .. pi
+				return FastArcTanFixedPoint(y / x) + FP_M_PI;
+			} else { // pi/2 .. pi*3/4
+				return FP_M_PI_2 - FastArcTanFixedPoint(x / y);
+			}
+		} else { // -pi .. -pi/2
+			if (-y < -x) { // -pi .. -pi*3/4
+				return FastArcTanFixedPoint(y / x) - FP_M_PI;
+			} else { // -pi*3/4 .. -pi/2
+				return -FP_M_PI_2 - FastArcTanFixedPoint(x / y);
+			}
+		}
+	}
+}
+
+void initPreComputedValueFixedPoint()
+{
+    // TODO : REWRITE THIS FUNCTION, TAKING INTO ACCOUNT THE FACT THAT WE ARE WORKING WITH FIXED POINT
+    #ifdef ENABLE_PRECOMPUTED_VALUES
+    for (int i = 0; i < SIZE_NAVBALL; i++)
+    {
+        for (int j = 0; j < SIZE_NAVBALL; j++)
+        {
+            g_px_hx_fp[i][j] = ((int32_t)-1 * MULTIPLIER) + (int32_t)j * (STEP * MULTIPLIER) + 1.0 / ((int32_t)SIZE_NAVBALL << COMMA_FIX);
+            g_px_hy_fp[i][j] = ((int32_t)-1 * MULTIPLIER) + (int32_t)i * (STEP * MULTIPLIER) + 1.0 / ((int32_t)SIZE_NAVBALL << COMMA_FIX);
+            g_r2_fp[i][j] = (g_px_hx_fp[i][j] * g_px_hx_fp[i][j]) >> COMMA_FIX + (g_px_hy_fp[i][j] * g_px_hy_fp[i][j]) >> COMMA_FIX; 
+
+            if(g_r2_fp[i][j] <= 1 << COMMA_FIX)
+            {
+                g_px_hz_fp[i][j] = -sqrt(1.0 - g_r2_fp[i][j]);
+            }
+            else
+            {
+                g_px_hz_fp[i][j] = NAN;
+            }
+        }
+    }
+    #endif
+}
+
+
 void initPreComputedValue()
 {
     #ifdef ENABLE_PRECOMPUTED_VALUES
@@ -118,7 +310,6 @@ void initPreComputedValue()
 }
 
 
-
 // https://stackoverflow.com/questions/11261170/c-and-maths-fast-approximation-of-a-trigonometric-function
 double FastASin(double x)
 {
@@ -132,6 +323,9 @@ double FastASin(double x)
           (3.0582043602875735e-2 * x2 + 4.4630538556294605e-2) * x4 +
           (7.5000364034134126e-2 * x2 + 1.6666666300567365e-1)) * x2 * x + x; 
 }
+
+
+
 /* minimax approximation to cos on [-pi/4, pi/4] with rel. err. ~= 7.5e-13 */
 double FastCos (double x)
 {
@@ -145,6 +339,8 @@ double FastCos (double x)
          (-4.9999999999963024e-1 * x2 + 1.0000000000000000e+0);
 }
 
+
+
 /* minimax approximation to sin on [-pi/4, pi/4] with rel. err. ~= 5.5e-12 */
 double FastSin (double x)
 {
@@ -155,6 +351,8 @@ double FastSin (double x)
   return ((2.7181216275479732e-6 * x2 - 1.9839312269456257e-4) * x4 + 
           (8.3333293048425631e-3 * x2 - 1.6666666640797048e-1)) * x2 * x + x;
 }
+
+
 
 // // https://developer.download.nvidia.com/cg/asin.html
 // double FastASin(double x)
@@ -176,6 +374,9 @@ double FastArcTan(double x)
 {
 	return M_PI_4 * x - x * (fabs(x) - 1) * (0.2447 + 0.0663 * fabs(x));
 }
+
+
+
 
 // https://yal.cc/fast-atan2/
 double FastArcTan2(double y, double x)
