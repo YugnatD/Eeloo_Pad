@@ -13,12 +13,16 @@ static float g_px_hy[SIZE_NAVBALL][SIZE_NAVBALL];
 static float g_px_hz[SIZE_NAVBALL][SIZE_NAVBALL];
 static float g_r2[SIZE_NAVBALL][SIZE_NAVBALL];
 
-static int32_t g_px_hx_fp[SIZE_NAVBALL][SIZE_NAVBALL];
-static int32_t g_px_hy_fp[SIZE_NAVBALL][SIZE_NAVBALL];
-static int32_t g_px_hz_fp[SIZE_NAVBALL][SIZE_NAVBALL];
+// static int32_t g_px_hx_fp[SIZE_NAVBALL][SIZE_NAVBALL];
+// static int32_t g_px_hy_fp[SIZE_NAVBALL][SIZE_NAVBALL];
+// static int32_t g_px_hz_fp[SIZE_NAVBALL][SIZE_NAVBALL];
 
-static int32_t g_r2_fp[SIZE_NAVBALL][SIZE_NAVBALL];
+// static int32_t g_r2_fp[SIZE_NAVBALL][SIZE_NAVBALL];
+#endif
 
+#ifdef ENABLE_PRE_COMPUTED_SIN_COS_VALUES
+static float g_sin[SIZE_PRECOMPUTED_VALUES_SIN_COS];
+static float g_cos[SIZE_PRECOMPUTED_VALUES_SIN_COS];
 
 #endif
 
@@ -31,12 +35,23 @@ void generateNavBall(textureMap_t *texture, navballImage_t *navballImage, float 
     double cs, ss, ct, st, cy, sy = 0.0;
     // uint8_t r,g,b;
     int x, y;
-    // cs = cos(roll);
-    // ct = cos(pitch);
-    // cy = cos(yaw);
-    // ss = sin(roll);
-    // st = sin(pitch);
-    // sy = sin(yaw);
+    #ifndef ENABLE_PRE_COMPUTED_SIN_COS_VALUES
+    cs = cos(roll);
+    ct = cos(pitch);
+    cy = cos(yaw);
+    ss = sin(roll);
+    st = sin(pitch);
+    sy = sin(yaw);
+    #endif
+    #ifdef ENABLE_PRE_COMPUTED_SIN_COS_VALUES
+    cs = g_cos[(int)(roll * CONVERT_RAD_TO_PRE)];
+    ct = g_cos[(int)(pitch * CONVERT_RAD_TO_PRE)];
+    cy = g_cos[(int)(yaw * CONVERT_RAD_TO_PRE)];
+    ss = g_sin[(int)(roll * CONVERT_RAD_TO_PRE)];
+    st = g_sin[(int)(pitch * CONVERT_RAD_TO_PRE)];
+    sy = g_sin[(int)(yaw * CONVERT_RAD_TO_PRE)];
+    #endif
+
 
     // 
     // ss = sqrt(1.0 - cs * cs);
@@ -44,12 +59,12 @@ void generateNavBall(textureMap_t *texture, navballImage_t *navballImage, float 
     // sy = sqrt(1.0 - cy * cy);
 
     // Approximation of cos and sin
-    ss = FastSin(roll);
-    cs = FastCos(roll);
-    st = FastSin(pitch);
-    ct = FastCos(pitch);
-    sy = FastSin(yaw);
-    cy = FastCos(yaw);
+    // ss = FastSin(roll);
+    // cs = FastCos(roll);
+    // st = FastSin(pitch);
+    // ct = FastCos(pitch);
+    // sy = FastSin(yaw);
+    // cy = FastCos(yaw);
     for (int i = 0; i < SIZE_NAVBALL; i++)
     {
         for (int j = 0; j < SIZE_NAVBALL; j++)
@@ -80,10 +95,10 @@ void generateNavBall(textureMap_t *texture, navballImage_t *navballImage, float 
                 temp_hx = cs * cy * g_px_hx[i][j] + cs * sy * g_px_hy[i][j] + ss * g_px_hz[i][j];
                 temp_hy = (st * -ss * cy + ct * -sy) * g_px_hx[i][j] + (st * -ss * sy + ct * cy) * g_px_hy[i][j] + st * cs * g_px_hz[i][j];
                 temp_hz = (ct * -ss * cy + -st * -sy) * g_px_hx[i][j] + (ct * -ss * sy + -st * cy) * g_px_hy[i][j] + ct * cs * g_px_hz[i][j];
-                // x = (int)((0.5 + (asin(temp_hy)) / M_PI) * TEXTURE_MAP_HEIGHT);
-                x = (int)((0.5 + (FastASin(temp_hy)) / M_PI) * TEXTURE_MAP_HEIGHT);
-                // y = (int)((1.0 + atan2(temp_hz, temp_hx) / M_PI) * 0.5 * TEXTURE_MAP_WIDTH);
-                y = (int)((1.0 + FastArcTan2(temp_hz, temp_hx) / M_PI) * 0.5 * TEXTURE_MAP_WIDTH);
+                x = (int)((0.5 + (asin(temp_hy)) / M_PI) * TEXTURE_MAP_HEIGHT);
+                // x = (int)((0.5 + (FastASin(temp_hy)) / M_PI) * TEXTURE_MAP_HEIGHT);
+                y = (int)((1.0 + atan2(temp_hz, temp_hx) / M_PI) * 0.5 * TEXTURE_MAP_WIDTH);
+                // y = (int)((1.0 + FastArcTan2(temp_hz, temp_hx) / M_PI) * 0.5 * TEXTURE_MAP_WIDTH);
                 #endif
                 navballImage->data[i][j][0] = (int) texture->data[x * TEXTURE_MAP_WIDTH * 3 + y * 3 + 0];
                 navballImage->data[i][j][1] = (int) texture->data[x * TEXTURE_MAP_WIDTH * 3 + y * 3 + 1];
@@ -102,85 +117,85 @@ void generateNavBall(textureMap_t *texture, navballImage_t *navballImage, float 
 }
 
 // fixed point version : without precomputed values
-void generateNavBallFixed(textureMap_t *texture, navballImage_t *navballImage, int32_t pitch, int32_t roll, int32_t yaw)
-{
-    // TODO : REWRITE THIS FUNCTION, TAKING INTO ACCOUNT THE FACT THAT WE ARE WORKING WITH FIXED POINT
-    #ifndef ENABLE_PRECOMPUTED_VALUES
-    float r2, px_hx, px_hy, px_hz;
-    #endif
-    float temp_hx, temp_hy, temp_hz;
-    double cs, ss, ct, st, cy, sy = 0.0;
-    // uint8_t r,g,b;
-    int x, y;
-    // cs = cos(roll);
-    // ct = cos(pitch);
-    // cy = cos(yaw);
-    // ss = sin(roll);
-    // st = sin(pitch);
-    // sy = sin(yaw);
+// void generateNavBallFixed(textureMap_t *texture, navballImage_t *navballImage, int32_t pitch, int32_t roll, int32_t yaw)
+// {
+//     // TODO : REWRITE THIS FUNCTION, TAKING INTO ACCOUNT THE FACT THAT WE ARE WORKING WITH FIXED POINT
+//     #ifndef ENABLE_PRECOMPUTED_VALUES
+//     float r2, px_hx, px_hy, px_hz;
+//     #endif
+//     float temp_hx, temp_hy, temp_hz;
+//     double cs, ss, ct, st, cy, sy = 0.0;
+//     // uint8_t r,g,b;
+//     int x, y;
+//     // cs = cos(roll);
+//     // ct = cos(pitch);
+//     // cy = cos(yaw);
+//     // ss = sin(roll);
+//     // st = sin(pitch);
+//     // sy = sin(yaw);
 
-    // 
-    // ss = sqrt(1.0 - cs * cs);
-    // st = sqrt(1.0 - ct * ct);
-    // sy = sqrt(1.0 - cy * cy);
+//     // 
+//     // ss = sqrt(1.0 - cs * cs);
+//     // st = sqrt(1.0 - ct * ct);
+//     // sy = sqrt(1.0 - cy * cy);
 
-    // Approximation of cos and sin
-    ss = FastSin(roll);
-    cs = FastCos(roll);
-    st = FastSin(pitch);
-    ct = FastCos(pitch);
-    sy = FastSin(yaw);
-    cy = FastCos(yaw);
-    for (int i = 0; i < SIZE_NAVBALL; i++)
-    {
-        for (int j = 0; j < SIZE_NAVBALL; j++)
-        {
-            #ifndef ENABLE_PRECOMPUTED_VALUES
-            px_hx = -1.0 + (float)j * STEP + 1.0 / (float)SIZE_NAVBALL;
-            px_hy = -1.0 + (float)i * STEP + 1.0 / (float)SIZE_NAVBALL;
-            r2 = px_hx * px_hx + px_hy * px_hy;
-            if(r2 <= 1.0)
-            #endif
-            #ifdef ENABLE_PRECOMPUTED_VALUES
-            if(g_r2[i][j] <= 1.0) // PRECOMPUTED VERSION
-            #endif
-            {
-                #ifndef ENABLE_PRECOMPUTED_VALUES
-                px_hz = -sqrt(1.0 - r2); // COULD BE PRECOMPUTED
-                temp_hx = px_hx;
-                temp_hy = px_hy;
-                temp_hz = px_hz;
-                px_hx = cs * cy * temp_hx + cs * sy * temp_hy + ss * temp_hz;
-                px_hy = (st * -ss * cy + ct * -sy) * temp_hx + (st * -ss * sy + ct * cy) * temp_hy + st * cs * temp_hz;
-                px_hz = (ct * -ss * cy + -st * -sy) * temp_hx + (ct * -ss * sy + -st * cy) * temp_hy + ct * cs * temp_hz;
-                x = (int)((0.5 + (asin(px_hy)) / M_PI) * TEXTURE_MAP_HEIGHT);
-                y = (int)((1.0 + atan2(px_hz, px_hx) / M_PI) * 0.5 * TEXTURE_MAP_WIDTH);
-                // y = (int)((1.0 + FastArcTan2(px_hz, px_hx) / M_PI) * 0.5 * TEXTURE_MAP_WIDTH);
-                #endif
-                #ifdef ENABLE_PRECOMPUTED_VALUES
-                temp_hx = cs * cy * g_px_hx[i][j] + cs * sy * g_px_hy[i][j] + ss * g_px_hz[i][j];
-                temp_hy = (st * -ss * cy + ct * -sy) * g_px_hx[i][j] + (st * -ss * sy + ct * cy) * g_px_hy[i][j] + st * cs * g_px_hz[i][j];
-                temp_hz = (ct * -ss * cy + -st * -sy) * g_px_hx[i][j] + (ct * -ss * sy + -st * cy) * g_px_hy[i][j] + ct * cs * g_px_hz[i][j];
-                // x = (int)((0.5 + (asin(temp_hy)) / M_PI) * TEXTURE_MAP_HEIGHT);
-                x = (int)((0.5 + (FastASin(temp_hy)) / M_PI) * TEXTURE_MAP_HEIGHT);
-                // y = (int)((1.0 + atan2(temp_hz, temp_hx) / M_PI) * 0.5 * TEXTURE_MAP_WIDTH);
-                y = (int)((1.0 + FastArcTan2(temp_hz, temp_hx) / M_PI) * 0.5 * TEXTURE_MAP_WIDTH);
-                #endif
-                navballImage->data[i][j][0] = (int) texture->data[x * TEXTURE_MAP_WIDTH * 3 + y * 3 + 0];
-                navballImage->data[i][j][1] = (int) texture->data[x * TEXTURE_MAP_WIDTH * 3 + y * 3 + 1];
-                navballImage->data[i][j][2] = (int) texture->data[x * TEXTURE_MAP_WIDTH * 3 + y * 3 + 2];
-            }
-            else
-            {
-                // set the color to black
-                // px_hz = NAN;
-                navballImage->data[i][j][0] = 0;
-                navballImage->data[i][j][1] = 0;
-                navballImage->data[i][j][2] = 0;
-            }
-        }
-    }
-}
+//     // Approximation of cos and sin
+//     ss = FastSin(roll);
+//     cs = FastCos(roll);
+//     st = FastSin(pitch);
+//     ct = FastCos(pitch);
+//     sy = FastSin(yaw);
+//     cy = FastCos(yaw);
+//     for (int i = 0; i < SIZE_NAVBALL; i++)
+//     {
+//         for (int j = 0; j < SIZE_NAVBALL; j++)
+//         {
+//             #ifndef ENABLE_PRECOMPUTED_VALUES
+//             px_hx = -1.0 + (float)j * STEP + 1.0 / (float)SIZE_NAVBALL;
+//             px_hy = -1.0 + (float)i * STEP + 1.0 / (float)SIZE_NAVBALL;
+//             r2 = px_hx * px_hx + px_hy * px_hy;
+//             if(r2 <= 1.0)
+//             #endif
+//             #ifdef ENABLE_PRECOMPUTED_VALUES
+//             if(g_r2[i][j] <= 1.0) // PRECOMPUTED VERSION
+//             #endif
+//             {
+//                 #ifndef ENABLE_PRECOMPUTED_VALUES
+//                 px_hz = -sqrt(1.0 - r2); // COULD BE PRECOMPUTED
+//                 temp_hx = px_hx;
+//                 temp_hy = px_hy;
+//                 temp_hz = px_hz;
+//                 px_hx = cs * cy * temp_hx + cs * sy * temp_hy + ss * temp_hz;
+//                 px_hy = (st * -ss * cy + ct * -sy) * temp_hx + (st * -ss * sy + ct * cy) * temp_hy + st * cs * temp_hz;
+//                 px_hz = (ct * -ss * cy + -st * -sy) * temp_hx + (ct * -ss * sy + -st * cy) * temp_hy + ct * cs * temp_hz;
+//                 x = (int)((0.5 + (asin(px_hy)) / M_PI) * TEXTURE_MAP_HEIGHT);
+//                 y = (int)((1.0 + atan2(px_hz, px_hx) / M_PI) * 0.5 * TEXTURE_MAP_WIDTH);
+//                 // y = (int)((1.0 + FastArcTan2(px_hz, px_hx) / M_PI) * 0.5 * TEXTURE_MAP_WIDTH);
+//                 #endif
+//                 #ifdef ENABLE_PRECOMPUTED_VALUES
+//                 temp_hx = cs * cy * g_px_hx[i][j] + cs * sy * g_px_hy[i][j] + ss * g_px_hz[i][j];
+//                 temp_hy = (st * -ss * cy + ct * -sy) * g_px_hx[i][j] + (st * -ss * sy + ct * cy) * g_px_hy[i][j] + st * cs * g_px_hz[i][j];
+//                 temp_hz = (ct * -ss * cy + -st * -sy) * g_px_hx[i][j] + (ct * -ss * sy + -st * cy) * g_px_hy[i][j] + ct * cs * g_px_hz[i][j];
+//                 // x = (int)((0.5 + (asin(temp_hy)) / M_PI) * TEXTURE_MAP_HEIGHT);
+//                 x = (int)((0.5 + (FastASin(temp_hy)) / M_PI) * TEXTURE_MAP_HEIGHT);
+//                 // y = (int)((1.0 + atan2(temp_hz, temp_hx) / M_PI) * 0.5 * TEXTURE_MAP_WIDTH);
+//                 y = (int)((1.0 + FastArcTan2(temp_hz, temp_hx) / M_PI) * 0.5 * TEXTURE_MAP_WIDTH);
+//                 #endif
+//                 navballImage->data[i][j][0] = (int) texture->data[x * TEXTURE_MAP_WIDTH * 3 + y * 3 + 0];
+//                 navballImage->data[i][j][1] = (int) texture->data[x * TEXTURE_MAP_WIDTH * 3 + y * 3 + 1];
+//                 navballImage->data[i][j][2] = (int) texture->data[x * TEXTURE_MAP_WIDTH * 3 + y * 3 + 2];
+//             }
+//             else
+//             {
+//                 // set the color to black
+//                 // px_hz = NAN;
+//                 navballImage->data[i][j][0] = 0;
+//                 navballImage->data[i][j][1] = 0;
+//                 navballImage->data[i][j][2] = 0;
+//             }
+//         }
+//     }
+// }
 
 int32_t fastASinFixedPoint(int32_t x)
 {
@@ -211,7 +226,7 @@ int32_t FastCosFixedPoint(int32_t x)
 
 int32_t FastSinFixedPoint(int32_t x)
 {
-    int32_t x4, x2, t;
+    int32_t x4, x2;
     x2 = x * x;
     x4 = x2 * x2;
     /* evaluate polynomial using a mix of Estrin's and Horner's scheme */
@@ -260,30 +275,30 @@ int32_t FastArcTan2FixedPoint(int32_t y, int32_t x)
 	}
 }
 
-void initPreComputedValueFixedPoint()
-{
-    // TODO : REWRITE THIS FUNCTION, TAKING INTO ACCOUNT THE FACT THAT WE ARE WORKING WITH FIXED POINT
-    #ifdef ENABLE_PRECOMPUTED_VALUES
-    for (int i = 0; i < SIZE_NAVBALL; i++)
-    {
-        for (int j = 0; j < SIZE_NAVBALL; j++)
-        {
-            g_px_hx_fp[i][j] = ((int32_t)-1 * MULTIPLIER) + (int32_t)j * (STEP * MULTIPLIER) + 1.0 / ((int32_t)SIZE_NAVBALL << COMMA_FIX);
-            g_px_hy_fp[i][j] = ((int32_t)-1 * MULTIPLIER) + (int32_t)i * (STEP * MULTIPLIER) + 1.0 / ((int32_t)SIZE_NAVBALL << COMMA_FIX);
-            g_r2_fp[i][j] = (g_px_hx_fp[i][j] * g_px_hx_fp[i][j]) >> COMMA_FIX + (g_px_hy_fp[i][j] * g_px_hy_fp[i][j]) >> COMMA_FIX; 
+// void initPreComputedValueFixedPoint()
+// {
+//     // TODO : REWRITE THIS FUNCTION, TAKING INTO ACCOUNT THE FACT THAT WE ARE WORKING WITH FIXED POINT
+//     #ifdef ENABLE_PRECOMPUTED_VALUES
+//     for (int i = 0; i < SIZE_NAVBALL; i++)
+//     {
+//         for (int j = 0; j < SIZE_NAVBALL; j++)
+//         {
+//             g_px_hx_fp[i][j] = ((int32_t)-1 * MULTIPLIER) + (int32_t)j * (STEP * MULTIPLIER) + 1.0 / ((int32_t)SIZE_NAVBALL << COMMA_FIX);
+//             g_px_hy_fp[i][j] = ((int32_t)-1 * MULTIPLIER) + (int32_t)i * (STEP * MULTIPLIER) + 1.0 / ((int32_t)SIZE_NAVBALL << COMMA_FIX);
+//             g_r2_fp[i][j] = (g_px_hx_fp[i][j] * g_px_hx_fp[i][j]) >> COMMA_FIX + (g_px_hy_fp[i][j] * g_px_hy_fp[i][j]) >> COMMA_FIX; 
 
-            if(g_r2_fp[i][j] <= 1 << COMMA_FIX)
-            {
-                g_px_hz_fp[i][j] = -sqrt(1.0 - g_r2_fp[i][j]);
-            }
-            else
-            {
-                g_px_hz_fp[i][j] = NAN;
-            }
-        }
-    }
-    #endif
-}
+//             if(g_r2_fp[i][j] <= 1 << COMMA_FIX)
+//             {
+//                 g_px_hz_fp[i][j] = -sqrt(1.0 - g_r2_fp[i][j]);
+//             }
+//             else
+//             {
+//                 g_px_hz_fp[i][j] = NAN;
+//             }
+//         }
+//     }
+//     #endif
+// }
 
 
 void initPreComputedValue()
@@ -305,6 +320,15 @@ void initPreComputedValue()
                 g_px_hz[i][j] = NAN;
             }
         }
+    }
+    #endif
+    // init the precomputed sin and cos
+    #ifdef ENABLE_PRE_COMPUTED_SIN_COS_VALUES
+    float step = M_PI / (float)SIZE_PRECOMPUTED_VALUES_SIN_COS; 
+    for (int i = 0; i < SIZE_PRECOMPUTED_VALUES_SIN_COS; i++)
+    {
+        g_sin[i] = sin(step * (float)i);
+        g_cos[i] = cos(step * (float)i);
     }
     #endif
 }
@@ -344,7 +368,7 @@ double FastCos (double x)
 /* minimax approximation to sin on [-pi/4, pi/4] with rel. err. ~= 5.5e-12 */
 double FastSin (double x)
 {
-  double x4, x2, t;
+  double x4, x2;
   x2 = x * x;
   x4 = x2 * x2;
   /* evaluate polynomial using a mix of Estrin's and Horner's scheme */

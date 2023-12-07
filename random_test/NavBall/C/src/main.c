@@ -38,20 +38,26 @@ int main(int argc, char *argv[])
   float roll = atof(argv[2]) * M_PI / 180.0;
   float yaw = atof(argv[3]) * M_PI / 180.0;
 
+
   initPreComputedValue();
 
   // generateNavBall(&texture, &navballImage, pitch, roll, yaw);
-  generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
+  // generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
   // generateNavBall(&texture, &navballImage, pitch, roll, yaw);
 
   // for profiling purpose
-  for (int i = 0; i < 5000; i++)
+  // measure total time to generate 5000 navball
+  clock_t start = clock();
+  for (int i = 0; i < 10000; i++)
   {
     generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
   }
+  clock_t end = clock();
+  float seconds = (float)(end - start) / CLOCKS_PER_SEC;
+  printf("Time to generate 5000 navball: %f\n", seconds);
 
   // save the navball
-  savePPM(&navballImage, "NavBall.ppm");
+  // savePPM(&navballImage, "NavBall.ppm");
 
   // SDL_Init(SDL_INIT_VIDEO);
   // SDL_CreateWindowAndRenderer(SIZE_NAVBALL,SIZE_NAVBALL,SDL_WINDOW_SHOWN,&window,&renderer);
