@@ -19,9 +19,9 @@ int main(int argc, char *argv[])
     printf("Usage: ./navball <pitch> <roll> <yaw>\n");
     return 1;
   }
-  // SDL_Window* window = NULL;
-  // SDL_Renderer* renderer = NULL;
-  // SDL_Event event;
+  SDL_Window* window = NULL;
+  SDL_Renderer* renderer = NULL;
+  SDL_Event event;
   // printf("HELLO WORLD \n");
   // open the texture file
   navballImage_t navballImage;
@@ -50,20 +50,20 @@ int main(int argc, char *argv[])
   initPreComputedValue();
 
   // generateNavBall(&texture, &navballImage, pitch, roll, yaw);
-  // generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
+  generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
   // generateNavBall(&texture, &navballImage, pitch, roll, yaw);
 
   // for profiling purpose
   // measure total time to generate 5000 navball
-  start = clock(); // bad for mt version
-  for (int i = 0; i < 10000; i++)
-  {
-    generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
-    // generateNavBallMt(&defaultTextureMap, &navballImage, pitch, roll, yaw);
-  }
-  end = clock();
-  seconds = (float)(end - start) / CLOCKS_PER_SEC;
-  printf("Time to generate 10000 navball with normal version: %f\n", seconds);
+  // start = clock(); // bad for mt version
+  // for (int i = 0; i < 10000; i++)
+  // {
+  //   generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
+  //   // generateNavBallMt(&defaultTextureMap, &navballImage, pitch, roll, yaw);
+  // }
+  // end = clock();
+  // seconds = (float)(end - start) / CLOCKS_PER_SEC;
+  // printf("Time to generate 10000 navball with normal version: %f\n", seconds);
 
   // start = clock();
   // for (int i = 0; i < 10000; i++)
@@ -80,48 +80,48 @@ int main(int argc, char *argv[])
   // save the navball
   savePPM(&navballImage, "NavBall.ppm");
 
-  // SDL_Init(SDL_INIT_VIDEO);
-  // SDL_CreateWindowAndRenderer(SIZE_NAVBALL,SIZE_NAVBALL,SDL_WINDOW_SHOWN,&window,&renderer);
-  // SDL_RenderClear(renderer);
-  // int quit = 0;
-  // uint32_t pixelR = 0;
-  // uint32_t pixelG = 0;
-  // uint32_t pixelB = 0;
-  // while (!quit)
-  // {
-  //   // measure time between generation
-  //   clock_t start = clock();
-  //   generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
-  //   // generateNavBall(&texture, &navballImage, pitch, roll, yaw);
-  //   clock_t end = clock();
-  //   float seconds = (float)(end - start) / CLOCKS_PER_SEC;
-  //   // sleep the righ amount of time to get 24 FPS
-  //   int sleepTime = (1.0 * 1000000 / FPS) - seconds * 1000000;
-  //   usleep(sleepTime);
-  //   printf("Time to generate: %f\n", seconds);
-  //   pitch += 0.01;
-  //   roll += 0.01;
-  //   yaw += 0.01;
-  //   SDL_RenderClear(renderer);    
-  //   for(uint32_t li=0;li<SIZE_NAVBALL;li++)
-  //   {
-  //     for(uint32_t co=0;co<SIZE_NAVBALL;co++)
-  //     {
+  SDL_Init(SDL_INIT_VIDEO);
+  SDL_CreateWindowAndRenderer(SIZE_NAVBALL,SIZE_NAVBALL,SDL_WINDOW_SHOWN,&window,&renderer);
+  SDL_RenderClear(renderer);
+  int quit = 0;
+  uint32_t pixelR = 0;
+  uint32_t pixelG = 0;
+  uint32_t pixelB = 0;
+  while (!quit)
+  {
+    // measure time between generation
+    clock_t start = clock();
+    generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
+    // generateNavBall(&texture, &navballImage, pitch, roll, yaw);
+    clock_t end = clock();
+    float seconds = (float)(end - start) / CLOCKS_PER_SEC;
+    // sleep the righ amount of time to get 24 FPS
+    int sleepTime = (1.0 * 1000000 / FPS) - seconds * 1000000;
+    usleep(sleepTime);
+    printf("Time to generate: %f, FPS MAX: %f\n", seconds, 1.0 / seconds);
+    pitch += 0.01;
+    roll += 0.01;
+    yaw += 0.01;
+    SDL_RenderClear(renderer);    
+    for(uint32_t li=0;li<SIZE_NAVBALL;li++)
+    {
+      for(uint32_t co=0;co<SIZE_NAVBALL;co++)
+      {
         
-  //       pixelR = navballImage.data[li][co][0];
-  //       pixelG = navballImage.data[li][co][1];
-  //       pixelB = navballImage.data[li][co][2];
-  //       if(SDL_SetRenderDrawColor(renderer,pixelR,pixelG,pixelB,SDL_ALPHA_OPAQUE)!=0){printf("ERROR Renderer\n");}
-  //         SDL_RenderDrawPoint(renderer,co,li);
-  //       }
-  //       if (SDL_PollEvent(&event)) {
-  //         if (event.type == SDL_QUIT) {
-  //           quit = 1;
-  //           break;
-  //         }
-  //     }
-  //   }
-  //   SDL_RenderPresent(renderer);
-  // }
+        pixelR = navballImage.data[li][co][0];
+        pixelG = navballImage.data[li][co][1];
+        pixelB = navballImage.data[li][co][2];
+        if(SDL_SetRenderDrawColor(renderer,pixelR,pixelG,pixelB,SDL_ALPHA_OPAQUE)!=0){printf("ERROR Renderer\n");}
+          SDL_RenderDrawPoint(renderer,co,li);
+        }
+        if (SDL_PollEvent(&event)) {
+          if (event.type == SDL_QUIT) {
+            quit = 1;
+            break;
+          }
+      }
+    }
+    SDL_RenderPresent(renderer);
+  }
   return 0;
 }
