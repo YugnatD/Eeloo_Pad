@@ -91,6 +91,10 @@ int main(int argc, char *argv[])
   {
     // measure time between generation
     clock_t start = clock();
+    //before sending the value to generate cast the pitch row, yaw to be between 0 and 2PI
+    pitch = fmod(pitch, 2 * M_PI);
+    roll = fmod(roll, 2 * M_PI);
+    yaw = fmod(yaw, 2 * M_PI);
     generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
     // generateNavBall(&texture, &navballImage, pitch, roll, yaw);
     clock_t end = clock();
