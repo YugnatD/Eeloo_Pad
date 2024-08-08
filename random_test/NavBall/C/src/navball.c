@@ -13,7 +13,8 @@ Description :
 static float g_px_hx[SIZE_NAVBALL][SIZE_NAVBALL];
 static float g_px_hy[SIZE_NAVBALL][SIZE_NAVBALL];
 static float g_px_hz[SIZE_NAVBALL][SIZE_NAVBALL];
-static float g_r2[SIZE_NAVBALL][SIZE_NAVBALL];
+// static float g_r2[SIZE_NAVBALL][SIZE_NAVBALL];
+static uint8_t g_r2[SIZE_NAVBALL][SIZE_NAVBALL];
 
 static float g_sin[SIZE_PRECOMPUTED_VALUES_SIN_COS];
 static float g_cos[SIZE_PRECOMPUTED_VALUES_SIN_COS];
@@ -80,32 +81,61 @@ float fastAsin(float x) {
     return g_asin[index];
 }
 
+
+//TODO : take into account when value is above 2pi
 float fastSin(float x) {
-    int index = (int)((x + M_PI) * CONVERT_RAD_TO_PRE) % SIZE_PRECOMPUTED_VALUES_SIN_COS;
+    //we need to take into account that the array contain only value between 0 and pi,
+    // for value between pi and 2pi we just need to invert the sign
+    // and take into account that x can be negative
+    if (x < 0)
+    {
+        return -fastSin(-x);
+    }
+    // check if we are between pi and 2pi
+    if (x > M_PI)
+    {
+        return -fastSin(x - M_PI);
+    }
+    int index = (int)(x * CONVERT_RAD_TO_PRE);
     return g_sin[index];
 }
 
 float fastCos(float x) {
-    int index = (int)((x + M_PI) * CONVERT_RAD_TO_PRE) % SIZE_PRECOMPUTED_VALUES_SIN_COS;
+    //we need to take into account that the array contain only value between 0 and pi,
+    // for value between pi and 2pi we just need to invert the sign
+    // and take into account that x can be negative
+    if (x < 0)
+    {
+        return fastCos(-x);
+    }
+    // check if we are between pi and 2pi
+    if (x > M_PI)
+    {
+        return -fastCos(x - M_PI);
+    }
+    int index = (int)(x * CONVERT_RAD_TO_PRE);
     return g_cos[index];
 }
 
 void initPreComputedValue()
 {
+    float r2;
     for (int i = 0; i < SIZE_NAVBALL; i++)
     {
         for (int j = 0; j < SIZE_NAVBALL; j++)
         {
             g_px_hx[i][j] = -1.0 + (float)j * STEP + 1.0 / (float)SIZE_NAVBALL;
             g_px_hy[i][j] = -1.0 + (float)i * STEP + 1.0 / (float)SIZE_NAVBALL; 
-            g_r2[i][j] = g_px_hx[i][j] * g_px_hx[i][j] + g_px_hy[i][j] * g_px_hy[i][j]; 
-            if(g_r2[i][j] <= 1.0)
+            r2 = g_px_hx[i][j] * g_px_hx[i][j] + g_px_hy[i][j] * g_px_hy[i][j]; 
+            if(r2 <= 1.0)
             {
-                g_px_hz[i][j] = -sqrt(1.0 - g_r2[i][j]);
+                g_px_hz[i][j] = -sqrt(1.0 - r2);
+                g_r2[i][j] = 1;
             }
             else
             {
                 g_px_hz[i][j] = NAN;
+                g_r2[i][j] = 0;
             }
         }
     }
@@ -114,11 +144,13 @@ void initPreComputedValue()
     // init the sin and cos table
     for (int i = 0; i < SIZE_PRECOMPUTED_VALUES_SIN_COS; i++)
     {
-        // we just need the value between 0 and pi because pi to 2pi is the same as 0 to pi
+        // we just need the value between 0 and pi because pi to 2pi is the same as 0 to pi with inverted sign
         g_sin[i] = sin((float)i * M_PI / (float)SIZE_PRECOMPUTED_VALUES_SIN_COS);
         g_cos[i] = cos((float)i * M_PI / (float)SIZE_PRECOMPUTED_VALUES_SIN_COS);
     }
 }
+
+
 
 
 void generateNavBall(textureMap_t *texture, navballImage_t *navballImage, float pitch, float roll, float yaw)
@@ -147,7 +179,8 @@ void generateNavBall(textureMap_t *texture, navballImage_t *navballImage, float 
     {
         for (int j = 0; j < SIZE_NAVBALL; j++)
         {
-            if(g_r2[i][j] <= 1.0)
+            // if(g_r2[i][j] <= 1.0)
+            if(g_r2[i][j])
             {
                 temp_hx = cs * cy * g_px_hx[i][j] + cs * sy * g_px_hy[i][j] + ss * g_px_hz[i][j];
                 temp_hy = (st * -ss * cy + ct * -sy) * g_px_hx[i][j] + (st * -ss * sy + ct * cy) * g_px_hy[i][j] + st * cs * g_px_hz[i][j];
@@ -168,20 +201,57 @@ void generateNavBall(textureMap_t *texture, navballImage_t *navballImage, float 
             }
             else
             {
-                navballImage->data[i][j][0] = 0;
-                navballImage->data[i][j][1] = 0;
-                navballImage->data[i][j][2] = 0;
+                // navballImage->data[i][j][0] = 0;
+                // navballImage->data[i][j][1] = 0;
+                // navballImage->data[i][j][2] = 0;
             }
+        }
+    }
+}
+
+void unit_test_trigo(double eps)
+{
+    double x, y;
+    double res, ref;
+    for (int i = 0; i < 1000; i++)
+    {
+        // for atan2 we need value between RANGE_ATAN2 and -RANGE_ATAN2
+        x = (double)rand() / RAND_MAX * 2 * RANGE_ATAN2 - RANGE_ATAN2;
+        y = (double)rand() / RAND_MAX * 2 * RANGE_ATAN2 - RANGE_ATAN2;
+        res = fastAtan2(x, y);
+        ref = atan2(x, y);
+        if (fabs(res - ref) > eps)
+        {
+            printf("Error atan2 %f %f %f %f\n", x, y, res, ref);
+        }
+        // for asin we need value between RANGE_ASIN and -RANGE_ASIN
+        x = (double)rand() / RAND_MAX * 2 * RANGE_ASIN - RANGE_ASIN;
+        res = fastAsin(x);
+        ref = asin(x);
+        if (fabs(res - ref) > eps)
+        {
+            printf("Error asin %f %f\n", res, ref);
+        }
+        // test between -2pi and 2pi
+        x = (double)rand() / RAND_MAX * 4 * M_PI - 2 * M_PI;
+        res = fastSin(x);
+        ref = sin(x);
+        if (fabs(res - ref) > eps)
+        {
+            printf("Error sin %f %f\n", res, ref);
+        }
+        res = fastCos(x);
+        ref = cos(x);
+        if (fabs(res - ref) > eps)
+        {
+            printf("Error cos %f %f\n", res, ref);
         }
     }
 }
 
 void generateNavBallMt(textureMap_t *texture, navballImage_t *navballImage, float pitch, float roll, float yaw)
 {
-    float temp_hx, temp_hy, temp_hz;
     double cs, ss, ct, st, cy, sy = 0.0;
-    uint8_t *texture_data;
-    int x, y;
     param_navball_thread_t param[NUM_THEARD];
     pthread_t thread[NUM_THEARD];
     cs = cos(roll);

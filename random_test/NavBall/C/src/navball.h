@@ -44,6 +44,8 @@ typedef struct _param_navball_thread {
   double *sy;
 } param_navball_thread_t;
 
+
+void unit_test_trigo(double eps);
 // #include "image.h"
 void generateNavBall(textureMap_t *texture, navballImage_t *navballImage, float pitch, float roll, float yaw);
 // void generateNavBallFast(textureMap_t *texture, navballImage_t *navballImage, int pitch, int roll, int yaw);

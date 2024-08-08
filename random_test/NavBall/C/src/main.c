@@ -25,9 +25,6 @@ int main(int argc, char *argv[])
   // printf("HELLO WORLD \n");
   // open the texture file
   navballImage_t navballImage;
-  clock_t start;
-  clock_t end;
-  float seconds;
   // textureMap_t texture;
   // openTextureMap(&texture, "NavBall_Texture.ppm");
   // openTextureMap(&texture, "NavBall_Texture_M.ppm"); // 612x306
@@ -41,41 +38,12 @@ int main(int argc, char *argv[])
   float roll = atof(argv[2]) * M_PI / 180.0;
   float yaw = atof(argv[3]) * M_PI / 180.0;
 
-  int pitchPre = (int)(pitch * CONVERT_RAD_TO_PRE);
-  int rollPre = (int)(roll * CONVERT_RAD_TO_PRE);
-  int yawPre = (int)(yaw * CONVERT_RAD_TO_PRE);
-
-
-
   initPreComputedValue();
 
   // generateNavBall(&texture, &navballImage, pitch, roll, yaw);
   generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
-  // generateNavBall(&texture, &navballImage, pitch, roll, yaw);
-
-  // for profiling purpose
-  // measure total time to generate 5000 navball
-  // start = clock(); // bad for mt version
-  // for (int i = 0; i < 10000; i++)
-  // {
-  //   generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
-  //   // generateNavBallMt(&defaultTextureMap, &navballImage, pitch, roll, yaw);
-  // }
-  // end = clock();
-  // seconds = (float)(end - start) / CLOCKS_PER_SEC;
-  // printf("Time to generate 10000 navball with normal version: %f\n", seconds);
-
-  // start = clock();
-  // for (int i = 0; i < 10000; i++)
-  // {
-  //   generateNavBallFast(&defaultTextureMap, &navballImage, pitchPre, rollPre, yawPre);
-  // }
-  // end = clock();
-  // seconds = (float)(end - start) / CLOCKS_PER_SEC;
-  // printf("Time to generate 10000 navball with fast version: %f\n", seconds);
-
-  // generateNavBallFast(&defaultTextureMap, &navballImage, pitchPre, rollPre, yawPre);
-
+  unit_test_trigo(1e-1);
+  // return 0;
 
   // save the navball
   savePPM(&navballImage, "NavBall.ppm");
@@ -92,9 +60,9 @@ int main(int argc, char *argv[])
     // measure time between generation
     clock_t start = clock();
     //before sending the value to generate cast the pitch row, yaw to be between 0 and 2PI
-    pitch = fmod(pitch, 2 * M_PI);
-    roll = fmod(roll, 2 * M_PI);
-    yaw = fmod(yaw, 2 * M_PI);
+    pitch = fmod(pitch, 2 * M_PI -1e-1);
+    roll = fmod(roll, 2 * M_PI -1e-1);
+    yaw = fmod(yaw, 2 * M_PI -1e-1);
     generateNavBall(&defaultTextureMap, &navballImage, pitch, roll, yaw);
     // generateNavBall(&texture, &navballImage, pitch, roll, yaw);
     clock_t end = clock();
