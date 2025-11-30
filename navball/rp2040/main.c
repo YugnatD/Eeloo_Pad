@@ -42,6 +42,8 @@
 
 #define DELAY_FLAG 0x80
 
+static int lcd_dma_chan;
+
 // Global RGB565 framebuffer
 static uint16_t fb1[WIDTH * HEIGHT];
 static uint16_t fb2[WIDTH * HEIGHT];
@@ -49,8 +51,8 @@ static uint16_t fb2[WIDTH * HEIGHT];
 static uint16_t* fb_to_show = fb1;
 static uint16_t* fb_to_draw = fb2;
 
-static int  lcd_dma_chan = -1;
-static bool lcd_dma_inited = false;
+static volatile bool lcd_frame_done = false;
+
 
 // --- Low-level LCD helpers (GC9A01A) ---
 static inline void cs_select()   { gpio_put(PIN_LCD_CS, 0); }
@@ -468,79 +470,98 @@ static inline uint16_t rgb565(uint8_t r, uint8_t g, uint8_t b) {
     return ((r & 0xF8) << 8) | ((g & 0xFC) << 3) | (b >> 3);
 }
 
-static void lcd_push_framebuffer(void) {
-    lcd_set_window_full();
-    // Send as bytes (MSB first)
-    dc_data(); cs_select();
-    
-    if (IMAGE_RATIO == 1) {
-        // Direct copy when no scaling
-        for (size_t i = 0; i < (LCD_WIDTH * LCD_HEIGHT); ++i) {
-            uint16_t p = fb_to_show[i];
-            uint8_t hi = p >> 8, lo = p & 0xFF;
-            uint8_t bytes[2] = {hi, lo};
-            spi_write_blocking(SPI_PORT, bytes, 2);
+void __isr dma_irq0_handler(void) {
+    // Which channels triggered?
+    uint32_t ints = dma_hw->ints0;
+
+    if (ints & (1u << lcd_dma_chan)) {
+        // Clear the interrupt for our channel
+        dma_hw->ints0 = 1u << lcd_dma_chan;
+
+        // DMA is done feeding the SPI FIFO. Make sure SPI shifted everything out.
+        while (spi_is_busy(SPI_PORT)) {
+            tight_loop_contents();
         }
-    } else {
-        // Scale up framebuffer to LCD size
-        for (int lcd_y = 0; lcd_y < LCD_HEIGHT; ++lcd_y) {
-            for (int lcd_x = 0; lcd_x < LCD_WIDTH; ++lcd_x) {
-                int fb_x = lcd_x / IMAGE_RATIO;
-                int fb_y = lcd_y / IMAGE_RATIO;
-                if (fb_x >= WIDTH) fb_x = WIDTH - 1;
-                if (fb_y >= HEIGHT) fb_y = HEIGHT - 1;
-                
-                uint16_t p = fb_to_show[fb_y * STRIDE + fb_x];
-                uint8_t hi = p >> 8, lo = p & 0xFF;
-                uint8_t bytes[2] = {hi, lo};
-                spi_write_blocking(SPI_PORT, bytes, 2);
-            }
-        }
+
+        // Deassert CS and restore SPI format if needed
+        cs_deselect();
+        spi_set_format(SPI_PORT, 8, SPI_CPOL_0, SPI_CPHA_0, SPI_MSB_FIRST);
+
+        // Signal completion to main code
+        lcd_frame_done = true;
     }
-    cs_deselect();
 }
 
-static void lcd_dma_init(void) {
-    if (lcd_dma_inited) return;
-    // Make sure SPI is configured for 16-bit frames & MSB-first
-    // (Do this once during init; shown here for completeness)
-    spi_set_format(SPI_PORT, 16 /*bits*/, SPI_CPOL_0, SPI_CPHA_0, SPI_MSB_FIRST);
-
+void lcd_dma_init(void) {
     lcd_dma_chan = dma_claim_unused_channel(true);
-    lcd_dma_inited = true;
-}
-
-void lcd_push_framebuffer_dma16_blocking(void) {
-    lcd_dma_init();
-
-    lcd_set_window_full();
-    dc_data(); 
-    cs_select();
-
-    const size_t px = (size_t)LCD_WIDTH * (size_t)LCD_HEIGHT;
 
     dma_channel_config c = dma_channel_get_default_config(lcd_dma_chan);
-    channel_config_set_transfer_data_size(&c, DMA_SIZE_16);            // 16-bit words
-    channel_config_set_read_increment(&c, true);                       // walk framebuffer
-    channel_config_set_write_increment(&c, false);                     // fixed SPI DR
-    channel_config_set_dreq(&c, spi_get_dreq(SPI_PORT, true));         // pace by SPI TX
-
-    volatile void *spi_dr = &spi_get_hw(SPI_PORT)->dr;
+    channel_config_set_transfer_data_size(&c, DMA_SIZE_16);                  // 16-bit per transfer
+    channel_config_set_read_increment(&c, true);                             // increment framebuffer pointer
+    channel_config_set_write_increment(&c, false);                           // always write to same SPI DR
+    channel_config_set_dreq(&c, spi_get_dreq(SPI_PORT, true));               // pace by SPI TX DREQ
 
     dma_channel_configure(
-        lcd_dma_chan, &c,
-        (void *)spi_dr,                   // write addr
-        (const void *)fb_to_show,         // read addr (uint16_t*)
-        px,                               // number of 16-bit transfers
-        true                              // start
+        lcd_dma_chan,
+        &c,
+        &spi_get_hw(SPI_PORT)->dr,  // write address (SPI data register)
+        NULL,                       // read address set later
+        0,                          // transfer count set later
+        false                       // don't start yet
     );
 
-    // Wait for DMA to complete
+    // Attach our handler to DMA_IRQ_0
+    irq_set_exclusive_handler(DMA_IRQ_0, dma_irq0_handler);
+    irq_set_enabled(DMA_IRQ_0, true);
+
+    // Enable IRQ for this channel on IRQ0
+    dma_channel_set_irq0_enabled(lcd_dma_chan, true);
+}
+
+static void lcd_push_framebuffer_dma(void) {
+    // lcd_set_window_full();
+
+    // dc_data();
+    // cs_select();
+
+    // // Switch SPI to 16-bit transfers so each pixel can go as one word
+    // // (MSB-first, so the panel still sees hi-byte then lo-byte)
+    // spi_set_format(SPI_PORT, 16, SPI_CPOL_0, SPI_CPHA_0, SPI_MSB_FIRST);
+
+    // uint32_t pixel_count = (uint32_t)LCD_WIDTH * (uint32_t)LCD_HEIGHT;
+
+    // // Configure DMA for this frame
+    // dma_channel_set_read_addr(lcd_dma_chan, fb_to_show, false);
+    // dma_channel_set_trans_count(lcd_dma_chan, pixel_count, true); // this also starts the transfer
+
+    // // Wait for DMA to finish moving all words into the SPI TX FIFO
     // dma_channel_wait_for_finish_blocking(lcd_dma_chan);
-    while (spi_is_busy(SPI_PORT)) {
-        tight_loop_contents();   // optional; yields a bit
-    }
-    cs_deselect();
+
+    // // Make sure SPI has actually shifted out everything
+    // while (spi_is_busy(SPI_PORT)) {
+    //     tight_loop_contents();
+    // }
+
+    // cs_deselect();
+
+    // // Restore SPI to 8-bit mode for commands / other traffic, if needed
+    // spi_set_format(SPI_PORT, 8, SPI_CPOL_0, SPI_CPHA_0, SPI_MSB_FIRST);
+
+    lcd_set_window_full();
+
+    dc_data();
+    cs_select();
+
+    // 16-bit SPI for RGB565 pixels
+    spi_set_format(SPI_PORT, 16, SPI_CPOL_0, SPI_CPHA_0, SPI_MSB_FIRST);
+
+    uint32_t pixel_count = (uint32_t)LCD_WIDTH * (uint32_t)LCD_HEIGHT;
+
+    lcd_frame_done = false;
+
+    dma_channel_set_read_addr(lcd_dma_chan, fb_to_show, false);
+    dma_channel_set_trans_count(lcd_dma_chan, pixel_count, true);  // starts DMA
+    // DMA IRQ will signal when done
 }
 
 /**********************************************************************/
@@ -552,9 +573,6 @@ void core_task1(void);
 /*--------------------------- MAIN FUNCTION -------------------------*/
 /**********************************************************************/
 
-// variable for core sync
-volatile bool frame_ready = false;
-
 int main() {
     stdio_init_all();
 
@@ -562,40 +580,6 @@ int main() {
     init_luts(); // Called once at startup
     build_color_ramps(); // Prebuild color ramps
 
-    multicore_launch_core1(core_task1);
-
-    while (1) {
-
-        navball_render_rgb565(fb_to_draw, WIDTH, HEIGHT, STRIDE, yaw, pitch, roll, ENABLE_GRID);
-
-        // Wait for core 1 to finish previous frame
-        while (frame_ready) {
-            tight_loop_contents();
-        }
-        // Swap framebuffers
-        uint16_t* temp = fb_to_show;
-        fb_to_show = fb_to_draw;
-        fb_to_draw = temp;
-        // Indicate to core 1 that a new frame is ready
-        frame_ready = true;
-
-        // Simple animation
-        yaw   = (yaw   + 5) % 360;
-        pitch = (pitch + 3) % 360;
-        roll  = (roll  + 7) % 360;
-    }
-
-    return 0;
-}
-
-
-/**********************************************************************/
-/*------------------------ CORE 1 FUNCTION --------------------------*/
-/**********************************************************************/
-void core_task1(void)
-{
-
-    // SPI setup
     spi_init(SPI_PORT, 40500000); // 40.5 MHz (tune down if unstable)
     gpio_set_function(PIN_LCD_SCK,  GPIO_FUNC_SPI);
     gpio_set_function(PIN_LCD_MOSI, GPIO_FUNC_SPI);
@@ -607,18 +591,45 @@ void core_task1(void)
     gpio_init(PIN_LCD_MISO); gpio_set_dir(PIN_LCD_MISO, GPIO_IN);
 
     lcd_init();
-    // lcd_dma_init();
+    lcd_dma_init();
 
-    while (true) {
-        // Wait for frame to be ready
-        while (!frame_ready) {
+    // multicore_launch_core1(core_task1);
+
+    lcd_frame_done = true;
+
+    while (1) {
+
+        navball_render_rgb565(fb_to_draw, WIDTH, HEIGHT, STRIDE, yaw, pitch, roll, ENABLE_GRID);
+
+        // Swap framebuffers, so dma sends the one we just drew, while we draw to the other
+        uint16_t* temp = fb_to_show;
+        fb_to_show = fb_to_draw;
+        fb_to_draw = temp;
+
+        // Simple animation
+        yaw   = (yaw   + 5) % 360;
+        pitch = (pitch + 3) % 360;
+        roll  = (roll  + 7) % 360;
+
+        while (!lcd_frame_done) {
             tight_loop_contents();
         }
-        frame_ready = false;
+        
+        lcd_frame_done = false;
+        lcd_push_framebuffer_dma();
+    }
 
-        // Push the framebuffer to LCD
-        lcd_push_framebuffer();
-        // Use DMA version for better performance
-        // lcd_push_framebuffer_dma16_blocking();
+    return 0;
+}
+
+
+
+/**********************************************************************/
+/*------------------------ CORE 1 FUNCTION --------------------------*/
+/**********************************************************************/
+void core_task1(void)
+{
+    while (true) {
+
     }
 }
