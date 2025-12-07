@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "Eeloo_Pad")(type "KiCad")(uri "${KIPRJMOD}/Eeloo_Pad.kicad_sym")(options "")(descr ""))
+)
