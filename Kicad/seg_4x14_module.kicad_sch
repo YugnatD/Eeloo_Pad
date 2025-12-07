@@ -5,6 +5,525 @@
 	(uuid "a7f0d871-dc5e-43ed-9145-623cf474e830")
 	(paper "A4")
 	(lib_symbols
+		(symbol "Eeloo_Pad:FJ5241AH"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "LED"
+				(at 0 22.86 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "FJ5241AH"
+				(at 0 -22.86 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "4segment_x2:LED-SEG-TH_18P-L25.2-W21.1-P2.54-LS15.2-BL"
+				(at 0 -25.4 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "LCSC Part" "C2938337"
+				(at 0 -27.94 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "FJ5241AH_0_1"
+				(rectangle
+					(start -20.32 12.7)
+					(end 17.78 -12.7)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -16.51 0) (xy -3.81 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -15.24 7.62) (xy -5.08 -7.62)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -15.24 7.62) (xy -2.54 7.62) (xy -5.08 -7.62) (xy -17.78 -7.62) (xy -15.24 7.62)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy -10.16 7.62) (xy -10.16 -7.62)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -2.54 7.62) (xy -17.78 -7.62)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center -2.03 -8.13)
+					(radius 0.64)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy 13.97 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 7.62) (xy 12.7 -7.62)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 7.62) (xy 15.24 7.62) (xy 12.7 -7.62) (xy 0 -7.62) (xy 2.54 7.62)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(polyline
+					(pts
+						(xy 7.62 7.62) (xy 7.62 -7.62)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 15.24 7.62) (xy 0 -7.62)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 15.75 -8.13)
+					(radius 0.64)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin unspecified line
+					(at -10.16 17.78 270)
+					(length 5.08)
+					(name "F"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "18"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at -10.16 -17.78 90)
+					(length 5.08)
+					(name "E"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at -7.62 17.78 270)
+					(length 5.08)
+					(name "H"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "17"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at -7.62 -17.78 90)
+					(length 5.08)
+					(name "N"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at -5.08 17.78 270)
+					(length 5.08)
+					(name "DIG1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "16"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at -2.54 17.78 270)
+					(length 5.08)
+					(name "J"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at -2.54 -17.78 90)
+					(length 5.08)
+					(name "M"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 17.78 270)
+					(length 5.08)
+					(name "K"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 0 -17.78 90)
+					(length 5.08)
+					(name "L"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 2.54 17.78 270)
+					(length 5.08)
+					(name "G1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 2.54 -17.78 90)
+					(length 5.08)
+					(name "G2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 5.08 17.78 270)
+					(length 5.08)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 5.08 -17.78 90)
+					(length 5.08)
+					(name "D"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 7.62 17.78 270)
+					(length 5.08)
+					(name "DIG2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 7.62 -17.78 90)
+					(length 5.08)
+					(name "DP"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 10.16 17.78 270)
+					(length 5.08)
+					(name "B"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 10.16 -17.78 90)
+					(length 5.08)
+					(name "C"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "Eeloo_Pad:HT16K33A-28SSOP"
 			(pin_names
 				(offset 1.016)
@@ -819,6 +1338,16 @@
 			(embedded_fonts no)
 		)
 	)
+	(text "FJ5241BH\r\nFJ3291BH\r\nFJ5241AH"
+		(exclude_from_sim no)
+		(at 158.75 187.96 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "b851506d-fbdc-47cd-a194-bad70f8e01d1")
+	)
 	(wire
 		(pts
 			(xy 35.56 63.5) (xy 38.1 63.5)
@@ -967,6 +1496,294 @@
 			(justify right)
 		)
 		(uuid "d9e2198d-0f8f-46ad-bdde-99d5f06f3272")
+	)
+	(symbol
+		(lib_id "Eeloo_Pad:FJ5241AH")
+		(at 139.7 78.74 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "296476f3-51f1-4b01-a736-9c08c2c8af61")
+		(property "Reference" "LED1"
+			(at 158.75 77.4699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "FJ5241AH"
+			(at 158.75 80.0099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Eeloo_Pad:LED-SEG-TH_18P-L25.2-W21.1-P2.54-LS15.2-BL"
+			(at 139.7 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 139.7 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 139.7 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C2938337"
+			(at 139.7 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "9"
+			(uuid "a1150998-0d2a-443d-aee5-d384f633272d")
+		)
+		(pin "5"
+			(uuid "50e14093-ab52-4332-b2a9-7612ac9e80f4")
+		)
+		(pin "1"
+			(uuid "ebdfa582-1246-4633-80ce-006504256480")
+		)
+		(pin "4"
+			(uuid "d3abafdc-cd2e-4654-a02b-e27720b015d8")
+		)
+		(pin "6"
+			(uuid "edffc09e-2b45-4adf-9688-abe155b7789d")
+		)
+		(pin "12"
+			(uuid "310782f5-ba36-426d-b9b6-864caa3d39ec")
+		)
+		(pin "15"
+			(uuid "f72fb826-ca4c-4e3d-b0c5-a46d68038ce0")
+		)
+		(pin "7"
+			(uuid "518f7313-01b7-4828-b7a8-2bc441cebedc")
+		)
+		(pin "10"
+			(uuid "697f2480-8fb8-4023-a082-457397ccf97b")
+		)
+		(pin "18"
+			(uuid "20ff08f2-545e-4d88-8187-249812eca159")
+		)
+		(pin "17"
+			(uuid "bda04cf9-dfbb-4c31-890d-a89abf4015ad")
+		)
+		(pin "13"
+			(uuid "c3ca427d-01df-42ab-a3d1-eaa23a1839ba")
+		)
+		(pin "2"
+			(uuid "521274a3-f301-4d3b-9a1c-dde060e9c972")
+		)
+		(pin "8"
+			(uuid "eac7d88e-e902-4cbf-8ec0-e7af90c657e7")
+		)
+		(pin "14"
+			(uuid "efe89967-a678-4eb7-b462-11d11feca0f2")
+		)
+		(pin "11"
+			(uuid "417b68e2-2156-4648-b963-499f3a63d729")
+		)
+		(pin "16"
+			(uuid "53d93f94-0b28-46e1-864e-3804f6c95dc9")
+		)
+		(instances
+			(project ""
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99/72870131-4c53-4694-a81e-2f5e4bf49b98/0f4039cf-3f45-4ae8-9378-3ceb6283d8c8"
+					(reference "LED4")
+					(unit 1)
+				)
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99/72870131-4c53-4694-a81e-2f5e4bf49b98/3bec8de2-9c24-4e49-b28a-855db6f4c5ee"
+					(reference "LED2")
+					(unit 1)
+				)
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99/72870131-4c53-4694-a81e-2f5e4bf49b98/64c6f0ce-8406-456c-8b27-5072b506a6d5"
+					(reference "LED1")
+					(unit 1)
+				)
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99/72870131-4c53-4694-a81e-2f5e4bf49b98/acc81ae2-3c41-40c4-8851-f91a08590880"
+					(reference "LED5")
+					(unit 1)
+				)
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99/72870131-4c53-4694-a81e-2f5e4bf49b98/ad724e65-63cc-437d-a13b-30466a3f2ed6"
+					(reference "LED6")
+					(unit 1)
+				)
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99/72870131-4c53-4694-a81e-2f5e4bf49b98/d47da5e5-f594-49cf-abf7-18c6ce418801"
+					(reference "LED3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Eeloo_Pad:FJ5241AH")
+		(at 195.58 77.47 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "6ae7807d-0487-41c9-b31d-53ae2ffb4558")
+		(property "Reference" "LED7"
+			(at 214.63 76.1999 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "FJ5241AH"
+			(at 214.63 78.7399 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Eeloo_Pad:LED-SEG-TH_18P-L25.2-W21.1-P2.54-LS15.2-BL"
+			(at 195.58 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 195.58 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 195.58 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C2938337"
+			(at 195.58 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "11"
+			(uuid "5cbda244-895a-4f84-87c3-e12dc1ee674c")
+		)
+		(pin "5"
+			(uuid "beb11d1c-4b7f-4142-9aaa-9f4305a71dab")
+		)
+		(pin "13"
+			(uuid "0f9e96e2-82c4-4308-a343-4a6cc5261c3f")
+		)
+		(pin "8"
+			(uuid "1af234f1-ec16-43f5-b6cf-1f100c0c9f6b")
+		)
+		(pin "14"
+			(uuid "f6198e3d-12a8-48d8-8aa2-6e7b6ef66f64")
+		)
+		(pin "9"
+			(uuid "f5eafa30-ab19-43e5-b383-5ce1c2ece18d")
+		)
+		(pin "6"
+			(uuid "6fb1fd1e-a710-4065-b2e8-f6ec535e2e3a")
+		)
+		(pin "10"
+			(uuid "112c6db6-d368-47b6-854e-f84c8ed62f8b")
+		)
+		(pin "15"
+			(uuid "dcb50be0-242b-4536-bd13-7cfd0e3bb516")
+		)
+		(pin "16"
+			(uuid "e22c1932-fc24-48a3-b338-fb89d90f3572")
+		)
+		(pin "2"
+			(uuid "7a0c4acf-39a8-4c68-98a3-b7e5c32ee327")
+		)
+		(pin "12"
+			(uuid "59abe45a-18a8-40ec-adcb-28039900aa4a")
+		)
+		(pin "17"
+			(uuid "27312a91-57f7-499c-bf31-57d7d21bc196")
+		)
+		(pin "7"
+			(uuid "131d07e6-374f-4458-834d-38a99d541aa8")
+		)
+		(pin "1"
+			(uuid "f4a8d917-fb21-4a25-b6e8-778fbe53ebc2")
+		)
+		(pin "18"
+			(uuid "95586914-fc1d-4886-a353-b4ec24016dc8")
+		)
+		(pin "4"
+			(uuid "990c3329-495c-4f6f-8138-4d216f512835")
+		)
+		(instances
+			(project ""
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99/72870131-4c53-4694-a81e-2f5e4bf49b98/0f4039cf-3f45-4ae8-9378-3ceb6283d8c8"
+					(reference "LED10")
+					(unit 1)
+				)
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99/72870131-4c53-4694-a81e-2f5e4bf49b98/3bec8de2-9c24-4e49-b28a-855db6f4c5ee"
+					(reference "LED8")
+					(unit 1)
+				)
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99/72870131-4c53-4694-a81e-2f5e4bf49b98/64c6f0ce-8406-456c-8b27-5072b506a6d5"
+					(reference "LED7")
+					(unit 1)
+				)
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99/72870131-4c53-4694-a81e-2f5e4bf49b98/acc81ae2-3c41-40c4-8851-f91a08590880"
+					(reference "LED11")
+					(unit 1)
+				)
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99/72870131-4c53-4694-a81e-2f5e4bf49b98/ad724e65-63cc-437d-a13b-30466a3f2ed6"
+					(reference "LED12")
+					(unit 1)
+				)
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99/72870131-4c53-4694-a81e-2f5e4bf49b98/d47da5e5-f594-49cf-abf7-18c6ce418801"
+					(reference "LED9")
+					(unit 1)
+				)
+			)
+		)
 	)
 	(symbol
 		(lib_id "power:GND")

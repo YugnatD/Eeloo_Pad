@@ -1,4 +1,4 @@
-26266731106796564
+26270261370679744
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -59629,6 +59629,20 @@ Eeloo_Pad
 ABM8272T3
 ABM8-272-T3-1
 Crystal or Oscillator
+0
+4
+4
+Eeloo_Pad
+LED-SEG-TH_18P-L25.2-W21.1-P2.54-LS15.2-BL
+
+
+0
+17
+17
+Eeloo_Pad
+LED-SMD_4P-L5.0-W5.0-BL_XL-5050RGBC
+
+
 0
 4
 4
