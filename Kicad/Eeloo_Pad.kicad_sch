@@ -3471,16 +3471,8 @@
 		(uuid "4dff2392-3d2c-47bd-8579-1a66cca5f22e")
 	)
 	(no_connect
-		(at 72.39 58.42)
-		(uuid "59468288-23f1-4666-87ba-8033426da7fd")
-	)
-	(no_connect
 		(at 97.79 33.02)
 		(uuid "93034cbd-56b1-43f5-bdc0-cfad61918ee2")
-	)
-	(no_connect
-		(at 72.39 53.34)
-		(uuid "ad6fb67b-533d-471a-8ab7-825fe8f3635a")
 	)
 	(no_connect
 		(at 72.39 43.18)
@@ -5438,7 +5430,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm_HandSoldering"
+		(property "Footprint" "Eeloo_Pad:ABM8272T3"
 			(at 64.77 67.31 0)
 			(effects
 				(font
@@ -8816,6 +8808,315 @@
 			(project "Eeloo_Pad"
 				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
 					(reference "#FLG03")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(label "HUB_OVCUR"
+		(at 72.39 53.34 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "a097c1d0-337d-41bd-90b1-dd84968b7f29")
+	)
+	(label "HUB_PSELF"
+		(at 72.39 58.42 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2215b708-03a3-45e2-8d70-2f67fb4d97ec")
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 62.23 52.07 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3eda217d-46b9-4f93-81fe-84bec3e89bd0")
+		(property "Reference" "R128"
+			(at 64.23 51.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10k"
+			(at 64.23 53.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+			(at 62.23 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 62.23 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "CH334F OVCUR# pull-up (no overcurrent detection used)"
+			(at 62.23 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "FRC0603F1002TS"
+			(at 62.23 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "FH (Fenghua)"
+			(at 62.23 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C2906982"
+			(at 62.23 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a6d1160c-8f02-46a6-9ae4-2d63a83b6f0e")
+		)
+		(pin "2"
+			(uuid "80ed0eae-3c69-4365-bd99-4eb7bb82efc9")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "R128")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(label "HUB_V33"
+		(at 62.23 48.26 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "745f3c25-1b39-42aa-9bd2-2082d7a2c2bb")
+	)
+	(label "HUB_OVCUR"
+		(at 62.23 55.88 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3f014954-0b8f-4b35-bd45-059329c420f0")
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 54.61 44.45 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "92b5298b-e47f-47c3-9899-f96b3be81417")
+		(property "Reference" "R129"
+			(at 56.61 43.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10k"
+			(at 56.61 45.99 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+			(at 54.61 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 54.61 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "CH334F PSELF pull-down: declare bus-powered"
+			(at 54.61 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Part_Number" "FRC0603F1002TS"
+			(at 54.61 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Manufacturer_Name" "FH (Fenghua)"
+			(at 54.61 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C2906982"
+			(at 54.61 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f0c0a071-b828-49d8-806f-17e0c2995533")
+		)
+		(pin "2"
+			(uuid "e723fa21-584f-4a65-9dbd-e31355c0c2c5")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "R129")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(label "HUB_PSELF"
+		(at 54.61 40.64 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "6f38e578-0523-4d45-ac36-5df2fad9c060")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 54.61 48.26 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "52c6238d-97ce-4875-8e29-a79cd77e5b37")
+		(property "Reference" "#PWR0174"
+			(at 54.61 54.61 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 54.61 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 54.61 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 54.61 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 54.61 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5f76c764-a622-48d4-9255-35a9b31fb48c")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR0174")
 					(unit 1)
 				)
 			)
