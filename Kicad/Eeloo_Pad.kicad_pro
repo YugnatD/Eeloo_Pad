@@ -51,7 +51,13 @@
           "min_clearance": 0.5
         }
       },
-      "diff_pair_dimensions": [],
+      "diff_pair_dimensions": [
+        {
+          "gap": 0.0,
+          "via_gap": 0.0,
+          "width": 0.0
+        }
+      ],
       "drc_exclusions": [],
       "meta": {
         "version": 2
@@ -180,7 +186,18 @@
           "td_width_to_size_filter_ratio": 0.9
         }
       ],
-      "track_widths": [],
+      "track_widths": [
+        0.0,
+        0.15,
+        0.2,
+        0.3,
+        0.4,
+        0.5,
+        0.8,
+        1.0,
+        1.2,
+        1.5
+      ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
           "corner_radius_percentage": 80,
@@ -207,7 +224,16 @@
           "spacing": 0.6
         }
       },
-      "via_dimensions": [],
+      "via_dimensions": [
+        {
+          "diameter": 0.0,
+          "drill": 0.0
+        },
+        {
+          "diameter": 0.5,
+          "drill": 0.3
+        }
+      ],
       "zones_allow_external_fillets": false
     },
     "ipc2581": {
@@ -615,10 +641,6 @@
       "Root"
     ],
     [
-      "64c6f0ce-8406-456c-8b27-5072b506a6d5",
-      "seg_4x14_module1"
-    ],
-    [
       "5d4ceac3-e175-4d2d-ac1b-c2025b28b5a2",
       "navball_module"
     ],
@@ -631,27 +653,31 @@
       "uC1"
     ],
     [
-      "2a88225a-bb6a-429c-8f0d-d7de468458ee",
+      "d0096811-a333-4466-b4ef-01314c23403a",
       "uC1"
     ],
     [
-      "3bec8de2-9c24-4e49-b28a-855db6f4c5ee",
+      "ff16ad28-8a9b-49e7-8d7f-5a0590313b3b",
       "seg_4x14_module"
     ],
     [
-      "d47da5e5-f594-49cf-abf7-18c6ce418801",
-      "seg_4x14_module2"
-    ],
-    [
-      "0f4039cf-3f45-4ae8-9378-3ceb6283d8c8",
+      "0fdc6d36-9b92-4969-bb1d-fcc83a2d5951",
       "seg_4x14_module3"
     ],
     [
-      "acc81ae2-3c41-40c4-8851-f91a08590880",
+      "f8e72a46-562a-467b-a9c5-21c0b9971bf4",
       "seg_4x14_module4"
     ],
     [
-      "ad724e65-63cc-437d-a13b-30466a3f2ed6",
+      "04dd8581-e06f-4c7f-add4-2e30d2938926",
+      "seg_4x14_module1"
+    ],
+    [
+      "758ade95-d631-420f-b4f9-9f9aaf0aa638",
+      "seg_4x14_module2"
+    ],
+    [
+      "9389cc67-342b-4a1c-8486-1aaf1043bff0",
       "seg_4x14_module5"
     ]
   ],
