@@ -3,7 +3,7 @@
 	(generator "pcbnew")
 	(generator_version "10.0")
 	(layer "F.Cu")
-	(descr "Panel mounting for Schneider Harmony XB2 22mm pushbutton (e.g. XB2-BS542): 22.5mm hole, head 40mm, rear body ~30x40mm, PCB used as panel (1-6mm)")
+	(descr "Panel mounting for Schneider Harmony XB2 22mm pushbutton (e.g. XB2-BS542): 22.5mm hole drawn on Edge.Cuts (too big for a drill), no tracks/vias within r=16.5mm (bezel and nut), copper-free ring to r=12.5mm, head 40mm, rear body ~30x40mm, PCB used as panel (1-6mm)")
 	(tags "Schneider XB2 22mm pushbutton emergency stop panel hole")
 	(property "Reference" "H10"
 		(at 0 -17.2 0)
@@ -126,17 +126,21 @@
 			)
 		)
 	)
-	(pad "" np_thru_hole circle
-		(at 0 0)
-		(size 22.5 22.5)
-		(drill 22.5)
-		(layers "*.Cu" "*.Mask")
-		(uuid "71d9fc24-f5eb-47eb-a4bd-91105ea18f26")
+	(fp_circle
+		(center 0 0)
+		(end 11.25 0)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "Edge.Cuts")
+		(uuid "702fe577-bede-448e-b0a9-2530b734dd54")
 	)
 	(zone
 		(layers "F.Cu" "B.Cu")
-		(uuid "b2ab7c85-c998-45b3-b6c8-5cbb4e501d60")
-		(name "XB2 collar keepout")
+		(uuid "27e3ac8a-572b-4706-b729-c67a955ee6b9")
+		(name "XB2 bezel keepout (no tracks/vias under bezel and nut)")
 		(hatch edge 0.5)
 		(connect_pads
 			(clearance 0)
@@ -160,7 +164,38 @@
 		)
 		(polygon
 			(pts
-				(xy 16 0)
+				(xy 16.5000 0.0000) (xy 16.4372 1.4381) (xy 16.2493 2.8652) (xy 15.9378 4.2705) (xy 15.5049 5.6433) (xy 14.9541 6.9732) (xy 14.2894 8.2500) (xy 13.5160 9.4640) (xy 12.6397 10.6060) (xy 11.6673 11.6673) (xy 10.6060 12.6397) (xy 9.4640 13.5160) (xy 8.2500 14.2894) (xy 6.9732 14.9541) (xy 5.6433 15.5049) (xy 4.2705 15.9378) (xy 2.8652 16.2493) (xy 1.4381 16.4372) (xy 0.0000 16.5000) (xy -1.4381 16.4372) (xy -2.8652 16.2493) (xy -4.2705 15.9378) (xy -5.6433 15.5049) (xy -6.9732 14.9541) (xy -8.2500 14.2894) (xy -9.4640 13.5160) (xy -10.6060 12.6397) (xy -11.6673 11.6673) (xy -12.6397 10.6060) (xy -13.5160 9.4640) (xy -14.2894 8.2500) (xy -14.9541 6.9732) (xy -15.5049 5.6433) (xy -15.9378 4.2705) (xy -16.2493 2.8652) (xy -16.4372 1.4381) (xy -16.5000 0.0000) (xy -16.4372 -1.4381) (xy -16.2493 -2.8652) (xy -15.9378 -4.2705) (xy -15.5049 -5.6433) (xy -14.9541 -6.9732) (xy -14.2894 -8.2500) (xy -13.5160 -9.4640) (xy -12.6397 -10.6060) (xy -11.6673 -11.6673) (xy -10.6060 -12.6397) (xy -9.4640 -13.5160) (xy -8.2500 -14.2894) (xy -6.9732 -14.9541) (xy -5.6433 -15.5049) (xy -4.2705 -15.9378) (xy -2.8652 -16.2493) (xy -1.4381 -16.4372) (xy -0.0000 -16.5000) (xy 1.4381 -16.4372) (xy 2.8652 -16.2493) (xy 4.2705 -15.9378) (xy 5.6433 -15.5049) (xy 6.9732 -14.9541) (xy 8.2500 -14.2894) (xy 9.4640 -13.5160) (xy 10.6060 -12.6397) (xy 11.6673 -11.6673) (xy 12.6397 -10.6060) (xy 13.5160 -9.4640) (xy 14.2894 -8.2500) (xy 14.9541 -6.9732) (xy 15.5049 -5.6433) (xy 15.9378 -4.2705) (xy 16.2493 -2.8652) (xy 16.4372 -1.4381)
+			)
+		)
+	)
+	(zone
+		(layers "F.Cu" "B.Cu")
+		(uuid "374a0dc5-f9dd-4bfd-88e2-3b4feaf957c9")
+		(name "XB2 hole ring (copper-free 1.25 mm around the 22.5 mm cutout)")
+		(hatch edge 0.5)
+		(connect_pads
+			(clearance 0)
+		)
+		(min_thickness 0.25)
+		(keepout
+			(tracks not_allowed)
+			(vias not_allowed)
+			(pads allowed)
+			(copperpour not_allowed)
+			(footprints allowed)
+		)
+		(placement
+			(enabled no)
+			(sheetname "")
+		)
+		(fill
+			(thermal_gap 0.5)
+			(thermal_bridge_width 0.5)
+			(island_removal_mode 0)
+		)
+		(polygon
+			(pts
+				(xy 12.5000 0.0000) (xy 12.4524 1.0894) (xy 12.3101 2.1706) (xy 12.0741 3.2352) (xy 11.7462 4.2753) (xy 11.3288 5.2827) (xy 10.8253 6.2500) (xy 10.2394 7.1697) (xy 9.5756 8.0348) (xy 8.8388 8.8388) (xy 8.0348 9.5756) (xy 7.1697 10.2394) (xy 6.2500 10.8253) (xy 5.2827 11.3288) (xy 4.2753 11.7462) (xy 3.2352 12.0741) (xy 2.1706 12.3101) (xy 1.0894 12.4524) (xy 0.0000 12.5000) (xy -1.0894 12.4524) (xy -2.1706 12.3101) (xy -3.2352 12.0741) (xy -4.2753 11.7462) (xy -5.2827 11.3288) (xy -6.2500 10.8253) (xy -7.1697 10.2394) (xy -8.0348 9.5756) (xy -8.8388 8.8388) (xy -9.5756 8.0348) (xy -10.2394 7.1697) (xy -10.8253 6.2500) (xy -11.3288 5.2827) (xy -11.7462 4.2753) (xy -12.0741 3.2352) (xy -12.3101 2.1706) (xy -12.4524 1.0894) (xy -12.5000 0.0000) (xy -12.4524 -1.0894) (xy -12.3101 -2.1706) (xy -12.0741 -3.2352) (xy -11.7462 -4.2753) (xy -11.3288 -5.2827) (xy -10.8253 -6.2500) (xy -10.2394 -7.1697) (xy -9.5756 -8.0348) (xy -8.8388 -8.8388) (xy -8.0348 -9.5756) (xy -7.1697 -10.2394) (xy -6.2500 -10.8253) (xy -5.2827 -11.3288) (xy -4.2753 -11.7462) (xy -3.2352 -12.0741) (xy -2.1706 -12.3101) (xy -1.0894 -12.4524) (xy -0.0000 -12.5000) (xy 1.0894 -12.4524) (xy 2.1706 -12.3101) (xy 3.2352 -12.0741) (xy 4.2753 -11.7462) (xy 5.2827 -11.3288) (xy 6.2500 -10.8253) (xy 7.1697 -10.2394) (xy 8.0348 -9.5756) (xy 8.8388 -8.8388) (xy 9.5756 -8.0348) (xy 10.2394 -7.1697) (xy 10.8253 -6.2500) (xy 11.3288 -5.2827) (xy 11.7462 -4.2753) (xy 12.0741 -3.2352) (xy 12.3101 -2.1706) (xy 12.4524 -1.0894)
 			)
 		)
 	)

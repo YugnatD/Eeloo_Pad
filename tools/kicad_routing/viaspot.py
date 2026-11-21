@@ -8,7 +8,9 @@ def free(b, net, x, y, r=0.3, clr=0.2, hole_clr=0.3, layers=(pcbnew.F_Cu,pcbnew.
             if t.IsOnLayer(L) and t.GetEffectiveShape(L).Collide(c,FromMM(clr)): return False
     for f in b.GetFootprints():
         for p in f.Pads():
-            if p.GetNetname()==net and net!='': continue
+            if p.GetNetname()==net and net!='':
+                if p.GetAttribute()==pcbnew.PAD_ATTRIB_SMD and min(M(p.GetSize().x),M(p.GetSize().y))<1.5 and any(p.IsOnLayer(L) and p.GetEffectiveShape(L).Collide(c,FromMM(0.2)) for L in layers): return False
+                continue
             for L in layers:
                 if p.IsOnLayer(L) and p.GetEffectiveShape(L).Collide(c,FromMM(clr)): return False
             if p.HasHole() and r>=0.25:

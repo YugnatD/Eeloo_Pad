@@ -8770,7 +8770,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "92b5298b-e47f-47c3-9899-f96b3be81417")
 		(property "Reference" "R129"
 			(at 56.61 43.45 0)
@@ -14681,7 +14681,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "363a6792-4cdd-46ad-ac70-29a069fe28b6")
 		(property "Reference" "Q2"
 			(at 138.43 132.08 0)
@@ -14805,7 +14805,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "291dab05-42c2-49da-a8ac-b226be802320")
 		(property "Reference" "R132"
 			(at 119.38 125.73 0)
@@ -14973,7 +14973,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "fe59f3d9-49d5-4fae-96b0-eaff04eaec40")
 		(property "Reference" "R133"
 			(at 119.38 138.43 0)

@@ -21,7 +21,8 @@ def _blockany(m, s):
 
 
 class Router:
-    def __init__(self, board, region, res=0.1, grid=0.2, clr=0.2, margin=0.05, via_d=0.6, via_drill=0.3, edge_clr=0.5, hole_clr=0.3):
+    def __init__(self, board, region, res=0.1, grid=0.2, clr=0.2, margin=0.05, via_d=0.6, via_drill=0.3, edge_clr=0.5, hole_clr=0.3, no_via_in_pad=True):
+        self.no_via_in_pad = no_via_in_pad
         self.b = board; self.res = res; self.grid = grid; self.clr = clr; self.margin = margin
         self.via_d = via_d; self.via_drill = via_drill; self.edge_clr = edge_clr; self.hole_clr = hole_clr
         self.x0, self.y0, x1, y1 = region
@@ -102,6 +103,10 @@ class Router:
                     if p.IsOnLayer(lid) and p.GetAttribute() != pcbnew.PAD_ATTRIB_NPTH:
                         self._add(net, L, 't', self._draw_polyset(self._infl(p, lid, ti)))
                         self._add(net, L, 'v', self._draw_polyset(self._infl(p, lid, vi)))
+                if self.no_via_in_pad and p.GetAttribute() == pcbnew.PAD_ATTRIB_SMD:
+                    for L, lid in LAYERS.items():
+                        if p.IsOnLayer(lid):
+                            self._add('__padvia__', L, 'v', self._draw_polyset(self._infl(p, lid, self.via_d / 2 + 0.2 + self.margin)))
                 if p.HasHole():
                     for L in 'FB':
                         hs = pcbnew.SHAPE_POLY_SET(); p.TransformHoleToPolygon(hs, FromMM(self.hole_clr + w / 2 + self.margin), FromMM(0.005), pcbnew.ERROR_OUTSIDE)
@@ -156,7 +161,8 @@ class Router:
                 elif it.Type() == pcbnew.PCB_VIA_T:
                     cx, cy = self._px(it.GetPosition().x, it.GetPosition().y)
                     r = max(1, int(0.15 / self.res))
-                    m[L][int(cy) - r:int(cy) + r + 1, int(cx) - r:int(cx) + r + 1] = True
+                    y0_, y1_ = max(0, int(cy) - r), min(self.H, int(cy) + r + 1); x0_, x1_ = max(0, int(cx) - r), min(self.W, int(cx) + r + 1)
+                    if y1_ > y0_ and x1_ > x0_: m[L][y0_:y1_, x0_:x1_] = True
                 else:
                     rr = self._draw_polyset(self._infl(it, lid, 0.0))
                     if not rr: continue
