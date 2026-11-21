@@ -5060,7 +5060,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(in_pos_files yes)
-		(dnp no)
+		(dnp yes)
 		(uuid "337650bd-1f8a-43b4-b53d-4aa17407a93d")
 		(property "Reference" "R9"
 			(at 104.14 180.34 90)

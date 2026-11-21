@@ -1,0 +1,9 @@
+# pantera-prep-ui session v1
+# Fichier de travail de pantera-prep-ui : ce n'est PAS un fichier pour Placer.
+source = /home/tanguy/Desktop/Eeloo_Pad/Kicad/Eeloo_Pad.kicad_pcb
+face = top
+rotation = 0
+traversants = non
+face_dessous = top-view
+sortie = Eeloo_Pad_top.brd
+# ligne = référence ; lib ; angle ; exclu      (« - » = pas de choix propre à la ligne)

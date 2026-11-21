@@ -42,3 +42,12 @@ __pycache__/
 *.pyc
 .DS_Store
 *.swp
+
+# ---------- ESP-IDF (navball/esp32p4) ----------
+navball/esp32p4/build/
+navball/esp32p4/managed_components/
+navball/esp32p4/crash.txt
+
+# ---------- outils PCB ----------
+tools/kicad_routing/backups/
+__pycache__/

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <!-- ESP32-P4 navball. Linux: /dev/ttyACM0 (USB-UART port of the Waveshare board, bench)
+         or the port of the P4's native USB once on the Eeloo Pad hub. Windows: COMx. -->
+    <navball>
+        <enabled>true</enabled>
+        <port>/dev/ttyACM0</port>
+        <baud>115200</baud>
+        <rate>30</rate>          <!-- frames per second sent to the board -->
+        <log>true</log>          <!-- copy the board's log lines (fps, load) into KSP.log -->
+    </navball>
+</config>

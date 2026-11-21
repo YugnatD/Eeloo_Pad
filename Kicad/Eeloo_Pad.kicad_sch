@@ -3585,6 +3585,1154 @@
 			)
 			(embedded_fonts no)
 		)
+			(symbol "Connector:Barrel_Jack"
+				(pin_names
+					(offset 1.016)
+				)
+				(exclude_from_sim no)
+				(in_bom yes)
+				(on_board yes)
+				(property "Reference" "J"
+					(at 0 5.334 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "Value" "Barrel_Jack"
+					(at 0 -5.08 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "Footprint" ""
+					(at 1.27 -1.016 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(property "Datasheet" "~"
+					(at 1.27 -1.016 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(property "Description" "DC Barrel Jack"
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(property "ki_keywords" "DC power barrel jack connector"
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(property "ki_fp_filters" "BarrelJack*"
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(symbol "Barrel_Jack_0_1"
+					(rectangle
+						(start -5.08 3.81)
+						(end 5.08 -3.81)
+						(stroke
+							(width 0.254)
+							(type default)
+						)
+						(fill
+							(type background)
+						)
+					)
+					(polyline
+						(pts
+							(xy -3.81 -2.54) (xy -2.54 -2.54) (xy -1.27 -1.27) (xy 0 -2.54) (xy 2.54 -2.54) (xy 5.08 -2.54)
+						)
+						(stroke
+							(width 0.254)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+					(arc
+						(start -3.302 1.905)
+						(mid -3.9343 2.54)
+						(end -3.302 3.175)
+						(stroke
+							(width 0.254)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+					(arc
+						(start -3.302 1.905)
+						(mid -3.9343 2.54)
+						(end -3.302 3.175)
+						(stroke
+							(width 0.254)
+							(type default)
+						)
+						(fill
+							(type outline)
+						)
+					)
+					(rectangle
+						(start 3.683 3.175)
+						(end -3.302 1.905)
+						(stroke
+							(width 0.254)
+							(type default)
+						)
+						(fill
+							(type outline)
+						)
+					)
+					(polyline
+						(pts
+							(xy 5.08 2.54) (xy 3.81 2.54)
+						)
+						(stroke
+							(width 0.254)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+				)
+				(symbol "Barrel_Jack_1_1"
+					(pin passive line
+						(at 7.62 2.54 180)
+						(length 2.54)
+						(name "~"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+						(number "1"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+					)
+					(pin passive line
+						(at 7.62 -2.54 180)
+						(length 2.54)
+						(name "~"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+						(number "2"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+					)
+				)
+				(embedded_fonts no)
+			)
+			(symbol "Device:D_Schottky"
+				(pin_numbers
+					(hide yes)
+				)
+				(pin_names
+					(offset 1.016)
+					(hide yes)
+				)
+				(exclude_from_sim no)
+				(in_bom yes)
+				(on_board yes)
+				(property "Reference" "D"
+					(at 0 2.54 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "Value" "D_Schottky"
+					(at 0 -2.54 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "Footprint" ""
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(property "Datasheet" "~"
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(property "Description" "Schottky diode"
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(property "ki_keywords" "diode Schottky"
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*"
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(symbol "D_Schottky_0_1"
+					(polyline
+						(pts
+							(xy -1.905 0.635) (xy -1.905 1.27) (xy -1.27 1.27) (xy -1.27 -1.27) (xy -0.635 -1.27) (xy -0.635 -0.635)
+						)
+						(stroke
+							(width 0.254)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+					(polyline
+						(pts
+							(xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0) (xy 1.27 1.27)
+						)
+						(stroke
+							(width 0.254)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+					(polyline
+						(pts
+							(xy 1.27 0) (xy -1.27 0)
+						)
+						(stroke
+							(width 0)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+				)
+				(symbol "D_Schottky_1_1"
+					(pin passive line
+						(at -3.81 0 0)
+						(length 2.54)
+						(name "K"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+						(number "1"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+					)
+					(pin passive line
+						(at 3.81 0 180)
+						(length 2.54)
+						(name "A"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+						(number "2"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+					)
+				)
+				(embedded_fonts no)
+			)
+			(symbol "Device:D_TVS"
+				(pin_numbers
+					(hide yes)
+				)
+				(pin_names
+					(offset 1.016)
+					(hide yes)
+				)
+				(exclude_from_sim no)
+				(in_bom yes)
+				(on_board yes)
+				(property "Reference" "D"
+					(at 0 2.54 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "Value" "D_TVS"
+					(at 0 -2.54 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "Footprint" ""
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(property "Datasheet" "~"
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(property "Description" "Bidirectional transient-voltage-suppression diode"
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(property "ki_keywords" "diode TVS thyrector"
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*"
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(symbol "D_TVS_0_1"
+					(polyline
+						(pts
+							(xy -2.54 1.27) (xy -2.54 -1.27) (xy 2.54 1.27) (xy 2.54 -1.27) (xy -2.54 1.27)
+						)
+						(stroke
+							(width 0.254)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+					(polyline
+						(pts
+							(xy 0.508 1.27) (xy 0 1.27) (xy 0 -1.27) (xy -0.508 -1.27)
+						)
+						(stroke
+							(width 0.254)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+					(polyline
+						(pts
+							(xy 1.27 0) (xy -1.27 0)
+						)
+						(stroke
+							(width 0)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+				)
+				(symbol "D_TVS_1_1"
+					(pin passive line
+						(at -3.81 0 0)
+						(length 2.54)
+						(name "A1"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+						(number "1"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+					)
+					(pin passive line
+						(at 3.81 0 180)
+						(length 2.54)
+						(name "A2"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+						(number "2"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+					)
+				)
+				(embedded_fonts no)
+			)
+			(symbol "Transistor_FET:AO3401A"
+				(pin_names
+					(hide yes)
+				)
+				(exclude_from_sim no)
+				(in_bom yes)
+				(on_board yes)
+				(property "Reference" "Q"
+					(at 5.08 1.905 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(justify left)
+					)
+				)
+				(property "Value" "AO3401A"
+					(at 5.08 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(justify left)
+					)
+				)
+				(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+					(at 5.08 -1.905 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+							(italic yes)
+						)
+						(justify left)
+						(hide yes)
+					)
+				)
+				(property "Datasheet" "http://www.aosmd.com/pdfs/datasheet/AO3401A.pdf"
+					(at 5.08 -3.81 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(justify left)
+						(hide yes)
+					)
+				)
+				(property "Description" "-4.0A Id, -30V Vds, P-Channel MOSFET, SOT-23"
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(property "ki_keywords" "P-Channel MOSFET"
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(property "ki_fp_filters" "SOT?23*"
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(symbol "AO3401A_0_1"
+					(polyline
+						(pts
+							(xy 0.254 1.905) (xy 0.254 -1.905)
+						)
+						(stroke
+							(width 0.254)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+					(polyline
+						(pts
+							(xy 0.254 0) (xy -2.54 0)
+						)
+						(stroke
+							(width 0)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+					(polyline
+						(pts
+							(xy 0.762 2.286) (xy 0.762 1.27)
+						)
+						(stroke
+							(width 0.254)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+					(polyline
+						(pts
+							(xy 0.762 1.778) (xy 3.302 1.778) (xy 3.302 -1.778) (xy 0.762 -1.778)
+						)
+						(stroke
+							(width 0)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+					(polyline
+						(pts
+							(xy 0.762 0.508) (xy 0.762 -0.508)
+						)
+						(stroke
+							(width 0.254)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+					(polyline
+						(pts
+							(xy 0.762 -1.27) (xy 0.762 -2.286)
+						)
+						(stroke
+							(width 0.254)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+					(circle
+						(center 1.651 0)
+						(radius 2.794)
+						(stroke
+							(width 0.254)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+					(polyline
+						(pts
+							(xy 2.286 0) (xy 1.27 0.381) (xy 1.27 -0.381) (xy 2.286 0)
+						)
+						(stroke
+							(width 0)
+							(type default)
+						)
+						(fill
+							(type outline)
+						)
+					)
+					(polyline
+						(pts
+							(xy 2.54 2.54) (xy 2.54 1.778)
+						)
+						(stroke
+							(width 0)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+					(circle
+						(center 2.54 1.778)
+						(radius 0.254)
+						(stroke
+							(width 0)
+							(type default)
+						)
+						(fill
+							(type outline)
+						)
+					)
+					(circle
+						(center 2.54 -1.778)
+						(radius 0.254)
+						(stroke
+							(width 0)
+							(type default)
+						)
+						(fill
+							(type outline)
+						)
+					)
+					(polyline
+						(pts
+							(xy 2.54 -2.54) (xy 2.54 0) (xy 0.762 0)
+						)
+						(stroke
+							(width 0)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+					(polyline
+						(pts
+							(xy 2.794 -0.508) (xy 2.921 -0.381) (xy 3.683 -0.381) (xy 3.81 -0.254)
+						)
+						(stroke
+							(width 0)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+					(polyline
+						(pts
+							(xy 3.302 -0.381) (xy 2.921 0.254) (xy 3.683 0.254) (xy 3.302 -0.381)
+						)
+						(stroke
+							(width 0)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+				)
+				(symbol "AO3401A_1_1"
+					(pin input line
+						(at -5.08 0 0)
+						(length 2.54)
+						(name "G"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+						(number "1"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+					)
+					(pin passive line
+						(at 2.54 5.08 270)
+						(length 2.54)
+						(name "D"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+						(number "3"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+					)
+					(pin passive line
+						(at 2.54 -5.08 90)
+						(length 2.54)
+						(name "S"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+						(number "2"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+					)
+				)
+				(embedded_fonts no)
+			)
+			(symbol "power:+12V"
+				(power)
+				(pin_numbers
+					(hide yes)
+				)
+				(pin_names
+					(offset 0)
+					(hide yes)
+				)
+				(exclude_from_sim no)
+				(in_bom yes)
+				(on_board yes)
+				(property "Reference" "#PWR"
+					(at 0 -3.81 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(property "Value" "+12V"
+					(at 0 3.556 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "Footprint" ""
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(property "Datasheet" ""
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(property "Description" "Power symbol creates a global label with name \"+12V\""
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(property "ki_keywords" "global power"
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(symbol "+12V_0_1"
+					(polyline
+						(pts
+							(xy -0.762 1.27) (xy 0 2.54)
+						)
+						(stroke
+							(width 0)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+					(polyline
+						(pts
+							(xy 0 2.54) (xy 0.762 1.27)
+						)
+						(stroke
+							(width 0)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+					(polyline
+						(pts
+							(xy 0 0) (xy 0 2.54)
+						)
+						(stroke
+							(width 0)
+							(type default)
+						)
+						(fill
+							(type none)
+						)
+					)
+				)
+				(symbol "+12V_1_1"
+					(pin power_in line
+						(at 0 0 90)
+						(length 0)
+						(name "~"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+						(number "1"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+					)
+				)
+				(embedded_fonts no)
+			)
+			(symbol "Regulator_Switching:LMR33630ADDA"
+				(exclude_from_sim no)
+				(in_bom yes)
+				(on_board yes)
+				(property "Reference" "U"
+					(at 0 11.43 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "Value" "LMR33630ADDA"
+					(at 0 8.89 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(property "Footprint" "Package_SO:Texas_HSOP-8-1EP_3.9x4.9mm_P1.27mm_ThermalVias"
+					(at 0 -20.32 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(property "Datasheet" "http://www.ti.com/lit/ds/symlink/lmr33630.pdf"
+					(at 0 -2.54 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(property "Description" "Simple Switcher Synchronous Buck Regulator, Vin=3.8-36V, Iout=3A, F=400kHz, Adjustable output voltage, HSOP-8"
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(property "ki_keywords" "simple-switcher synchronous buck step-down voltage-regulator"
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(property "ki_fp_filters" "Texas*HSOP*1EP*"
+					(at 0 0 0)
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+						(hide yes)
+					)
+				)
+				(symbol "LMR33630ADDA_0_1"
+					(rectangle
+						(start -7.62 7.62)
+						(end 7.62 -7.62)
+						(stroke
+							(width 0.254)
+							(type default)
+						)
+						(fill
+							(type background)
+						)
+					)
+				)
+				(symbol "LMR33630ADDA_1_1"
+					(pin power_in line
+						(at -10.16 5.08 0)
+						(length 2.54)
+						(name "VIN"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+						(number "2"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+					)
+					(pin input line
+						(at -10.16 0 0)
+						(length 2.54)
+						(name "EN"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+						(number "3"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+					)
+					(pin power_out line
+						(at -10.16 -5.08 0)
+						(length 2.54)
+						(name "VCC"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+						(number "6"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+					)
+					(pin power_in line
+						(at 0 -10.16 90)
+						(length 2.54)
+						(name "GND"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+						(number "1"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+					)
+					(pin passive line
+						(at 0 -10.16 90)
+						(length 2.54)
+						(hide yes)
+						(name "GND"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+						(number "9"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+					)
+					(pin input line
+						(at 10.16 5.08 180)
+						(length 2.54)
+						(name "BOOT"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+						(number "7"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+					)
+					(pin output line
+						(at 10.16 2.54 180)
+						(length 2.54)
+						(name "SW"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+						(number "8"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+					)
+					(pin input line
+						(at 10.16 -2.54 180)
+						(length 2.54)
+						(name "FB"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+						(number "5"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+					)
+					(pin open_collector line
+						(at 10.16 -5.08 180)
+						(length 2.54)
+						(name "PG"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+						(number "4"
+							(effects
+								(font
+									(size 1.27 1.27)
+								)
+							)
+						)
+					)
+				)
+				(embedded_fonts no)
+			)
 	)
 	(junction
 		(at 196.85 148.59)
@@ -4166,7 +5314,7 @@
 		)
 		(uuid "120120d7-ed7d-40a4-89f5-3c821ac8e818")
 	)
-	(label "VBUS"
+	(label "VBUS_USB"
 		(at 58.42 25.4 0)
 		(effects
 			(font
@@ -4476,7 +5624,7 @@
 		)
 		(uuid "e8e63864-afb3-405c-b0ed-17b35a3a5941")
 	)
-	(label "HUB_V33"
+	(label "VBUS_USB"
 		(at 106.68 22.86 0)
 		(effects
 			(font
@@ -10126,6 +11274,4367 @@
 				)
 			)
 		)
+	)
+	(symbol
+		(lib_id "Connector:Barrel_Jack")
+		(at 113.03 96.52 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "2711ceb6-e8d8-4427-bf12-1c61f3020713")
+		(property "Reference" "J45"
+			(at 113.03 90.17 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "Jack 12V 5.5x2.1"
+			(at 113.03 102.87 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Connector_BarrelJack:BarrelJack_Horizontal"
+			(at 113.03 96.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 113.03 96.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "DC barrel jack 5.5x2.1mm, centre +, 12V 2A adapter"
+			(at 113.03 96.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "9dc22338-7ad5-47ce-a6e9-6e9a9c56992f")
+		)
+		(pin "2"
+			(uuid "11eb4735-f9ba-4788-8e8c-709e2711a882")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "J45")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 120.65 99.06) (xy 123.19 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d54a1a89-be4d-4a62-a1e2-921f88b633b9")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 123.19 99.06 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "c6683a2e-2a59-487c-a558-72b572f81ba6")
+		(property "Reference" "#PWR221"
+			(at 123.19 99.06 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 127 99.06 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 123.19 99.06 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 123.19 99.06 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 123.19 99.06 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "da07e1aa-0977-415b-8374-898943dc017d")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR221")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:Polyfuse")
+		(at 128.27 93.98 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "de69d5fd-b78a-4a7d-9ae8-44d604809f46")
+		(property "Reference" "F2"
+			(at 128.27 90.17 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "2A"
+			(at 128.27 97.79 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Fuse:Fuse_1812_4532Metric_Pad1.30x3.40mm_HandSolder"
+			(at 128.27 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 128.27 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "PTC resettable fuse 2A hold, 1812"
+			(at 128.27 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "bc92486d-befd-4a72-b6e2-b7bc3456d7b3")
+		)
+		(pin "2"
+			(uuid "6ebb443b-8ea6-4d18-80bf-31743aced8a4")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "F2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:D_Schottky")
+		(at 139.7 93.98 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "df18c621-7a9f-4448-81f7-538d1c891f73")
+		(property "Reference" "D11"
+			(at 139.7 90.17 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SS34"
+			(at 139.7 97.79 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SMA"
+			(at 139.7 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 139.7 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Reverse polarity protection, 40V 3A Schottky"
+			(at 139.7 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "824c920e-a489-44b2-892b-d6bc64800112")
+		)
+		(pin "2"
+			(uuid "18c51fbb-d236-42fa-a4f9-5b1aae3e5142")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "D11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 143.51 93.98) (xy 146.05 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ced020d4-1a84-4c7c-8a1f-4ec59e7e47d9")
+	)
+	(symbol
+		(lib_id "power:+12V")
+		(at 146.05 93.98 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "23082a01-eaec-43c3-99aa-016475509b6a")
+		(property "Reference" "#PWR222"
+			(at 146.05 93.98 270)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+12V"
+			(at 149.86 93.98 270)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 146.05 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 146.05 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+12V\""
+			(at 146.05 93.98 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "c11dddca-6fb2-4cfa-a20e-d8cba81b130b")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR222")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 120.65 93.98) (xy 124.46 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cc7e8fcf-621f-44e0-a5b9-84c573281bab")
+	)
+	(wire
+		(pts
+			(xy 132.08 93.98) (xy 135.89 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fa1eb3c4-59b6-49b2-9644-fc72847b36ef")
+	)
+	(symbol
+		(lib_id "Device:D_TVS")
+		(at 152.4 104.14 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "14fba826-d101-4bf8-a3ae-1e519794c05c")
+		(property "Reference" "D12"
+			(at 149.86 102.87 270)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "SMBJ15CA"
+			(at 149.86 105.41 270)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SMB"
+			(at 152.4 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 152.4 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "TVS 15V on 12V input"
+			(at 152.4 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "aedaa923-f95f-4ed3-adb2-f37d077bc34c")
+		)
+		(pin "2"
+			(uuid "83ece5a3-dcce-40e8-8752-860db106c302")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "D12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 152.4 100.33) (xy 152.4 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "39be388c-e447-479b-a7d8-b57a9981692a")
+	)
+	(symbol
+		(lib_id "power:+12V")
+		(at 152.4 97.79 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "c2fdcd17-ffa5-4800-8cb7-7b8cbaba80e3")
+		(property "Reference" "#PWR223"
+			(at 152.4 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+12V"
+			(at 152.4 93.98 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 152.4 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 152.4 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+12V\""
+			(at 152.4 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "eafdec8a-c80b-42e3-9e49-fea744c1d211")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR223")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 152.4 107.95) (xy 152.4 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "40264300-ac4d-4877-90bf-639198b3e13f")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 152.4 110.49 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "dac06740-7193-4f66-a161-90fc2f0bba9f")
+		(property "Reference" "#PWR224"
+			(at 152.4 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 152.4 115.57 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 152.4 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 152.4 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 152.4 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "f01b1e6b-28a5-4aa8-85b1-67df94b38e27")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR224")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 160.02 104.14 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "9228124a-5fa8-472e-9d4d-f7d05e123cb4")
+		(property "Reference" "C112"
+			(at 162.56 102.87 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10uF"
+			(at 162.56 105.41 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 160.02 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 160.02 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "input cap, 25V X7R"
+			(at 160.02 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "2cc9919b-6a4e-4228-a462-0b853be0b905")
+		)
+		(pin "2"
+			(uuid "b3dd1c9a-f783-4c93-9ad4-f04d07090998")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "C112")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 160.02 100.33) (xy 160.02 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "83119fb3-3666-434b-8e5e-deb15ed69265")
+	)
+	(symbol
+		(lib_id "power:+12V")
+		(at 160.02 97.79 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "8cbfadd1-e1a8-415a-a04d-8327f3804896")
+		(property "Reference" "#PWR225"
+			(at 160.02 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+12V"
+			(at 160.02 93.98 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 160.02 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 160.02 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+12V\""
+			(at 160.02 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "8467b07a-6dc2-4079-bb16-650e72732cfb")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR225")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 160.02 107.95) (xy 160.02 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fc64251e-5d9c-40af-937b-1a6405a8fe99")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 160.02 110.49 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "3429053b-2242-4150-868a-0faf7c230d73")
+		(property "Reference" "#PWR226"
+			(at 160.02 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 160.02 115.57 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 160.02 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 160.02 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 160.02 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "60fa19d3-5654-43f8-9bf2-afe603ea00de")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR226")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 172.72 104.14 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "04bfb685-a2db-435b-b844-6e8cd4c80a71")
+		(property "Reference" "C113"
+			(at 175.26 102.87 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10uF"
+			(at 175.26 105.41 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 172.72 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 172.72 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "input cap, 25V X7R"
+			(at 172.72 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "f8960024-d66a-425c-bb5e-96be6b064b0c")
+		)
+		(pin "2"
+			(uuid "1e41c6e3-cffc-4b2f-852a-60d811994d53")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "C113")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 172.72 100.33) (xy 172.72 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7feed500-1c00-4016-8730-f9af1ae30556")
+	)
+	(symbol
+		(lib_id "power:+12V")
+		(at 172.72 97.79 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "24767eda-5593-41e8-ba28-912c3ade9464")
+		(property "Reference" "#PWR227"
+			(at 172.72 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+12V"
+			(at 172.72 93.98 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 172.72 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 172.72 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+12V\""
+			(at 172.72 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "3046447e-acc1-44f4-9421-cf0c09d358ed")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR227")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 172.72 107.95) (xy 172.72 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8a10d34a-dcb8-4f53-978b-abcbdf5d4d9d")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 172.72 110.49 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "55333e8f-a13d-40b0-b293-579371a5369d")
+		(property "Reference" "#PWR228"
+			(at 172.72 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 172.72 115.57 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 172.72 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 172.72 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 172.72 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "98b9ac71-9eb1-48b5-aa4f-e67670b74002")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR228")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 185.42 104.14 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "d50e0180-d911-4933-a6d0-48b2928b30fe")
+		(property "Reference" "C114"
+			(at 187.96 102.87 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 187.96 105.41 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
+			(at 185.42 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 185.42 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 185.42 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "97532ac3-97a4-4218-a52a-4a318f77907e")
+		)
+		(pin "2"
+			(uuid "6a38453f-3934-46fb-ad8b-20f606e96ffb")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "C114")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 185.42 100.33) (xy 185.42 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "04b4aa7d-9275-4aa2-a1df-c333f2d4bb8f")
+	)
+	(symbol
+		(lib_id "power:+12V")
+		(at 185.42 97.79 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "bd5cbcc1-142c-410b-b4cf-6a307f2b8f83")
+		(property "Reference" "#PWR229"
+			(at 185.42 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+12V"
+			(at 185.42 93.98 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 185.42 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 185.42 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+12V\""
+			(at 185.42 97.79 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "e656cf77-243a-45d9-9e73-dc14b1bd8bff")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR229")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 185.42 107.95) (xy 185.42 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4b7dfe17-5f4f-4de4-b176-8985cdc3550c")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 185.42 110.49 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "912d001b-0a1c-4104-8226-2ca46c40f9e9")
+		(property "Reference" "#PWR230"
+			(at 185.42 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 185.42 115.57 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 185.42 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 185.42 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 185.42 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "aa17782a-8cf3-472f-bcfa-dff3965460cd")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR230")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Regulator_Switching:LMR33630ADDA")
+		(at 208.28 104.14 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "c0d065e3-5c8e-45f3-ab21-86c9fce8723b")
+		(property "Reference" "U12"
+			(at 208.28 92.71 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LMR33630ADDA"
+			(at 208.28 95.25 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_SO:Texas_HSOP-8-1EP_3.9x4.9mm_P1.27mm_ThermalVias"
+			(at 208.28 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/lmr33630.pdf"
+			(at 208.28 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "3.8-36V in, 3A, 400kHz synchronous buck, Vfb=1.0V"
+			(at 208.28 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "37a066e1-5a59-495d-9a81-264639482f7b")
+		)
+		(pin "2"
+			(uuid "2889c483-56d2-42dc-91ea-a5cc28ef963e")
+		)
+		(pin "3"
+			(uuid "b7770375-5075-434d-b1a6-9f5e634b479f")
+		)
+		(pin "4"
+			(uuid "70f2700f-5eee-4203-b5e6-f894195de6a6")
+		)
+		(pin "5"
+			(uuid "56ab5554-b942-4385-a168-dece172d8ae3")
+		)
+		(pin "6"
+			(uuid "42edb6a4-6dd5-471d-8c2d-8bf54f022a7c")
+		)
+		(pin "7"
+			(uuid "6455512d-07ac-4551-8e4b-e1d6cfb66633")
+		)
+		(pin "8"
+			(uuid "0056978f-5b9c-4178-b614-0266423264f3")
+		)
+		(pin "9"
+			(uuid "4aec391a-8293-458b-8db5-183e238a23d1")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "U12")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 198.12 99.06) (xy 195.58 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dd7a2523-9f6e-4140-9068-00943b714dd0")
+	)
+	(symbol
+		(lib_id "power:+12V")
+		(at 195.58 99.06 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "f31ebff1-9e28-44e2-9709-5908bb417cb8")
+		(property "Reference" "#PWR231"
+			(at 195.58 99.06 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+12V"
+			(at 191.77 99.06 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 195.58 99.06 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 195.58 99.06 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+12V\""
+			(at 195.58 99.06 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "494b179d-6ee9-42ee-a0d5-f747ff107e52")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR231")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 198.12 109.22) (xy 195.58 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "208d489b-9c02-4b26-b4a0-c3998c1ab111")
+	)
+	(label "BUCK_VCC"
+		(at 195.58 109.22 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "1608d645-252a-43cc-a7a4-b1ad583bd088")
+	)
+	(wire
+		(pts
+			(xy 208.28 114.3) (xy 208.28 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8c11c100-61c7-41ba-aafe-93dcbaf1abb7")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 208.28 116.84 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "edeb56e1-8669-4ecd-ab39-2a64f85dc755")
+		(property "Reference" "#PWR232"
+			(at 208.28 116.84 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 208.28 121.92 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 208.28 116.84 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 208.28 116.84 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 208.28 116.84 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "b1722fb0-056c-4559-bfe9-dcff8b55bbcb")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR232")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 218.44 99.06) (xy 220.98 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6b583a35-becc-4de7-ac6d-393575e426a9")
+	)
+	(label "BUCK_BOOT"
+		(at 220.98 99.06 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "be659db3-facb-4efb-aa09-452eb05a456a")
+	)
+	(wire
+		(pts
+			(xy 218.44 106.68) (xy 220.98 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "14074e82-ac3f-40e1-b9de-d4006d8354e4")
+	)
+	(label "BUCK_FB"
+		(at 220.98 106.68 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b6a88211-8b61-4a8e-9ddc-7d24199171f0")
+	)
+	(no_connect
+		(at 218.44 109.22)
+		(uuid "1465b1ca-49a9-4ee4-a52a-57183604fce5")
+	)
+	(wire
+		(pts
+			(xy 198.12 104.14) (xy 198.12 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f8a376cc-5571-4093-b944-f2e78f12b6f7")
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 193.04 119.38 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "676ec822-0c71-469d-8453-f049d4980700")
+		(property "Reference" "C116"
+			(at 195.58 118.11 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "1uF"
+			(at 195.58 120.65 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
+			(at 193.04 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 193.04 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "LMR33630 VCC bypass"
+			(at 193.04 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "81ef2199-2887-4aa1-aef4-e0ab336f294a")
+		)
+		(pin "2"
+			(uuid "5f19afb3-ae2b-4f0e-9027-b9d28352b168")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "C116")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 193.04 115.57) (xy 193.04 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b2bbf25d-c645-43e8-9a11-258864695422")
+	)
+	(label "BUCK_VCC"
+		(at 193.04 113.03 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "e669843a-a6e6-4f37-867b-d8adbba2f06f")
+	)
+	(wire
+		(pts
+			(xy 193.04 123.19) (xy 193.04 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0632b919-ed03-4a49-ac37-5a642c029539")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 193.04 125.73 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "c5015109-ff66-484d-b66a-6eb26ce0812a")
+		(property "Reference" "#PWR233"
+			(at 193.04 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 193.04 130.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 193.04 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 193.04 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 193.04 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "9234f33f-a1b5-4869-a002-647985c1a46e")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR233")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 228.6 88.9 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "26a9a282-c040-40a3-9e86-c8ed49852ed2")
+		(property "Reference" "C115"
+			(at 228.6 85.09 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "100nF"
+			(at 228.6 92.71 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
+			(at 228.6 88.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 228.6 88.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "bootstrap"
+			(at 228.6 88.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "660bf059-bed1-47a8-bd59-f8e6dd66307d")
+		)
+		(pin "2"
+			(uuid "35f01638-c841-4933-bfeb-04368303d188")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "C115")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 224.79 88.9) (xy 222.25 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "64c237dd-5a16-403b-8b0d-7e396836a4fd")
+	)
+	(label "BUCK_BOOT"
+		(at 222.25 88.9 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "88d530c8-a468-406a-8be4-fc331e4bfe25")
+	)
+	(wire
+		(pts
+			(xy 232.41 88.9) (xy 234.95 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6a401b0c-3579-491c-9991-dcd930bb75df")
+	)
+	(label "BUCK_SW"
+		(at 234.95 88.9 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "dea6a649-356c-4856-9f02-91a72ead7540")
+	)
+	(symbol
+		(lib_id "Device:L")
+		(at 238.76 101.6 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "5cb5b46b-ac3b-4594-909e-6d3639486e4a")
+		(property "Reference" "L2"
+			(at 238.76 97.79 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "8.2uH"
+			(at 238.76 105.41 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Inductor_SMD:L_Bourns_SRP7028A_7.3x6.6mm"
+			(at 238.76 101.6 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 238.76 101.6 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "8.2uH, Isat >= 5A (e.g. Bourns SRP7028A-8R2M)"
+			(at 238.76 101.6 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "9c56e5eb-3056-4431-b4e2-da3219c0beb0")
+		)
+		(pin "2"
+			(uuid "9e1db00b-309c-4e2e-a19c-650f5e53bd97")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "L2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 242.57 101.6) (xy 245.11 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cd4ad7da-72c1-4b6a-81f7-69b1efb8395e")
+	)
+	(label "V5_DC"
+		(at 245.11 101.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1eba7264-d0a4-4373-8f5b-6d2da1050e1c")
+	)
+	(wire
+		(pts
+			(xy 218.44 101.6) (xy 234.95 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e08b1b3d-98ce-4aa3-a520-731f2f51b09f")
+	)
+	(label "BUCK_SW"
+		(at 223.52 101.6 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "807e9d91-3a5e-4e85-9e27-ac3c9ded392e")
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 242.57 109.22 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "e460de53-0167-4558-9a55-b905216fc3c1")
+		(property "Reference" "R130"
+			(at 245.11 107.95 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100k"
+			(at 245.11 110.49 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+			(at 242.57 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 242.57 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "FB top: Vout = 1.0V x (1 + 100k/23.2k) = 5.31V"
+			(at 242.57 109.22 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "96fa9aab-4bda-4030-84e1-4cd129636c53")
+		)
+		(pin "2"
+			(uuid "cdb587e3-5bf4-4e08-8563-bb1a50e9105b")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "R130")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 242.57 119.38 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "05307e7f-79a9-476d-9db2-07b0dae4e88c")
+		(property "Reference" "R131"
+			(at 245.11 118.11 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "23.2k"
+			(at 245.11 120.65 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+			(at 242.57 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 242.57 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "FB bottom"
+			(at 242.57 119.38 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "c143618f-c7f0-4a49-802f-8ac1b6eb3e49")
+		)
+		(pin "2"
+			(uuid "28677ba7-651a-48b9-8a9a-bead5e3b5d2a")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "R131")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 242.57 123.19) (xy 242.57 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5aa3d6b2-f294-45a8-ad13-da01b02e746b")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 242.57 125.73 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "28075006-260e-42ce-baaf-c40b5fafcd6a")
+		(property "Reference" "#PWR234"
+			(at 242.57 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 242.57 130.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 242.57 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 242.57 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 242.57 125.73 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "c7938700-54fd-4a56-a108-42dc8caf2da0")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR234")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 242.57 101.6) (xy 242.57 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a34631a3-9beb-4400-8252-68cecadcd07f")
+	)
+	(junction
+		(at 242.57 101.6)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "add879c0-0f13-41bc-b5a9-701d9331caa6")
+	)
+	(wire
+		(pts
+			(xy 242.57 113.03) (xy 242.57 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1f49e3a9-af67-48f8-950d-ffc8316288cb")
+	)
+	(junction
+		(at 242.57 114.3)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "10fd5a3e-9fb9-457c-9761-be63aa371cf4")
+	)
+	(wire
+		(pts
+			(xy 242.57 114.3) (xy 238.76 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "36b09c44-cbbd-4167-8d5f-20bd8c34e8d5")
+	)
+	(label "BUCK_FB"
+		(at 238.76 114.3 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "7085afeb-9a28-4b1b-acb7-7623a56a4be1")
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 251.46 111.76 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "88a7baea-3fe8-4ce5-b13f-a721d1200fe6")
+		(property "Reference" "C117"
+			(at 254 110.49 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "22uF"
+			(at 254 113.03 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 251.46 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 251.46 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "output cap, 10V X7R"
+			(at 251.46 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "54ae9f0a-26b5-4230-97db-7f3278c91af1")
+		)
+		(pin "2"
+			(uuid "7c8678b9-0b11-4658-9ebb-42d1c5b434e6")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "C117")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 251.46 107.95) (xy 251.46 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4b3f94d0-7197-45be-bead-7de0eed0cb73")
+	)
+	(label "V5_DC"
+		(at 251.46 105.41 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "92f82516-74ce-4347-9ba5-69917fe60583")
+	)
+	(wire
+		(pts
+			(xy 251.46 115.57) (xy 251.46 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "08b58f48-020e-4993-99b2-f2d015c9065f")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 251.46 118.11 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "b0be22c1-e952-4e72-a480-e4006763a109")
+		(property "Reference" "#PWR235"
+			(at 251.46 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 251.46 123.19 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 251.46 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 251.46 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 251.46 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "74c6825d-d1bc-4a7a-8007-573558c712f2")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR235")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 261.62 111.76 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "63eb6fd9-4ad5-43c2-a6a8-0a1f47ef8655")
+		(property "Reference" "C118"
+			(at 264.16 110.49 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "22uF"
+			(at 264.16 113.03 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 261.62 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 261.62 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "output cap, 10V X7R"
+			(at 261.62 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1eff3671-5b57-41d3-a647-e58b9ae1a377")
+		)
+		(pin "2"
+			(uuid "2c9e04dd-36a2-4a91-8c96-6da2bea97888")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "C118")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 261.62 107.95) (xy 261.62 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a3e115bd-e552-48a9-8e3a-ab0021416440")
+	)
+	(label "V5_DC"
+		(at 261.62 105.41 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1c666101-a275-40fc-8695-231ab212b2e1")
+	)
+	(wire
+		(pts
+			(xy 261.62 115.57) (xy 261.62 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "60424996-2f51-4408-8b2d-f8132e2e33aa")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 261.62 118.11 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "f1a2057a-b609-480a-b905-c0466e3833d3")
+		(property "Reference" "#PWR236"
+			(at 261.62 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 261.62 123.19 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 261.62 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 261.62 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 261.62 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "86e4a941-5e67-4c2c-bd42-2d99305c9531")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR236")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 271.78 111.76 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "c959c3c0-b346-4389-8c7c-3c5b2d879954")
+		(property "Reference" "C119"
+			(at 274.32 110.49 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "22uF"
+			(at 274.32 113.03 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder"
+			(at 271.78 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 271.78 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "output cap, 10V X7R"
+			(at 271.78 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "451213c9-cec0-4ea5-a0cc-021766661f68")
+		)
+		(pin "2"
+			(uuid "27060def-801a-4d1d-acd9-8cb9dbe5e919")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "C119")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 271.78 107.95) (xy 271.78 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "91f6ba12-3d35-45d8-95a3-9b92a387355c")
+	)
+	(label "V5_DC"
+		(at 271.78 105.41 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a2bc3137-c8fc-45e2-8891-cd9297e37d53")
+	)
+	(wire
+		(pts
+			(xy 271.78 115.57) (xy 271.78 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1a026e54-f508-47c3-ad7a-4b4a72d00e27")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 271.78 118.11 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "9bb3243d-8cf0-4016-a885-ccbc730af04c")
+		(property "Reference" "#PWR237"
+			(at 271.78 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 271.78 123.19 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 271.78 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 271.78 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 271.78 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "223af2fd-a90f-413c-86ff-655a901806b6")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR237")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 281.94 111.76 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "30cce6fc-c225-4980-9021-9fb863599ec2")
+		(property "Reference" "C120"
+			(at 284.48 110.49 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100nF"
+			(at 284.48 113.03 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric_Pad1.08x0.95mm_HandSolder"
+			(at 281.94 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 281.94 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 281.94 111.76 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "ed594ab6-52c1-4ce4-9aec-6687a61f009e")
+		)
+		(pin "2"
+			(uuid "b1f384ca-6077-4291-8b9d-fc21fd9b55b1")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "C120")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 281.94 107.95) (xy 281.94 105.41)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cb4bf4cd-43c9-4490-a4e7-9ed1955e78fe")
+	)
+	(label "V5_DC"
+		(at 281.94 105.41 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "124cf4ff-ef46-4c0e-8d73-3bff65aa6958")
+	)
+	(wire
+		(pts
+			(xy 281.94 115.57) (xy 281.94 118.11)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ca81daac-40e7-454f-9f59-2442cad04509")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 281.94 118.11 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "c8ac81e3-05d0-4533-bee9-c98fa569bbde")
+		(property "Reference" "#PWR238"
+			(at 281.94 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 281.94 123.19 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 281.94 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 281.94 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 281.94 118.11 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "5fdce751-1cde-4c7b-9ee5-41e9eaa38f4d")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR238")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:D_Schottky")
+		(at 269.24 91.44 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "46ebdbdd-a226-4e85-833f-adfd48fed237")
+		(property "Reference" "D13"
+			(at 269.24 87.63 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SS54"
+			(at 269.24 95.25 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SMB"
+			(at 269.24 91.44 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 269.24 91.44 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "OR-ing diode 12V-buck -> VBUS, 40V 5A Schottky"
+			(at 269.24 91.44 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4b9ec669-96b8-4672-a248-ce01c469093e")
+		)
+		(pin "2"
+			(uuid "d14ec255-bf73-4aec-a21c-4fdd3c6c80c6")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "D13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 273.05 91.44) (xy 275.59 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f652a9f3-c10e-4eeb-b250-674f2245be3e")
+	)
+	(label "VBUS"
+		(at 275.59 91.44 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8582ad48-d9b7-49f5-8b33-199f0f56496b")
+	)
+	(wire
+		(pts
+			(xy 265.43 91.44) (xy 262.89 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "01866e33-1322-4304-ad8c-b4de8c0210e3")
+	)
+	(label "V5_DC"
+		(at 262.89 91.44 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d39e31fb-aae0-4039-9f41-dd875505b028")
+	)
+	(symbol
+		(lib_id "Transistor_FET:AO3401A")
+		(at 134.62 133.35 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "363a6792-4cdd-46ad-ac70-29a069fe28b6")
+		(property "Reference" "Q2"
+			(at 138.43 132.08 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "AO3401A"
+			(at 138.43 134.62 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 134.62 133.35 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 134.62 133.35 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "USB VBUS switch: off when the 12V jack is present (gate pulled up from +12V)"
+			(at 134.62 133.35 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "9c39ba86-dc54-421a-9fdf-29a3fa1f72e9")
+		)
+		(pin "2"
+			(uuid "8c5bf622-a033-472e-a128-37bf54dec024")
+		)
+		(pin "3"
+			(uuid "708262b9-9b87-416c-8a4a-d9e8050089a3")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "Q2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 137.16 128.27) (xy 137.16 125.73)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "63979218-a598-4544-a72f-3a4d2dcad211")
+	)
+	(label "VBUS_USB"
+		(at 137.16 125.73 90)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7045ef27-717c-466f-a8ea-11ba01b355f7")
+	)
+	(wire
+		(pts
+			(xy 137.16 138.43) (xy 137.16 140.97)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "244da7c0-32a4-4f80-a2e4-462846bc337b")
+	)
+	(label "VBUS"
+		(at 137.16 140.97 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "707546ce-385a-49e4-9fd7-e4adc090ad3a")
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 116.84 127 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "291dab05-42c2-49da-a8ac-b226be802320")
+		(property "Reference" "R132"
+			(at 119.38 125.73 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "47k"
+			(at 119.38 128.27 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+			(at 116.84 127 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 116.84 127 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 116.84 127 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "f24eebe9-fdd2-472f-87e4-f3d92bbebd39")
+		)
+		(pin "2"
+			(uuid "abd85938-0197-4d35-ad47-58ef36f7312e")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "R132")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 116.84 123.19) (xy 116.84 120.65)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "996d55f0-f6e9-4d9b-a0ba-0a0b71a3b670")
+	)
+	(symbol
+		(lib_id "power:+12V")
+		(at 116.84 120.65 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "4bbf411b-3d20-41c5-8d46-a7cb809e69bf")
+		(property "Reference" "#PWR239"
+			(at 116.84 120.65 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+12V"
+			(at 116.84 116.84 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 116.84 120.65 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 116.84 120.65 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+12V\""
+			(at 116.84 120.65 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "b7b4879d-1f36-4555-b985-5f0a8a61685c")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR239")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 116.84 139.7 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "fe59f3d9-49d5-4fae-96b0-eaff04eaec40")
+		(property "Reference" "R133"
+			(at 119.38 138.43 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "100k"
+			(at 119.38 140.97 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+			(at 116.84 139.7 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 116.84 139.7 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 116.84 139.7 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "4cc4edac-7405-4441-81ca-8586509d644b")
+		)
+		(pin "2"
+			(uuid "08ab91a3-478f-431b-a6e6-039ae4decfb1")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "R133")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 116.84 143.51) (xy 116.84 146.05)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5595de77-417b-43b7-b2ec-e87354d12f19")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 116.84 146.05 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "88e999c9-fad6-489d-b2b6-c882b64e0301")
+		(property "Reference" "#PWR240"
+			(at 116.84 146.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 116.84 151.13 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 116.84 146.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 116.84 146.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 116.84 146.05 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "a59b34f9-e017-4aa6-acd2-0e6c26dff9b7")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR240")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 116.84 130.81) (xy 116.84 135.89)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c8a29a58-a973-4986-98fb-be42e2480d3c")
+	)
+	(junction
+		(at 116.84 133.35)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "dd077fb5-efc9-4844-8c2c-fc5d79eece2f")
+	)
+	(wire
+		(pts
+			(xy 116.84 133.35) (xy 129.54 133.35)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cc753ca2-1b97-408e-88ff-1e25684c7e4a")
+	)
+	(label "DC_SENSE"
+		(at 119.38 133.35 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5b78ca99-2859-4103-857b-6b6af4c7c9ce")
+	)
+	(symbol
+		(lib_id "power:+12V")
+		(at 166.37 80.01 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "0626e3d0-9462-49d0-8aba-9883627300d8")
+		(property "Reference" "#PWR241"
+			(at 166.37 80.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "+12V"
+			(at 166.37 76.2 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 166.37 80.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 166.37 80.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+12V\""
+			(at 166.37 80.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "dae3efbe-387f-4d5e-84bc-01b8da07ea92")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR241")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 166.37 80.01) (xy 166.37 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "095fce90-3ddc-4f00-a251-878aa5929669")
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 166.37 82.55 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "63420607-899c-4e72-8dcd-6069c88bc0bc")
+		(property "Reference" "#FLG04"
+			(at 166.37 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 166.37 87.63 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 166.37 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 166.37 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 166.37 82.55 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "e1f931a9-b555-48b5-acaf-7c702f354245")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#FLG04")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:PWR_FLAG")
+		(at 281.94 86.36 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "901e8ce7-3425-454a-b04e-ce662f1ff156")
+		(property "Reference" "#FLG05"
+			(at 281.94 86.36 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 281.94 82.55 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 281.94 86.36 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 281.94 86.36 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 281.94 86.36 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "929a66ec-0d8b-4adc-a39c-bb87b934dc6e")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#FLG05")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 281.94 86.36) (xy 281.94 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "06af8048-6d09-4c82-bf7d-6f61bec0480e")
+	)
+	(label "VBUS"
+		(at 281.94 88.9 270)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "50357aa5-720e-4b9c-945b-4db9c7cdffff")
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 114.3 36.83 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "4bf1519e-ad1a-431a-9886-88990e005e9f")
+		(property "Reference" "R134"
+			(at 116.84 35.56 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "15k"
+			(at 116.84 38.1 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric_Pad0.98x0.95mm_HandSolder"
+			(at 114.3 36.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 114.3 36.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "with R123 (10k from VBUS_USB): RESET = 3.0V only when the USB host supplies VBUS"
+			(at 114.3 36.83 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "cd67d106-ffd0-482e-8c8f-df05617486d9")
+		)
+		(pin "2"
+			(uuid "fc4b2481-437b-49d8-af64-b055daf5d942")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "R134")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 114.3 40.64) (xy 114.3 43.18)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9e426077-6e1c-47ea-bea8-61719047ca8e")
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 114.3 43.18 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board no)
+		(in_pos_files no)
+		(dnp no)
+		(uuid "c9f51093-bcd6-4bfb-b705-61b7d7fd5763")
+		(property "Reference" "#PWR242"
+			(at 114.3 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 114.3 48.26 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 114.3 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 114.3 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 114.3 43.18 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "ab2cb6eb-fe30-4cca-8810-b997ce6eb724")
+		)
+		(instances
+			(project "Eeloo_Pad"
+				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99"
+					(reference "#PWR242")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 106.68 30.48) (xy 114.3 30.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6c1f5d71-1e28-4336-8aa7-92be4dab72a9")
+	)
+	(wire
+		(pts
+			(xy 114.3 30.48) (xy 114.3 33.02)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f63f33ee-4dae-409e-9d6e-d145e1fbb803")
+	)
+	(text "Entree 12V (jack) -> abaisseur 5,3V -> VBUS. Q2 coupe l'USB quand le jack est branche.\nLe hub reste en reset sans VBUS USB (R123 depuis VBUS_USB + R134)."
+		(exclude_from_sim no)
+		(at 106.68 73.66 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8ebf7208-73c1-4713-aca8-602262389bdb")
+	)
+	(no_connect
+		(at 46.99 53.34)
+		(uuid "52dcebc8-8b86-41fb-88a6-a8118e8ca400")
+	)
+	(no_connect
+		(at 46.99 55.88)
+		(uuid "50cdefca-ebac-44f5-ab65-175f06173478")
 	)
 	(sheet_instances
 		(path "/"

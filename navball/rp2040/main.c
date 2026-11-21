@@ -6,6 +6,12 @@
 #include <pico/stdlib.h> 
 #include <hardware/gpio.h>
 #include <pico/multicore.h>
+#include <pico/util/queue.h>
+
+
+#include "hardware/irq.h"
+// inlcude for clock setting
+#include "hardware/clocks.h"
 
 #include "hardware/dma.h"
 
@@ -16,6 +22,7 @@
 
 // #include <hardware/spi.h>
 #include <pico/time.h>
+
 
 /* ===== Config ===== */
 #ifndef NAVBALL_MAX_SIZE
@@ -41,8 +48,13 @@
 #define PIN_LCD_RST   13
 #define PIN_LCD_BL    25
 
+#define I2C_SDA_PIN 6
+#define I2C_SCL_PIN 7
+
+#define I2C_PORT i2c1
 #define SPI_PORT spi1
 
+#define PIN_DEBUG_LED 28
 
 #define DELAY_FLAG 0x80
 
@@ -276,163 +288,163 @@ static void euler_to_R_q15(int yaw_deg, int pitch_deg, int roll_deg, int32_t R[9
 // W,H: framebuffer size
 // stride: framebuffer row stride in pixels
 // yaw_deg, pitch_deg, roll_deg: Euler angles in degrees
-// void navball_render_rgb565(
-//     uint16_t* fb, int W, int H, int stride,
-//     int yaw_deg, int pitch_deg, int roll_deg, int draw_grid)
-// {    
+void navball_render_rgb565_single_core(
+    uint16_t* fb, int W, int H, int stride,
+    int yaw_deg, int pitch_deg, int roll_deg, int draw_grid)
+{    
 
-//     int D = (W < H ? W : H);
-//     if (D > NAVBALL_MAX_SIZE) D = NAVBALL_MAX_SIZE;
-//     int cx = W/2, cy = H/2;
-//     int radius_px = (D - 2) / 2;
-//     if (radius_px < 24) return;
+    int D = (W < H ? W : H);
+    if (D > NAVBALL_MAX_SIZE) D = NAVBALL_MAX_SIZE;
+    int cx = W/2, cy = H/2;
+    int radius_px = (D - 2) / 2;
+    if (radius_px < 24) return;
 
-//     // thickness thresholds (Q15) ≈ px / radius
-//     int32_t eps_grid = ((Q15_ONE + radius_px/2) / radius_px);      // ~1 px
-//     int32_t eps_hor  = ((2*Q15_ONE + radius_px/2) / radius_px);    // ~2 px
+    // thickness thresholds (Q15) ≈ px / radius
+    int32_t eps_grid = ((Q15_ONE + radius_px/2) / radius_px);      // ~1 px
+    int32_t eps_hor  = ((2*Q15_ONE + radius_px/2) / radius_px);    // ~2 px
 
-//     // Rotation (Q15) and transpose
-//     int32_t R[9]; euler_to_R_q15(yaw_deg, pitch_deg, roll_deg, R);
-//     int32_t RT[9] = { R[0],R[3],R[6], R[1],R[4],R[7], R[2],R[5],R[8] };
+    // Rotation (Q15) and transpose
+    int32_t R[9]; euler_to_R_q15(yaw_deg, pitch_deg, roll_deg, R);
+    int32_t RT[9] = { R[0],R[3],R[6], R[1],R[4],R[7], R[2],R[5],R[8] };
 
-//     // Cache x/y normalized arrays; recompute only if radius changes
-//     static int32_t xQ[NAVBALL_MAX_SIZE], yQ[NAVBALL_MAX_SIZE];
-//     static int cache_radius = -1, cache_cx = 0, cache_cy = 0, cache_D = 0;
-//     if (cache_radius != radius_px || cache_cx != cx || cache_cy != cy || cache_D != D) {
-//         for (int x = cx - radius_px; x <= cx + radius_px; ++x) {
-//             int idx = x - (cx - radius_px);
-//             // (x-cx)/radius in Q15
-//             xQ[idx] = (int32_t)(((int32_t)(x - cx) * Q15_ONE) / radius_px);
-//         }
-//         for (int y = cy - radius_px; y <= cy + radius_px; ++y) {
-//             int idy = y - (cy - radius_px);
-//             // +Y up: (cy - y)/radius in Q15
-//             yQ[idy] = (int32_t)(((int32_t)(cy - y) * Q15_ONE) / radius_px);
-//         }
-//         cache_radius = radius_px; cache_cx = cx; cache_cy = cy; cache_D = D;
-//     }
+    // Cache x/y normalized arrays; recompute only if radius changes
+    static int32_t xQ[NAVBALL_MAX_SIZE], yQ[NAVBALL_MAX_SIZE];
+    static int cache_radius = -1, cache_cx = 0, cache_cy = 0, cache_D = 0;
+    if (cache_radius != radius_px || cache_cx != cx || cache_cy != cy || cache_D != D) {
+        for (int x = cx - radius_px; x <= cx + radius_px; ++x) {
+            int idx = x - (cx - radius_px);
+            // (x-cx)/radius in Q15
+            xQ[idx] = (int32_t)(((int32_t)(x - cx) * Q15_ONE) / radius_px);
+        }
+        for (int y = cy - radius_px; y <= cy + radius_px; ++y) {
+            int idy = y - (cy - radius_px);
+            // +Y up: (cy - y)/radius in Q15
+            yQ[idy] = (int32_t)(((int32_t)(cy - y) * Q15_ONE) / radius_px);
+        }
+        cache_radius = radius_px; cache_cx = cx; cache_cy = cy; cache_D = D;
+    }
 
-//     // Precompute grid constants (lat & long)
-//     const int lat_deg_list[] = {-60,-30,30,60};
-//     int32_t lat_sin[4];
-//     for (int i=0;i<4;i++){
-//         int a = ((lat_deg_list[i]%360)+360)%360;
-//         lat_sin[i] = SIN_DEG[a];
-//     }
-//     int32_t lon_sin[12], lon_cos[12];
-//     for (int i=0;i<12;i++){
-//         int a = (i*30)%360;
-//         lon_sin[i] = SIN_DEG[a];
-//         lon_cos[i] = COS_DEG[a];
-//     }
+    // Precompute grid constants (lat & long)
+    const int lat_deg_list[] = {-60,-30,30,60};
+    int32_t lat_sin[4];
+    for (int i=0;i<4;i++){
+        int a = ((lat_deg_list[i]%360)+360)%360;
+        lat_sin[i] = SIN_DEG[a];
+    }
+    int32_t lon_sin[12], lon_cos[12];
+    for (int i=0;i<12;i++){
+        int a = (i*30)%360;
+        lon_sin[i] = SIN_DEG[a];
+        lon_cos[i] = COS_DEG[a];
+    }
 
-//     const int xBase = cx - radius_px;
-//     const int yBase = cy - radius_px;
-//     uint16_t white = pack_rgb565(255,255,255);
+    const int xBase = cx - radius_px;
+    const int yBase = cy - radius_px;
+    uint16_t white = pack_rgb565(255,255,255);
 
-//     for (int iy = cy - radius_px; iy <= cy + radius_px; ++iy) {
-//         int idy = iy - yBase;
-//         int32_t yq = yQ[idy];
-//         uint16_t* row = fb + iy*stride;
+    for (int iy = cy - radius_px; iy <= cy + radius_px; ++iy) {
+        int idy = iy - yBase;
+        int32_t yq = yQ[idy];
+        uint16_t* row = fb + iy*stride;
 
-//         // Compute row span: |x| <= sqrt(1 - y^2) using LUT; index via shifts (no divide)
-//         // y2 is Q30; convert to Q15 then to LUT index: idx = ((y2 >> 15) >> 5)
-//         int32_t y2 = (int32_t)((int64_t)yq * (int64_t)yq);  // if you prefer, cast to int32: yq*yq fits in 31-bit
-//         int      idxY = (int)(( (y2 >> 15) ) >> 5);         // 0..1024
-//         if (idxY > 1024) idxY = 1024;
-//         int32_t xlim_q15 = SQRT_1_MINUS[idxY];
-//         int     xlim_px  = (int)(( (int32_t)xlim_q15 * radius_px + (Q15_ONE-1) ) / Q15_ONE);
+        // Compute row span: |x| <= sqrt(1 - y^2) using LUT; index via shifts (no divide)
+        // y2 is Q30; convert to Q15 then to LUT index: idx = ((y2 >> 15) >> 5)
+        int32_t y2 = (int32_t)((int64_t)yq * (int64_t)yq);  // if you prefer, cast to int32: yq*yq fits in 31-bit
+        int      idxY = (int)(( (y2 >> 15) ) >> 5);         // 0..1024
+        if (idxY > 1024) idxY = 1024;
+        int32_t xlim_q15 = SQRT_1_MINUS[idxY];
+        int     xlim_px  = (int)(( (int32_t)xlim_q15 * radius_px + (Q15_ONE-1) ) / Q15_ONE);
 
-//         int xStart = cx - xlim_px;
-//         int xEnd   = cx + xlim_px;
-//         int xIdx0  = xStart - xBase;
+        int xStart = cx - xlim_px;
+        int xEnd   = cx + xlim_px;
+        int xIdx0  = xStart - xBase;
 
-//         // Precompute longitude threshold using cos(lat) = sqrt(1 - vy^2)
-//         // We'll compute vy per pixel, but thr uses cos(lat) only, so we can build it after vy is known.
-//         for (int ix = xStart, xIdx = xIdx0; ix <= xEnd; ++ix, ++xIdx) {
-//             int32_t xq = xQ[xIdx];
+        // Precompute longitude threshold using cos(lat) = sqrt(1 - vy^2)
+        // We'll compute vy per pixel, but thr uses cos(lat) only, so we can build it after vy is known.
+        for (int ix = xStart, xIdx = xIdx0; ix <= xEnd; ++ix, ++xIdx) {
+            int32_t xq = xQ[xIdx];
 
-//             // r2 index for z LUT: r2_idx = (((x^2 + y^2) >> 15) >> 5);
-//             int32_t x2 = (int32_t)(xq * xq);
-//             int32_t r2q15 = (int32_t)((x2 + (int32_t)(yq * yq)) >> 15);
-//             int      r2_idx = (int)(r2q15 >> 5);   // 0..1024
-//             if (r2_idx > 1024) r2_idx = 1024;
-//             int32_t zq = SQRT_1_MINUS[r2_idx];
+            // r2 index for z LUT: r2_idx = (((x^2 + y^2) >> 15) >> 5);
+            int32_t x2 = (int32_t)(xq * xq);
+            int32_t r2q15 = (int32_t)((x2 + (int32_t)(yq * yq)) >> 15);
+            int      r2_idx = (int)(r2q15 >> 5);   // 0..1024
+            if (r2_idx > 1024) r2_idx = 1024;
+            int32_t zq = SQRT_1_MINUS[r2_idx];
 
-//             // v_nav = R^T * v_cam
-//             int32_t vx = q15_mul(RT[0], xq) + q15_mul(RT[1], yq) + q15_mul(RT[2], zq);
-//             int32_t vy = q15_mul(RT[3], xq) + q15_mul(RT[4], yq) + q15_mul(RT[5], zq);
-//             int32_t vz = q15_mul(RT[6], xq) + q15_mul(RT[7], yq) + q15_mul(RT[8], zq);
+            // v_nav = R^T * v_cam
+            int32_t vx = q15_mul(RT[0], xq) + q15_mul(RT[1], yq) + q15_mul(RT[2], zq);
+            int32_t vy = q15_mul(RT[3], xq) + q15_mul(RT[4], yq) + q15_mul(RT[5], zq);
+            int32_t vz = q15_mul(RT[6], xq) + q15_mul(RT[7], yq) + q15_mul(RT[8], zq);
 
-//             // base color from |vy| using prebuilt ramps
-//             uint16_t t8 = (uint16_t)(((vy<0?-vy:vy) * 255) / Q15_ONE);
-//             uint16_t base = (vy >= 0) ? SKY_RAMP[t8] : GND_RAMP[t8];
+            // base color from |vy| using prebuilt ramps
+            uint16_t t8 = (uint16_t)(((vy<0?-vy:vy) * 255) / Q15_ONE);
+            uint16_t base = (vy >= 0) ? SKY_RAMP[t8] : GND_RAMP[t8];
 
-//             if (draw_grid) {
-//                 int on_line = 0;
+            if (draw_grid) {
+                int on_line = 0;
 
-//                 // horizon band |vy| < eps_hor
-//                 if ((vy < 0 ? -vy : vy) < eps_hor) {
-//                     on_line = 1;
-//                 } else {
-//                     // latitude lines |vy - sin(lat)| < eps_grid
-//                     for (int k=0;k<4 && !on_line;k++){
-//                         int32_t d = vy - lat_sin[k];
-//                         if (d < 0) d = -d;
-//                         if (d < eps_grid) on_line = 1;
-//                     }
-//                     // longitude lines around Y using XZ plane:
-//                     // distance ~ |vx*cos(m) - vz*sin(m)| < eps * cos(lat)
-//                     if (!on_line) {
-//                         int32_t vy2 = (int32_t)(vy * vy);
-//                         int idxVy = (int)(( (vy2 >> 15) ) >> 5);
-//                         if (idxVy > 1024) idxVy = 1024;
-//                         int32_t cos_lat = SQRT_1_MINUS[idxVy];  // Q15
-//                         int32_t thr = (int32_t)(((int32_t)eps_grid * cos_lat) >> 15);
-//                         for (int m=0;m<12; m++){
-//                             int32_t d = q15_mul(vx, lon_cos[m]) - q15_mul(vz, lon_sin[m]);
-//                             if (d < 0) d = -d;
-//                             if (d < thr) { on_line = 1; break; }
-//                         }
-//                     }
-//                 }
+                // horizon band |vy| < eps_hor
+                if ((vy < 0 ? -vy : vy) < eps_hor) {
+                    on_line = 1;
+                } else {
+                    // latitude lines |vy - sin(lat)| < eps_grid
+                    for (int k=0;k<4 && !on_line;k++){
+                        int32_t d = vy - lat_sin[k];
+                        if (d < 0) d = -d;
+                        if (d < eps_grid) on_line = 1;
+                    }
+                    // longitude lines around Y using XZ plane:
+                    // distance ~ |vx*cos(m) - vz*sin(m)| < eps * cos(lat)
+                    if (!on_line) {
+                        int32_t vy2 = (int32_t)(vy * vy);
+                        int idxVy = (int)(( (vy2 >> 15) ) >> 5);
+                        if (idxVy > 1024) idxVy = 1024;
+                        int32_t cos_lat = SQRT_1_MINUS[idxVy];  // Q15
+                        int32_t thr = (int32_t)(((int32_t)eps_grid * cos_lat) >> 15);
+                        for (int m=0;m<12; m++){
+                            int32_t d = q15_mul(vx, lon_cos[m]) - q15_mul(vz, lon_sin[m]);
+                            if (d < 0) d = -d;
+                            if (d < thr) { on_line = 1; break; }
+                        }
+                    }
+                }
 
-//                 if (on_line) {
-//                     // brighten toward LINE_RGB (no float)
-//                     uint8_t r = ((base >> 11) & 0x1F) << 3;
-//                     uint8_t g = ((base >> 5)  & 0x3F) << 2;
-//                     uint8_t b = ( base        & 0x1F) << 3;
-//                     r = (uint8_t)((r*60 + LINE_RGB[0]*40)/100);
-//                     g = (uint8_t)((g*60 + LINE_RGB[1]*40)/100);
-//                     b = (uint8_t)((b*60 + LINE_RGB[2]*40)/100);
-//                     base = pack_rgb565(r,g,b);
-//                 }
-//             }
+                if (on_line) {
+                    // brighten toward LINE_RGB (no float)
+                    uint8_t r = ((base >> 11) & 0x1F) << 3;
+                    uint8_t g = ((base >> 5)  & 0x3F) << 2;
+                    uint8_t b = ( base        & 0x1F) << 3;
+                    r = (uint8_t)((r*60 + LINE_RGB[0]*40)/100);
+                    g = (uint8_t)((g*60 + LINE_RGB[1]*40)/100);
+                    b = (uint8_t)((b*60 + LINE_RGB[2]*40)/100);
+                    base = pack_rgb565(r,g,b);
+                }
+            }
 
-//             row[ix] = base;
-//         }
-//     }
+            row[ix] = base;
+        }
+    }
 
-//     // rim (1–2 px)
-//     // int r_out = radius_px;
-//     // int r_in  = radius_px - 2;
-//     // white = pack_rgb565(255,255,255);
-//     // for (int y = cy - radius_px; y <= cy + radius_px; ++y) {
-//     //     uint16_t* row = fb + y*stride;
-//     //     for (int x = cx - radius_px; x <= cx + radius_px; ++x) {
-//     //         int dx = x - cx, dy = y - cy;
-//     //         int r2 = dx*dx + dy*dy;
-//     //         if (r2 <= r_out*r_out && r2 >= r_in*r_in)
-//     //             row[x] = white;
-//     //     }
-//     // }
+    // rim (1–2 px)
+    // int r_out = radius_px;
+    // int r_in  = radius_px - 2;
+    // white = pack_rgb565(255,255,255);
+    // for (int y = cy - radius_px; y <= cy + radius_px; ++y) {
+    //     uint16_t* row = fb + y*stride;
+    //     for (int x = cx - radius_px; x <= cx + radius_px; ++x) {
+    //         int dx = x - cx, dy = y - cy;
+    //         int r2 = dx*dx + dy*dy;
+    //         if (r2 <= r_out*r_out && r2 >= r_in*r_in)
+    //             row[x] = white;
+    //     }
+    // }
 
-//     // 12 o'clock marker
-//     int tip_x = cx, tip_y = cy - radius_px + 6;
-//     int left_x = cx - 8, left_y = cy - radius_px + 14;
-//     int right_x= cx + 8, right_y= cy - radius_px + 14;
-//     fill_tri_rgb565(fb, W,H,stride, tip_x,tip_y, left_x,left_y, right_x,right_y, white);
-// }
+    // 12 o'clock marker
+    int tip_x = cx, tip_y = cy - radius_px + 6;
+    int left_x = cx - 8, left_y = cy - radius_px + 14;
+    int right_x= cx + 8, right_y= cy - radius_px + 14;
+    fill_tri_rgb565(fb, W,H,stride, tip_x,tip_y, left_x,left_y, right_x,right_y, white);
+}
 
 
 // Funciton for screen
@@ -515,6 +527,7 @@ void __isr dma_irq0_handler(void) {
 
         // Signal completion to main code
         lcd_frame_done = true;
+        // gpio_put(PIN_DEBUG_LED, 0);
     }
 }
 
@@ -774,13 +787,20 @@ void core1_entry(void);
 /**********************************************************************/
 
 int main() {
+
+    // change clock to 250 MHz
+    // set_sys_clock_khz(250000, true);
+
+    // change clock to 270 MHz
+    // set_sys_clock_khz(270000, true);
+
     stdio_init_all();
 
     uint16_t yaw = 0, pitch = 0, roll = 0;
     init_luts(); // Called once at startup
     build_color_ramps(); // Prebuild color ramps
 
-    spi_init(SPI_PORT, 40500000); // 40.5 MHz (tune down if unstable)
+    spi_init(SPI_PORT, 40500000); // 40.5 MHz 
     gpio_set_function(PIN_LCD_SCK,  GPIO_FUNC_SPI);
     gpio_set_function(PIN_LCD_MOSI, GPIO_FUNC_SPI);
     // CS / DC / RST / BL as GPIO
@@ -790,32 +810,48 @@ int main() {
     gpio_init(PIN_LCD_BL);  gpio_set_dir(PIN_LCD_BL, GPIO_OUT);  gpio_put(PIN_LCD_BL, 1); // backlight on
     gpio_init(PIN_LCD_MISO); gpio_set_dir(PIN_LCD_MISO, GPIO_IN);
 
+    gpio_set_function(I2C_SDA_PIN, GPIO_FUNC_I2C);
+    gpio_set_function(I2C_SCL_PIN, GPIO_FUNC_I2C);
+    gpio_pull_up(I2C_SDA_PIN);
+    gpio_pull_up(I2C_SCL_PIN);
+
+    gpio_init(PIN_DEBUG_LED); gpio_set_dir(PIN_DEBUG_LED, GPIO_OUT); gpio_put(PIN_DEBUG_LED, 0);
+
     lcd_init();
     lcd_dma_init();
 
     multicore_launch_core1(core1_entry);
 
+    //
+
     lcd_frame_done = true;
 
     while (1) {
 
-        navball_render_rgb565(fb_to_draw, WIDTH, HEIGHT, STRIDE, yaw, pitch, roll, ENABLE_GRID);
+        // yaw   = (yaw   + 2) % 360;
+        // pitch = (pitch + 1) % 360;
+        // roll  = (roll  + 5) % 360;
+        // read yaw, pitch, roll from the USB
+        scanf("%hu %hu %hu\n", &yaw, &pitch, &roll);
+
+        // gpio_put(PIN_DEBUG_LED, 1);
+        // pitch, yaw, roll are uint16_t in degrees (0..359)
+        navball_render_rgb565(fb_to_draw, WIDTH, HEIGHT, STRIDE, yaw, pitch, roll, ENABLE_GRID); // 11.5 Hz
+        // navball_render_rgb565_single_core(fb_to_draw, WIDTH, HEIGHT, STRIDE, yaw, pitch, roll, ENABLE_GRID); // 6.7 Hz
+        // gpio_put(PIN_DEBUG_LED, 0);
 
         // Swap framebuffers, so dma sends the one we just drew, while we draw to the other
         uint16_t* temp = fb_to_show;
         fb_to_show = fb_to_draw;
         fb_to_draw = temp;
 
-        // Simple animation
-        yaw   = (yaw   + 5) % 360;
-        pitch = (pitch + 3) % 360;
-        roll  = (roll  + 7) % 360;
-
         while (!lcd_frame_done) {
             tight_loop_contents();
         }
+
         lcd_frame_done = false;
-        lcd_push_framebuffer_dma();
+        // gpio_put(PIN_DEBUG_LED, 1);
+        lcd_push_framebuffer_dma(); // dma take 32 ms to send the buffer (~31.25 FPS)
     }
 
     return 0;

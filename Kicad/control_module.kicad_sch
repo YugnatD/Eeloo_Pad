@@ -2468,7 +2468,7 @@
 						(type none)
 					)
 				)
-				(pin unspecified line
+				(pin power_in line
 					(at 0 7.62 270)
 					(length 2.54)
 					(name "VDD"
@@ -2486,7 +2486,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin output line
 					(at 8.89 0 180)
 					(length 2.54)
 					(name "DOU"
@@ -2504,7 +2504,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin power_in line
 					(at 0 -6.35 90)
 					(length 2.54)
 					(name "GND"
@@ -2522,7 +2522,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin input line
 					(at -8.89 0 0)
 					(length 2.54)
 					(name "DIN"
@@ -3685,7 +3685,7 @@
 						(type none)
 					)
 				)
-				(pin unspecified line
+				(pin power_in line
 					(at 0 7.62 270)
 					(length 2.54)
 					(name "VDD"
@@ -3703,7 +3703,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin output line
 					(at 8.89 0 180)
 					(length 2.54)
 					(name "DOU"
@@ -3721,7 +3721,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin power_in line
 					(at 0 -6.35 90)
 					(length 2.54)
 					(name "GND"
@@ -3739,7 +3739,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin input line
 					(at -8.89 0 0)
 					(length 2.54)
 					(name "DIN"
@@ -25397,8 +25397,9 @@
 		)
 	)
 	(symbol
-		(lib_id "Switch:SW_Push")
-		(at 236.22 236.22 270)
+		(lib_id "Connector:Conn_01x02_Pin")
+		(at 241.3 231.14 180)
+		(mirror x)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -25406,31 +25407,31 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "5fc94462-4147-4384-b3e6-7c73eee50bd9")
-		(property "Reference" "SW20"
-			(at 238.506 231.902 0)
+		(uuid "149cd726-f0c6-4b8d-926a-0ab1ac88d3a5")
+		(property "Reference" "J46"
+			(at 242.57000000000002 229.86999999999998 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Value" "DUROCK_Ice_King_62g"
-			(at 238.506 236.728 0)
+		(property "Value" "XB2-BS542 STAGE"
+			(at 242.57000000000002 234.95 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 			)
 		)
-		(property "Footprint" "Eeloo_Pad:SW_MX_Transparent_1.00u_PCB"
-			(at 241.3 236.22 0)
+		(property "Footprint" "Connector_JST:JST_EH_B2B-EH-A_1x02_P2.50mm_Vertical"
+			(at 241.3 231.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -25441,7 +25442,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 241.3 236.22 0)
+			(at 241.3 231.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -25451,8 +25452,8 @@
 				)
 			)
 		)
-		(property "Description" "Push button switch, generic, two pins"
-			(at 236.22 236.22 0)
+		(property "Description" "Vers bouton coup-de-poing Schneider XB2-BS542 (contact 1 NF, accrochage, deverrouillage par rotation). STAGE: logique inversee + detection de front dans le firmware"
+			(at 241.3 231.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -25462,8 +25463,8 @@
 				)
 			)
 		)
-		(property "Manufacturer_Part_Number" "Ice King Linear 62g"
-			(at 236.22 236.22 0)
+		(property "Manufacturer_Part_Number" "B2B-EH-A"
+			(at 241.3 231.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -25473,19 +25474,8 @@
 				)
 			)
 		)
-		(property "Manufacturer_Name" "DUROCK"
-			(at 236.22 236.22 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "LCSC Part" ""
-			(at 236.22 236.22 0)
+		(property "Manufacturer_Name" "JST"
+			(at 241.3 231.14 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -25496,19 +25486,29 @@
 			)
 		)
 		(pin "1"
-			(uuid "2502c8c3-1c6e-4bc8-9266-44922a58fb58")
+			(uuid "83123393-e923-4d85-81de-4f8cbf825bd8")
 		)
 		(pin "2"
-			(uuid "760461ff-8a62-4b0d-9b75-d1de898aa394")
+			(uuid "af9176e0-5d9e-4db7-a655-b82da0a840e4")
 		)
 		(instances
 			(project "Eeloo_Pad"
 				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99/72870131-4c53-4694-a81e-2f5e4bf49b98"
-					(reference "SW20")
+					(reference "J46")
 					(unit 1)
 				)
 			)
 		)
+	)
+	(wire
+		(pts
+			(xy 236.22 233.68) (xy 236.22 241.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0cbe2187-e521-45ba-ab70-6dddcc1e8784")
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
@@ -30393,84 +30393,6 @@
 			(project "Eeloo_Pad"
 				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99/72870131-4c53-4694-a81e-2f5e4bf49b98"
 					(reference "#PWR0123")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 288.29 223.52 0)
-		(unit 1)
-		(body_style 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(in_pos_files yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "822486a6-1ded-4dac-9639-1f0965767fce")
-		(property "Reference" "#PWR034"
-			(at 288.29 229.87 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "GND"
-			(at 288.29 228.6 0)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 288.29 223.52 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Datasheet" ""
-			(at 288.29 223.52 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 288.29 223.52 0)
-			(hide yes)
-			(show_name no)
-			(do_not_autoplace no)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "247b3fc3-dc2d-4cf9-bb3f-0ed92fddac91")
-		)
-		(instances
-			(project "Eeloo_Pad"
-				(path "/87d8adc5-e437-42ec-8acd-9927ea10cd99/72870131-4c53-4694-a81e-2f5e4bf49b98"
-					(reference "#PWR034")
 					(unit 1)
 				)
 			)
@@ -46780,6 +46702,98 @@
 				)
 			)
 		)
+	)
+	(no_connect
+		(at 129.54 273.05)
+		(uuid "aacfa3f0-994d-4a9c-b077-0196dab50777")
+	)
+	(no_connect
+		(at 31.75 48.26)
+		(uuid "773f9b54-4cc1-4252-bb7e-1e4e9bd6ef92")
+	)
+	(no_connect
+		(at 31.75 50.8)
+		(uuid "0085dc4a-4ee9-4dd3-bd46-2ae6882d0a19")
+	)
+	(no_connect
+		(at 31.75 53.34)
+		(uuid "6b4f2eb9-f85f-4ceb-8936-b6308b83c820")
+	)
+	(no_connect
+		(at 31.75 55.88)
+		(uuid "811a1386-980a-4d17-a6b1-d15a007ecb87")
+	)
+	(no_connect
+		(at 66.04 27.94)
+		(uuid "35bc4b27-10e2-4238-bb4f-e4ee1704a1e1")
+	)
+	(no_connect
+		(at 66.04 30.48)
+		(uuid "4888bcda-e547-46e6-aba4-50a61f9b5bad")
+	)
+	(no_connect
+		(at 66.04 33.02)
+		(uuid "80d375d7-16b4-4fb4-b5a0-c0d7e8a4d66e")
+	)
+	(no_connect
+		(at 66.04 35.56)
+		(uuid "f9cb9356-af78-44d1-b94d-267a4578dbe8")
+	)
+	(no_connect
+		(at 66.04 43.18)
+		(uuid "090c3a18-3f5f-4df1-8369-6d74369afb4a")
+	)
+	(no_connect
+		(at 66.04 45.72)
+		(uuid "7a6060d0-11fd-49fb-803c-817515b20cc6")
+	)
+	(no_connect
+		(at 66.04 48.26)
+		(uuid "6d700631-4459-41b5-b17b-094e18a5eb77")
+	)
+	(no_connect
+		(at 66.04 50.8)
+		(uuid "695c31b9-4997-4893-abd3-f7421da4c47d")
+	)
+	(no_connect
+		(at 66.04 58.42)
+		(uuid "177dfcb0-9071-4171-aa01-12711b5034dd")
+	)
+	(no_connect
+		(at 66.04 60.96)
+		(uuid "3e4c6a02-e5eb-4b39-b66b-5674b72d5c2d")
+	)
+	(no_connect
+		(at 66.04 71.12)
+		(uuid "1f463e63-6209-4554-88ec-d7e578b1798a")
+	)
+	(no_connect
+		(at 66.04 73.66)
+		(uuid "1d1806d6-121e-4513-90eb-4c1400e59b84")
+	)
+	(no_connect
+		(at 66.04 76.2)
+		(uuid "3e64428e-eb5c-4e4c-b8e1-67fe66a258b4")
+	)
+	(no_connect
+		(at 66.04 78.74)
+		(uuid "ea17b771-444f-4493-91de-70fd43f5c352")
+	)
+	(no_connect
+		(at 66.04 83.82)
+		(uuid "f65931d1-2a9c-4a0f-92d5-07ac51e66faf")
+	)
+	(no_connect
+		(at 66.04 86.36)
+		(uuid "e9af5088-bbb0-49cb-9d7f-6ef0d7c89078")
+	)
+	(no_connect
+		(at 66.04 88.9)
+		(uuid "65ab86ff-be87-4129-aaa3-8f4365387e88")
+	)
+	(no_connect
+		(at 66.04 91.44)
+		(uuid "3f971760-e3aa-4fc2-bc75-b48a0c4aee4b")
 	)
 	(sheet_instances
 		(path "/"
